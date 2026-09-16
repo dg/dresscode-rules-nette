@@ -1,0 +1,22 @@
+presets:
+	- nette
+
+groups:
+	- modernization
+	- deprecations
+
+rules:
+	group-import: {minImports: 2}
+	override-attribute-required: keep
+
+types: phpstan
+
+paths:
+	- tests
+
+excludePaths:
+	- fixtures
+
+fileExtensions:
+	- php
+	- phpt
