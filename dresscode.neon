@@ -1,0 +1,15 @@
+presets:
+	- nette
+
+rules:
+	group-import: {minImports: 2}
+
+paths:
+	- tests
+
+excludePaths:
+	- fixtures
+
+fileExtensions:
+	- php
+	- phpt
