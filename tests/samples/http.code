@@ -1,0 +1,106 @@
+<?php
+
+namespace App;
+
+use Nette\Http\FileUpload;
+use Nette\Http\Helpers;
+use Nette\Http\IRequest;
+use Nette\Http\IResponse;
+use Nette\Http\Request;
+use Nette\Http\RequestFactory;
+use Nette\Http\Response;
+use Nette\Http\Session;
+use Nette\Http\SessionSection;
+use Nette\Http\Url;
+use Nette\Http\UrlScript;
+
+class Controller
+{
+	public function handle(IRequest $request, Response $response, Url $url): void
+	{
+		$page = $request->getQuery('page', 1);
+		$name = $request->getPost('name', '');
+		$token = $request->getCookie('token', 'none');
+		$agent = $request->getHeader('User-Agent', 'unknown');
+		$type = $response->getHeader('Content-Type', 'text/plain');
+		$sort = $url->getQueryParameter('sort', 'name');
+
+		$response->setCode(IResponse::S404_NOT_FOUND);
+		$response->setCookie('lang', 'cs', time: '14 days', sameSite: IResponse::SAME_SITE_LAX);
+		$response->setCookie('theme', 'dark', null, sameSite: IResponse::SameSiteStrict);
+		$response->setExpiration(time: '1 hour');
+
+		if ($request->getMethod() === IRequest::POST) {
+			$response->redirect('/', IResponse::S303_SEE_OTHER);
+		}
+	}
+
+
+	public function detect(Request $request): void
+	{
+		if ($request->isPost() && $request->isSameSite()) {
+			$referer = $request->getReferer();
+		}
+
+		$host = $request->getRemoteHost();
+		$local = Helpers::ipMatch($request->getRemoteAddress(), '10.0.0.0/8');
+		$cookie = Helpers::STRICT_COOKIE_NAME;
+	}
+
+
+	public function session(Session $session, SessionSection $section, \SessionHandlerInterface $handler): void
+	{
+		$session->setExpiration(time: '20 minutes');
+		$section->set('user', 'joe', expiration: '10 minutes');
+		$section->setExpiration(time: '10 minutes', variables: 'user');
+
+		$user = $section->user;
+		$section->basket = [];
+		if (isset($section->flash)) {
+			unset($section->flash);
+		}
+
+		$counter = $section['counter'];
+		$section['counter'] = $counter + 1;
+		if (isset($section['temp'])) {
+			unset($section['temp']);
+		}
+
+		$names = $session->getIterator();
+		$params = $session->getCookieParameters();
+		$session->setCookieParameters('/', null, null, samesite: 'Lax');
+		$session->setStorage($handler);
+	}
+
+
+	public function urls(Url $url, UrlScript $script): void
+	{
+		$url->setScheme(value: 'https');
+		$url->setHost(value: 'example.com');
+		$url->setPath(value: '/x');
+		$url->appendQuery(value: ['a' => 1]);
+
+		$base = $url->getBasePath();
+		$user = $url->getUser();
+
+		$script->setPath('/y');
+		$script->appendQuery('a=1');
+	}
+
+
+	public function files(FileUpload $file, RequestFactory $factory): void
+	{
+		$plain = $file->getName();
+		$extension = $file->getImageFileExtension();
+		$types = FileUpload::IMAGE_MIME_TYPES;
+		$request = $factory->createHttpRequest();
+		$stamp = Response::date(time());
+		$now = Response::date();
+	}
+
+
+	public function legacy(): array
+	{
+		return [\Nette\Http\UserStorage::class, \Nette\Http\ISessionStorage::class];
+	}
+}

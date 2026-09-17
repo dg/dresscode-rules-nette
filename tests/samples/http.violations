@@ -1,0 +1,48 @@
+21: Method Nette\Http\IRequest::getQuery() is replaced by getQuery($key) ?? $default
+22: Method Nette\Http\IRequest::getPost() is replaced by getPost($key) ?? $default
+23: Method Nette\Http\IRequest::getCookie() is replaced by getCookie($key) ?? $default
+24: Method Nette\Http\IRequest::getHeader() is replaced by getHeader($header) ?? $default
+25: Method Nette\Http\IResponse::getHeader() is replaced by getHeader($header) ?? $default
+26: Method Nette\Http\Url::getQueryParameter() is replaced by getQueryParameter($name) ?? $default
+28: Constant Nette\Http\IResponse::S404_NOT_FOUND is replaced by IResponse::S404_NotFound
+29: Method Nette\Http\Response::setCookie() is replaced by setCookie(expire: $t, ...)
+29: Constant Nette\Http\IResponse::SAME_SITE_LAX is replaced by IResponse::SameSiteLax
+31: Method Nette\Http\Response::setExpiration() is replaced by setExpiration(expire: $t)
+33: Constant Nette\Http\IRequest::POST is replaced by IRequest::Post
+34: Constant Nette\Http\IResponse::S303_SEE_OTHER is replaced by IResponse::S303_PostGet
+41: Method Nette\Http\Request::isPost() is replaced by isMethod('POST')
+41: Method Nette\Http\Request::isSameSite() is replaced by isFrom([\Nette\Http\FetchSite::SameSite, \Nette\Http\FetchSite::SameOrigin])
+42: Method Nette\Http\Request::getReferer() is forbidden: use getOrigin(), which reads the Origin header and gives only the scheme, the host and the port instead of the whole URL of the referring page
+45: Method Nette\Http\IRequest::getRemoteHost() is forbidden: there is no replacement, the method always returns null
+46: Static method Nette\Http\Helpers::ipMatch() is replaced by \Nette\Http\IPAddress::tryFrom($ip)?->isInRange($mask) ?? false
+47: Constant Nette\Http\Helpers::STRICT_COOKIE_NAME is replaced by Helpers::StrictCookieName
+53: Method Nette\Http\Session::setExpiration() is replaced by setExpiration(expire: $t)
+54: Method Nette\Http\SessionSection::set() is replaced by set(expire: $e, ...)
+55: Method Nette\Http\SessionSection::setExpiration() is replaced by setExpiration(expire: $t, ...)
+57: Method Nette\Http\SessionSection::__get() is replaced by get($name)
+58: Method Nette\Http\SessionSection::__set() is replaced by set($name, $value)
+59: Method Nette\Http\SessionSection::__isset() is replaced by get($name) !== null
+60: Method Nette\Http\SessionSection::__unset() is replaced by remove($name)
+63: Method Nette\Http\SessionSection::offsetGet() is replaced by get($name)
+64: Method Nette\Http\SessionSection::offsetSet() is replaced by set($name, $value)
+65: Method Nette\Http\SessionSection::offsetExists() is replaced by get($name) !== null
+66: Method Nette\Http\SessionSection::offsetUnset() is replaced by remove($name)
+69: Method Nette\Http\Session::getIterator() is forbidden: call getSectionNames(), which returns an array of the names of the sections instead of an iterator
+70: Method Nette\Http\Session::getCookieParameters() is replaced by session_get_cookie_params()
+71: Method Nette\Http\Session::setCookieParameters() is replaced by setCookieParameters(sameSite: $s, ...)
+72: Method Nette\Http\Session::setStorage() is replaced by Session::setHandler()
+78: Method Nette\Http\Url::setScheme() is replaced by setScheme(scheme: $v)
+79: Method Nette\Http\Url::setHost() is replaced by setHost(host: $v)
+80: Method Nette\Http\Url::setPath() is replaced by setPath(path: $v)
+81: Method Nette\Http\Url::appendQuery() is replaced by appendQuery(query: $v)
+83: Method Nette\Http\Url::getBasePath() is forbidden: call getBasePath() on a Nette\Http\UrlScript, such as the one Nette\Http\Request::getUrl() returns
+86: Method Nette\Http\UrlScript::setPath() is forbidden: the class is immutable; take a changed copy with withPath()
+87: Method Nette\Http\UrlScript::appendQuery() is forbidden: the class is immutable and has no appendQuery(); build the whole query and pass it to withQuery()
+93: Method Nette\Http\FileUpload::getName() is replaced by FileUpload::getUntrustedName()
+94: Method Nette\Http\FileUpload::getImageFileExtension() is replaced by FileUpload::getSuggestedExtension()
+95: Constant Nette\Http\FileUpload::IMAGE_MIME_TYPES is forbidden: there is no replacement, isImage() decides by the image types the PHP build supports
+96: Method Nette\Http\RequestFactory::createHttpRequest() is replaced by RequestFactory::fromGlobals()
+97: Static method Nette\Http\Response::date() is replaced by \Nette\Http\Helpers::formatDate($time)
+98: Static method Nette\Http\Response::date() is replaced by \Nette\Http\Helpers::formatDate('now')
+104: Class Nette\Http\UserStorage is forbidden: use Nette\Bridges\SecurityHttp\SessionStorage from nette/security, which stores the identity differently
+104: Class Nette\Http\ISessionStorage is forbidden: the interface is gone; implement \SessionHandlerInterface, whose destroy() and gc() take the place of remove() and clean()
