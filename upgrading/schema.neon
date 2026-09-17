@@ -1,0 +1,22 @@
+package: nette/schema
+group: deprecations
+
+since 1.3.2:
+	replaced-calls:
+		'Nette\Schema\Expect::structure(items: $shape)': 'structure(shape: $shape)'
+		'Nette\Schema\Elements\Structure::__construct(items: $shape)': 'new \Nette\Schema\Elements\Structure(shape: $shape)'
+
+since 1.2.4:
+	replaced-members:
+		Nette\Schema\Message::TYPE_MISMATCH: TypeMismatch
+		Nette\Schema\Message::VALUE_OUT_OF_RANGE: ValueOutOfRange
+		Nette\Schema\Message::LENGTH_OUT_OF_RANGE: LengthOutOfRange
+		Nette\Schema\Message::PATTERN_MISMATCH: PatternMismatch
+		Nette\Schema\Message::FAILED_ASSERTION: FailedAssertion
+		Nette\Schema\Message::MISSING_ITEM: MissingItem
+		Nette\Schema\Message::UNEXPECTED_ITEM: UnexpectedItem
+		Nette\Schema\Message::DEPRECATED: Deprecated
+
+since 1.2:
+	replaced-calls:
+		'Nette\Schema\Expect::arrayOf(type: $type, ...)': 'arrayOf(valueType: $type, ...)'
