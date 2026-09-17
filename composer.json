@@ -44,7 +44,8 @@
 		"dresscode": {
 			"upgrading": [
 				"upgrading/forms.neon",
-				"upgrading/http.neon"
+				"upgrading/http.neon",
+				"upgrading/schema.neon"
 			]
 		}
 	}
