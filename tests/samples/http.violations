@@ -1,0 +1,66 @@
+22: Method `Nette\Http\IRequest::getQuery()` is replaced by `getQuery($key) ?? $default`.
+23: Method `Nette\Http\IRequest::getPost()` is replaced by `getPost($key) ?? $default`.
+24: Method `Nette\Http\IRequest::getCookie()` is replaced by `getCookie($key) ?? $default`.
+25: Method `Nette\Http\IRequest::getHeader()` is replaced by `getHeader($header) ?? $default`.
+26: Method `Nette\Http\IResponse::getHeader()` is replaced by `getHeader($header) ?? $default`.
+27: Method `Nette\Http\Url::getQueryParameter()` is replaced by `getQueryParameter($name) ?? $default`.
+29: Constant `Nette\Http\IResponse::S404_NOT_FOUND` is replaced by `IResponse::S404_NotFound`.
+30: Method `Nette\Http\Response::setCookie()` is replaced by `setCookie(expire: $t, ...)`.
+30: Constant `Nette\Http\IResponse::SAME_SITE_LAX` is deprecated: use `Nette\Http\SameSite::Lax`, which is an enum case, not a string; read its `value` where a string is needed, since nette/http 3.4.
+31: Constant `Nette\Http\IResponse::SameSiteStrict` is deprecated: use `Nette\Http\SameSite::Strict`, which is an enum case, not a string; read its `value` where a string is needed, since nette/http 3.4.
+32: Method `Nette\Http\Response::setExpiration()` is replaced by `setExpiration(expire: $t)`.
+34: Constant `Nette\Http\IRequest::POST` is replaced by `IRequest::Post`.
+35: Constant `Nette\Http\IResponse::S303_SEE_OTHER` is replaced by `IResponse::S303_PostGet`.
+42: Method `Nette\Http\Request::isPost()` is replaced by `isMethod('POST')`.
+42: Method `Nette\Http\Request::isSameSite()` is replaced by `isFrom([\Nette\Http\FetchSite::SameSite, \Nette\Http\FetchSite::SameOrigin])`.
+43: Method `Nette\Http\Request::getReferer()` is deprecated: use `getOrigin()`, which reads the Origin header and gives only the scheme, the host and the port instead of the whole URL of the referring page, since nette/http 3.1.7.
+46: Method `Nette\Http\IRequest::getRemoteHost()` is deprecated: there is no replacement; the method always returns `null`, since nette/http 3.4.
+47: Static method `Nette\Http\Helpers::ipMatch()` is replaced by `\Nette\Http\IPAddress::tryFrom($ip)?->isInRange($mask) ?? false`.
+48: Constant `Nette\Http\Helpers::STRICT_COOKIE_NAME` is replaced by `Helpers::StrictCookieName`.
+54: Method `Nette\Http\Session::setExpiration()` is replaced by `setExpiration(expire: $t)`.
+55: Method `Nette\Http\SessionSection::set()` is replaced by `set(expire: $e, ...)`.
+56: Method `Nette\Http\SessionSection::setExpiration()` is replaced by `setExpiration(expire: $t, ...)`.
+58: Method `Nette\Http\SessionSection::__get()` is replaced by `get($name)`.
+59: Method `Nette\Http\SessionSection::__set()` is replaced by `set($name, $value)`.
+60: Method `Nette\Http\SessionSection::__isset()` is replaced by `get($name) !== null`.
+61: Method `Nette\Http\SessionSection::__unset()` is replaced by `remove($name)`.
+64: Method `Nette\Http\SessionSection::offsetGet()` is replaced by `get($name)`.
+65: Method `Nette\Http\SessionSection::offsetSet()` is replaced by `set($name, $value)`.
+66: Method `Nette\Http\SessionSection::offsetExists()` is replaced by `get($name) !== null`.
+67: Method `Nette\Http\SessionSection::offsetUnset()` is replaced by `remove($name)`.
+70: Method `Nette\Http\Session::getIterator()` is removed: call `getSectionNames()`, which returns an array of the names of the sections instead of an iterator, since nette/http 3.2.2.
+71: Method `Nette\Http\Session::getCookieParameters()` is replaced by `session_get_cookie_params()`.
+72: Method `Nette\Http\Session::setCookieParameters()` is replaced by `setCookieParameters(sameSite: $s, ...)`.
+73: Method `Nette\Http\Session::setStorage()` is replaced by `Session::setHandler()`.
+79: Method `Nette\Http\Url::setScheme()` is replaced by `setScheme(scheme: $v)`.
+80: Method `Nette\Http\Url::setHost()` is replaced by `setHost(host: $v)`.
+81: Method `Nette\Http\Url::setPath()` is replaced by `setPath(path: $v)`.
+82: Method `Nette\Http\Url::appendQuery()` is replaced by `appendQuery(query: $v)`.
+84: Method `Nette\Http\Url::getBasePath()` is deprecated: call `getBasePath()` on a `Nette\Http\UrlScript`, such as the one `Nette\Http\Request::getUrl()` returns, since nette/http 3.1.
+85: Method `Nette\Http\Url::getUser()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+86: Method `Nette\Http\Url::getPassword()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+87: Method `Nette\Http\Url::setUser()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+87: Method `Nette\Http\Url::setUser()` is replaced by `setUser(user: $v)`.
+88: Method `Nette\Http\Url::setPassword()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+90: Method `Nette\Http\UrlScript::setPath()` is deprecated: the class is immutable; take a changed copy with `withPath()`, since nette/http 3.0.
+91: Method `Nette\Http\UrlScript::appendQuery()` is removed: the class is immutable and has no `appendQuery()`; build the whole query and pass it to `withQuery()`, since nette/http 3.0.
+93: Method `Nette\Http\UrlImmutable::getUser()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+94: Method `Nette\Http\UrlImmutable::getPassword()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+95: Method `Nette\Http\UrlImmutable::withUser()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+95: Method `Nette\Http\UrlImmutable::withPassword()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+96: Method `Nette\Http\UrlImmutable::withoutUserInfo()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+102: Constant `Nette\Http\IResponse::SameSiteNone` is deprecated: use `Nette\Http\SameSite::None`, which is an enum case, not a string; read its `value` where a string is needed, since nette/http 3.4.
+103: Constant `Nette\Http\IResponse::SAME_SITE_STRICT` is deprecated: use `Nette\Http\SameSite::Strict`, which is an enum case, not a string; read its `value` where a string is needed, since nette/http 3.4.
+104: Constant `Nette\Http\IResponse::SAME_SITE_NONE` is deprecated: use `Nette\Http\SameSite::None`, which is an enum case, not a string; read its `value` where a string is needed, since nette/http 3.4.
+104: Constant `Nette\Http\IResponse::SameSiteLax` is deprecated: use `Nette\Http\SameSite::Lax`, which is an enum case, not a string; read its `value` where a string is needed, since nette/http 3.4.
+110: Method `Nette\Http\FileUpload::getName()` is replaced by `FileUpload::getUntrustedName()`.
+111: Method `Nette\Http\FileUpload::getImageFileExtension()` is replaced by `FileUpload::getSuggestedExtension()`.
+112: Constant `Nette\Http\FileUpload::IMAGE_MIME_TYPES` is deprecated: there is no replacement; `isImage()` decides by the image types the PHP build supports, since nette/http 3.2.3.
+113: Method `Nette\Http\RequestFactory::createHttpRequest()` is replaced by `RequestFactory::fromGlobals()`.
+114: Static method `Nette\Http\Response::date()` is replaced by `\Nette\Http\Helpers::formatDate($time)`.
+115: Static method `Nette\Http\Response::date()` is replaced by `\Nette\Http\Helpers::formatDate('now')`.
+121: Class `Nette\Http\UserStorage` is removed: use `Nette\Bridges\SecurityHttp\SessionStorage` from `nette/security`, which stores the identity differently, since nette/http 3.1.
+121: Class `Nette\Http\ISessionStorage` is removed: the interface is gone; implement `\SessionHandlerInterface`, whose `destroy()` and `gc()` take the place of `remove()` and `clean()`, since nette/http 3.0.
+128: Method `Nette\Http\Url::getUser()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+130: Method `Nette\Http\Url::getUser()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
+136: Method `Nette\Http\Url::getPassword()` is deprecated: there is no replacement; credentials do not belong in a URL; keep them apart from it, since nette/http 3.3.3.
