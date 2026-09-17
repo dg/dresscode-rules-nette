@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Config;
+
+use Nette\Schema\Context;
+use Nette\Schema\Elements\Structure;
+use Nette\Schema\Expect;
+use Nette\Schema\Message;
+use Nette\Schema\Processor;
+use Nette\Schema\Schema;
+use Nette\Schema\ValidationException;
+
+
+class MailerSchema extends Structure
+{
+	public function __construct()
+	{
+		parent::__construct(shape: [
+			'host' => Expect::string(),
+		]);
+	}
+}
+
+
+class ConfigFactory
+{
+	public function create(): Schema
+	{
+		return Expect::structure(shape: [
+			'name' => Expect::string()->required(),
+			'tags' => Expect::arrayOf(valueType: 'string'),
+			'ports' => Expect::arrayOf(valueType: 'int', keyType: 'string'),
+			'ids' => Expect::arrayOf('int'),
+			'mailer' => new Structure(shape: ['host' => Expect::string()]),
+			'db' => new Structure(['dsn' => Expect::string()]),
+			'cache' => Expect::structure(['dir' => Expect::string()]),
+		]);
+	}
+
+
+	public function process(array $data): array
+	{
+		try {
+			return (array) (new Processor)->process($this->create(), $data);
+		} catch (ValidationException $e) {
+			$errors = [];
+			foreach ($e->getMessageObjects() as $message) {
+				if ($message->code === Message::TypeMismatch || $message->code === Message::PatternMismatch) {
+					$errors[] = 'type: ' . $message->toString();
+				} elseif (in_array($message->code, [Message::ValueOutOfRange, Message::LengthOutOfRange], true)) {
+					$errors[] = 'range: ' . $message->toString();
+				} elseif ($message->code === Message::MissingItem) {
+					$errors[] = 'missing: ' . $message->toString();
+				} elseif ($message->code === Message::UnexpectedItem || $message->code === Message::Deprecated) {
+					$errors[] = 'extra: ' . $message->toString();
+				}
+			}
+			return $errors;
+		}
+	}
+}
+
+
+function validatePositive(int $value, Context $context): bool
+{
+	if ($value < 0) {
+		$context->addError('Value must be positive', Message::FailedAssertion);
+		return false;
+	}
+	return true;
+}
