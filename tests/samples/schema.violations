@@ -1,0 +1,21 @@
+19: Constructor `Nette\Schema\Elements\Structure::__construct()` is replaced by `new \Nette\Schema\Elements\Structure(shape: $shape)`.
+30: Static method `Nette\Schema\Expect::structure()` is replaced by `structure(shape: $shape)`.
+32: Static method `Nette\Schema\Expect::arrayOf()` is replaced by `arrayOf(valueType: $type, ...)`.
+33: Static method `Nette\Schema\Expect::arrayOf()` is replaced by `arrayOf(valueType: $type, ...)`.
+35: Constructor `Nette\Schema\Elements\Structure::__construct()` is replaced by `new \Nette\Schema\Elements\Structure(shape: $shape)`.
+39: Method `Nette\Schema\Elements\StringType::items()` is deprecated: a string has no items; drop the call, since nette/schema 1.4.
+39: Method `Nette\Schema\Elements\StringType::mergeDefaults()` is deprecated: a string has no default merging; drop the call, since nette/schema 1.4.
+40: Method `Nette\Schema\Elements\NumberType::pattern()` is deprecated: a number has no pattern; drop the call, since nette/schema 1.4.
+40: Method `Nette\Schema\Elements\NumberType::items()` is deprecated: a number has no items; drop the call, since nette/schema 1.4.
+40: Method `Nette\Schema\Elements\NumberType::mergeDefaults()` is deprecated: a number has no default merging; drop the call, since nette/schema 1.4.
+41: Method `Nette\Schema\Elements\NumberType::pattern()` is deprecated: a number has no pattern; drop the call, since nette/schema 1.4.
+42: Method `Nette\Schema\Elements\ArrayType::pattern()` is deprecated: an array has no pattern; drop the call, since nette/schema 1.4.
+50: Constant `Nette\Schema\Helpers::PREVENT_MERGING` is replaced by `Helpers::PreventMerging`.
+62: Constant `Nette\Schema\Message::TYPE_MISMATCH` is replaced by `Message::TypeMismatch`.
+62: Constant `Nette\Schema\Message::PATTERN_MISMATCH` is replaced by `Message::PatternMismatch`.
+64: Constant `Nette\Schema\Message::VALUE_OUT_OF_RANGE` is replaced by `Message::ValueOutOfRange`.
+64: Constant `Nette\Schema\Message::LENGTH_OUT_OF_RANGE` is replaced by `Message::LengthOutOfRange`.
+66: Constant `Nette\Schema\Message::MISSING_ITEM` is replaced by `Message::MissingItem`.
+68: Constant `Nette\Schema\Message::UNEXPECTED_ITEM` is replaced by `Message::UnexpectedItem`.
+68: Constant `Nette\Schema\Message::DEPRECATED` is replaced by `Message::Deprecated`.
+81: Constant `Nette\Schema\Message::FAILED_ASSERTION` is replaced by `Message::FailedAssertion`.

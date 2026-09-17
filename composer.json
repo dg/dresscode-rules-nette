@@ -43,7 +43,7 @@
 		},
 		"dresscode": {
 			"upgrading-dir": "upgrading",
-			"packages": ["nette/forms", "nette/http"]
+			"packages": ["nette/forms", "nette/http", "nette/schema"]
 		}
 	}
 }
