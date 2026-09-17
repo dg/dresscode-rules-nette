@@ -43,7 +43,8 @@
 		},
 		"dresscode": {
 			"upgrading": [
-				"upgrading/forms.neon"
+				"upgrading/forms.neon",
+				"upgrading/http.neon"
 			]
 		}
 	}
