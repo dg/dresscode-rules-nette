@@ -1,0 +1,75 @@
+package: nette/database
+group: deprecations
+
+since 3.2.7:
+	forbidden-members:
+		'Nette\Database\IStructure::getBelongsToReference($table, $column)': 'call it with the table only; it returns all belongsTo references of the table as an array of the referenced tables indexed by column'
+		'Nette\Database\IStructure::getHasManyReference($table, $targetTable)': 'call it with the table only; it returns all hasMany references of the table as an array of the referencing columns indexed by table'
+
+since 3.2.5:
+	replaced-members:
+		Nette\Database\Driver::SupportMultiColumnAsOrCond: SupportMultiColumnAsOrCondition
+		Nette\Database\ResultSet::fetchFields: fetchList
+		Nette\Database\Connection::fetchFields: fetchList
+		Nette\Database\Explorer::fetchFields: fetchList
+	replaced-calls:
+		'Nette\Database\Driver::isSupported(item: $feature)': 'isSupported(feature: $feature)'
+
+since 3.2.4:
+	replaced-members:
+		Nette\Database\Driver::SUPPORT_SEQUENCE: SupportSequence
+		Nette\Database\Driver::SUPPORT_SELECT_UNGROUPED_COLUMNS: SupportSelectUngroupedColumns
+		Nette\Database\Driver::SUPPORT_MULTI_INSERT_AS_SELECT: SupportMultiInsertAsSelect
+		Nette\Database\Driver::SUPPORT_MULTI_COLUMN_AS_OR_COND: SupportMultiColumnAsOrCond
+		Nette\Database\Driver::SUPPORT_SUBSELECT: SupportSubselect
+		Nette\Database\Driver::SUPPORT_SCHEMA: SupportSchema
+	replaced-calls:
+		'Nette\Database\ResultSet::fetchPairs(key: $key, ...)': 'fetchPairs(keyOrCallback: $key, ...)'
+		'Nette\Database\Table\Selection::fetchPairs(key: $key, ...)': 'fetchPairs(keyOrCallback: $key, ...)'
+		'Nette\Database\Helpers::toPairs($rows)': '\Nette\Database\Helpers::toPairs($rows, null, null)'
+		'Nette\Database\Helpers::toPairs($rows, $key)': '\Nette\Database\Helpers::toPairs($rows, $key, null)'
+
+since 3.2:
+	replaced-calls:
+		'Nette\Database\Table\GroupedSelection::emptyResultSet(saveCache: $clearCache, ...)': 'emptyResultSet(clearCache: $clearCache, ...)'
+		'Nette\Database\Table\Selection::emptyResultSet(deleteRererencedCache: $delete, ...)': 'emptyResultSet(deleteReferencedCache: $delete, ...)'
+
+since 3.1.5:
+	replaced-members:
+		Nette\Database\Helpers::initializeTracy: Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize
+
+since 3.1.4:
+	replaced-calls:
+		'Nette\Database\Connection::queryArgs($sql, $params)': 'query($sql, ...$params)'
+		'Nette\Database\Explorer::queryArgs($sql, $params)': 'query($sql, ...$params)'
+
+since 3.1.2:
+	replaced-calls:
+		'Nette\Database\Helpers::createDebugPanel($connection)': '\Nette\Database\Helpers::initializeTracy($connection, true)'
+		'Nette\Database\Helpers::createDebugPanel($connection, $explain)': '\Nette\Database\Helpers::initializeTracy($connection, true, '''', $explain)'
+		'Nette\Database\Helpers::createDebugPanel($connection, $explain, $name)': '\Nette\Database\Helpers::initializeTracy($connection, true, $name, $explain)'
+		'Nette\Database\Helpers::createDebugPanel($connection, $explain, $name, $bar, $blueScreen)': '\Nette\Database\Helpers::initializeTracy($connection, true, $name, $explain, $bar, $blueScreen)'
+
+since 3.1:
+	replaced-classes:
+		Nette\Database\Context: Nette\Database\Explorer
+		Nette\Database\IConventions: Nette\Database\Conventions
+		Nette\Database\ISupplementalDriver: Nette\Database\Driver
+	replaced-members:
+		Nette\Database\Table\Selection::$context: $explorer
+		Nette\Database\Connection::getSupplementalDriver: getDriver
+	replaced-calls:
+		'Nette\Database\Table\Selection::__construct(context: $explorer, ...)': 'new \Nette\Database\Table\Selection(explorer: $explorer, ...)'
+		'Nette\Database\Table\GroupedSelection::__construct(context: $explorer, ...)': 'new \Nette\Database\Table\GroupedSelection(explorer: $explorer, ...)'
+	forbidden-members:
+		Nette\Bridges\DatabaseTracy\ConnectionPanel::logQuery: 'there is no replacement, the panel logs the queries of the connection it was created for by itself'
+
+since 3.0:
+	replaced-calls:
+		'Nette\Database\Connection::__construct($dsn, $user, $password, $options, $driverClass)': 'new \Nette\Database\Connection($dsn, $user, $password, [''driverClass'' => $driverClass] + (array) $options)'
+		'Nette\Database\ResultSet::fetchField($column)': 'fetch()[$column] ?? null'
+	forbidden-classes:
+		Nette\Database\Drivers\Sqlite2Driver: 'there is no replacement, SQLite 2 is no longer supported'
+	forbidden-members:
+		Nette\Database\Driver::formatBool: 'there is no replacement, the method was unused'
+		Nette\Database\Driver::normalizeRow: 'there is no replacement, the result set normalizes the rows itself'

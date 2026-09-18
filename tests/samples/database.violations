@@ -1,0 +1,42 @@
+6: Class Nette\Database\Context is replaced by Nette\Database\Explorer
+9: Class Nette\Database\IConventions is replaced by Nette\Database\Conventions
+11: Class Nette\Database\ISupplementalDriver is replaced by Nette\Database\Driver
+21: Class Nette\Database\Context is replaced by Nette\Database\Explorer
+29: Method Nette\Database\Connection::fetchFields() is replaced by Connection::fetchList()
+30: Method Nette\Database\Explorer::fetchFields() is replaced by Explorer::fetchList()
+31: Method Nette\Database\Explorer::queryArgs() is replaced by query($sql, ...$params)
+32: Method Nette\Database\Connection::queryArgs() is replaced by query($sql, ...$params)
+33: Method Nette\Database\ResultSet::fetchFields() is replaced by ResultSet::fetchList()
+34: Method Nette\Database\ResultSet::fetchField() is replaced by fetch()[$column] ?? null
+36: Method Nette\Database\ResultSet::fetchPairs() is replaced by fetchPairs(keyOrCallback: $key, ...)
+37: Method Nette\Database\Table\Selection::fetchPairs() is replaced by fetchPairs(keyOrCallback: $key, ...)
+41: Class Nette\Database\ISupplementalDriver is replaced by Nette\Database\Driver
+43: Method Nette\Database\IStructure::getBelongsToReference() is forbidden: call it with the table only; it returns all belongsTo references of the table as an array of the referenced tables indexed by column
+45: Method Nette\Database\IStructure::getHasManyReference() is forbidden: call it with the table only; it returns all hasMany references of the table as an array of the referencing columns indexed by table
+47: Constant Nette\Database\Driver::SUPPORT_SUBSELECT is replaced by Driver::SupportSubselect
+48: Method Nette\Database\Driver::isSupported() is replaced by isSupported(feature: $feature)
+48: Constant Nette\Database\Driver::SUPPORT_SCHEMA is replaced by Driver::SupportSchema
+49: Constant Nette\Database\Driver::SupportMultiColumnAsOrCond is replaced by Driver::SupportMultiColumnAsOrCondition
+50: Class Nette\Database\ISupplementalDriver is replaced by Nette\Database\Driver
+50: Constant Nette\Database\Driver::SUPPORT_SEQUENCE is replaced by Driver::SupportSequence
+51: Method Nette\Database\Driver::formatBool() is forbidden: there is no replacement, the method was unused
+52: Method Nette\Database\Connection::getSupplementalDriver() is replaced by Connection::getDriver()
+58: Static method Nette\Database\Helpers::toPairs() is replaced by \Nette\Database\Helpers::toPairs($rows, null, null)
+58: Static method Nette\Database\Helpers::toPairs() is replaced by \Nette\Database\Helpers::toPairs($rows, $key, null)
+62: Class Nette\Database\IConventions is replaced by Nette\Database\Conventions
+64: Constructor Nette\Database\Table\Selection::__construct() is replaced by new \Nette\Database\Table\Selection(explorer: $explorer, ...)
+65: Constructor Nette\Database\Connection::__construct() is replaced by new \Nette\Database\Connection($dsn, $user, $password, ['driverClass' => $driverClass] + (array) $options)
+71: Class Nette\Database\Drivers\Sqlite2Driver is forbidden: there is no replacement, SQLite 2 is no longer supported
+80: Static method Nette\Database\Helpers::initializeTracy() is replaced by Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()
+80: Static method Nette\Database\Helpers::createDebugPanel() is replaced by \Nette\Database\Helpers::initializeTracy($connection, true)
+81: Static method Nette\Database\Helpers::initializeTracy() is replaced by Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()
+81: Static method Nette\Database\Helpers::createDebugPanel() is replaced by \Nette\Database\Helpers::initializeTracy($connection, true, '', $explain)
+82: Static method Nette\Database\Helpers::initializeTracy() is replaced by Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()
+82: Static method Nette\Database\Helpers::createDebugPanel() is replaced by \Nette\Database\Helpers::initializeTracy($connection, true, $name, $explain)
+83: Static method Nette\Database\Helpers::initializeTracy() is replaced by Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()
+83: Static method Nette\Database\Helpers::createDebugPanel() is replaced by \Nette\Database\Helpers::initializeTracy($connection, true, $name, $explain, $bar, $blueScreen)
+84: Static method Nette\Database\Helpers::initializeTracy() is replaced by Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()
+85: Method Nette\Bridges\DatabaseTracy\ConnectionPanel::logQuery() is forbidden: there is no replacement, the panel logs the queries of the connection it was created for by itself
+94: Method Nette\Database\Table\Selection::emptyResultSet() is replaced by emptyResultSet(deleteReferencedCache: $delete, ...)
+95: Property Nette\Database\Table\Selection::$context is replaced by Selection::$explorer
+104: Method Nette\Database\Table\GroupedSelection::emptyResultSet() is replaced by emptyResultSet(clearCache: $clearCache, ...)

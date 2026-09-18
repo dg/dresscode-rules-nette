@@ -1,0 +1,106 @@
+<?php
+
+namespace App;
+
+use Nette\Database\Connection;
+use Nette\Database\Context;
+use Nette\Database\Driver;
+use Nette\Database\Helpers;
+use Nette\Database\IConventions;
+use Nette\Database\IStructure;
+use Nette\Database\ISupplementalDriver;
+use Nette\Database\ResultSet;
+use Nette\Database\Table\GroupedSelection;
+use Nette\Database\Table\Selection;
+use Nette\Bridges\DatabaseTracy\ConnectionPanel;
+use Tracy;
+
+class ArticleModel
+{
+	public function __construct(
+		private Context $database,
+		private Connection $connection,
+	) {
+	}
+
+
+	public function fetchTitles(int $categoryId): array
+	{
+		$ids = $this->connection->fetchFields('SELECT id FROM article WHERE category_id = ?', $categoryId);
+		$names = $this->database->fetchFields('SELECT name FROM category');
+		$result = $this->database->queryArgs('SELECT * FROM article WHERE id IN (?)', [$ids]);
+		$this->connection->queryArgs('DELETE FROM log WHERE id = ?', $params);
+		$tags = $result->fetchFields();
+		$first = $result->fetchField('title');
+		$count = $result->fetchField();
+		$pairs = $result->fetchPairs(key: 'id', value: 'title');
+		return $this->database->table('article')->fetchPairs(key: 'id', value: 'title');
+	}
+
+
+	public function describe(IStructure $structure, Driver $driver, ISupplementalDriver $legacy): void
+	{
+		$belongsTo = $structure->getBelongsToReference('article', 'author_id');
+		$allBelongsTo = $structure->getBelongsToReference('article');
+		$hasMany = $structure->getHasManyReference('author', 'article');
+
+		$subselect = $driver->isSupported(Driver::SUPPORT_SUBSELECT);
+		$schema = $driver->isSupported(item: Driver::SUPPORT_SCHEMA);
+		$orCond = $driver->isSupported(Driver::SupportMultiColumnAsOrCond);
+		$legacy->isSupported(ISupplementalDriver::SUPPORT_SEQUENCE);
+		$bool = $driver->formatBool(true);
+		$driver = $this->connection->getSupplementalDriver();
+	}
+
+
+	public function convert(array $rows): array
+	{
+		return Helpers::toPairs($rows) + Helpers::toPairs($rows, 'id') + Helpers::toPairs($rows, 'id', 'name');
+	}
+
+
+	public function create(string $dsn, IConventions $conventions): Connection
+	{
+		$selection = new Selection(context: $this->database, conventions: $conventions, tableName: 'article');
+		return new Connection($dsn, 'root', 'secret', ['lazy' => true], Drivers\MyDriver::class);
+	}
+
+
+	public function legacy(): string
+	{
+		return \Nette\Database\Drivers\Sqlite2Driver::class;
+	}
+}
+
+
+class Bootstrap
+{
+	public function setupTracy(Connection $connection, Tracy\Bar $bar, Tracy\BlueScreen $blueScreen, ConnectionPanel $panel): void
+	{
+		Helpers::createDebugPanel($connection);
+		Helpers::createDebugPanel($connection, false);
+		Helpers::createDebugPanel($connection, true, 'main');
+		$second = Helpers::createDebugPanel($connection, true, 'main', $bar, $blueScreen);
+		Helpers::initializeTracy($connection, true, 'second');
+		$panel->logQuery($connection, null);
+	}
+}
+
+
+class ArticleSelection extends Selection
+{
+	public function reset(): void
+	{
+		$this->emptyResultSet(deleteRererencedCache: false);
+		$explorer = $this->context;
+	}
+}
+
+
+class CommentSelection extends GroupedSelection
+{
+	public function reset(): void
+	{
+		$this->emptyResultSet(saveCache: false);
+	}
+}
