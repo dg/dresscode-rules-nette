@@ -21,6 +21,7 @@
 		"nette/caching": "^3.4",
 		"nette/forms": "^3.2",
 		"nette/http": "^3.3",
+		"nette/mail": "^4.2",
 		"nette/phpstan-rules": "^1.0",
 		"nette/schema": "^1.3",
 		"nette/tester": "^2.6",
@@ -49,6 +50,7 @@
 				"upgrading/caching.neon",
 				"upgrading/forms.neon",
 				"upgrading/http.neon",
+				"upgrading/mail.neon",
 				"upgrading/schema.neon"
 			]
 		}
