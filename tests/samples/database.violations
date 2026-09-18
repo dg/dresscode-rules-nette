@@ -1,0 +1,60 @@
+6: Class `Nette\Database\Context` is replaced by `Nette\Database\Explorer`.
+9: Class `Nette\Database\IConventions` is replaced by `Nette\Database\Conventions`.
+13: Class `Nette\Database\ISupplementalDriver` is replaced by `Nette\Database\Driver`.
+24: Class `Nette\Database\Context` is replaced by `Nette\Database\Explorer`.
+32: Method `Nette\Database\Connection::fetchFields()` is replaced by `Connection::fetchList()`.
+33: Method `Nette\Database\Explorer::fetchFields()` is replaced by `Explorer::fetchList()`.
+34: Method `Nette\Database\Explorer::queryArgs()` is replaced by `query($sql, ...$params)`.
+35: Method `Nette\Database\Connection::queryArgs()` is replaced by `query($sql, ...$params)`.
+36: Method `Nette\Database\ResultSet::fetchFields()` is replaced by `ResultSet::fetchList()`.
+37: Method `Nette\Database\ResultSet::fetchField()` is replaced by `fetch()[$column] ?? null`.
+39: Method `Nette\Database\ResultSet::fetchPairs()` is replaced by `fetchPairs(keyOrCallback: $key, ...)`.
+40: Method `Nette\Database\ResultSet::getConnection()` is deprecated: use the `Nette\Database\Connection` that ran the query, since nette/database 3.1.4.
+41: Method `Nette\Database\Table\Selection::fetchAssoc()` is deprecated: call `Nette\Utils\Arrays::associate()` on the rows of `fetchAll()` converted by `toArray()`, since nette/database 3.2.6.
+42: Method `Nette\Database\Table\Selection::fetchField()` is deprecated: call `fetch()` and read the column from the returned row, since nette/database 3.0.
+43: Method `Nette\Database\Table\Selection::createSelectionInstance()` is deprecated: call `Nette\Database\Explorer::table()`, since nette/database 3.2.6.
+44: Method `Nette\Database\Table\Selection::fetchPairs()` is replaced by `fetchPairs(keyOrCallback: $key, ...)`.
+48: Class `Nette\Database\ISupplementalDriver` is replaced by `Nette\Database\Driver`.
+50: Method `Nette\Database\IStructure::getBelongsToReference()` is deprecated: call it with the table only; it returns all belongsTo references of the table as an array of the referenced tables indexed by column, since nette/database 3.2.7.
+52: Method `Nette\Database\IStructure::getHasManyReference()` is deprecated: call it with the table only; it returns all hasMany references of the table as an array of the referencing columns indexed by table, since nette/database 3.2.7.
+54: Constant `Nette\Database\Driver::SUPPORT_SUBSELECT` is deprecated: all drivers support subselects; drop the `isSupported()` check, since nette/database 3.2.6.
+55: Constant `Nette\Database\Driver::SupportSubselect` is deprecated: all drivers support subselects; drop the `isSupported()` check, since nette/database 3.2.6.
+56: Method `Nette\Database\Driver::isSupported()` is replaced by `isSupported(feature: $feature)`.
+56: Constant `Nette\Database\Driver::SUPPORT_SCHEMA` is replaced by `Driver::SupportSchema`.
+57: Constant `Nette\Database\Driver::SupportMultiColumnAsOrCond` is replaced by `Driver::SupportMultiColumnAsOrCondition`.
+58: Class `Nette\Database\ISupplementalDriver` is replaced by `Nette\Database\Driver`.
+58: Constant `Nette\Database\Driver::SUPPORT_SEQUENCE` is replaced by `Driver::SupportSequence`.
+59: Method `Nette\Database\Driver::formatBool()` is removed: there is no replacement; the method was unused, since nette/database 3.0.
+60: Method `Nette\Database\Connection::getSupplementalDriver()` is replaced by `Connection::getDriver()`.
+66: Static method `Nette\Database\Helpers::toPairs()` is replaced by `\Nette\Database\Helpers::toPairs($rows, null, null)`.
+66: Static method `Nette\Database\Helpers::toPairs()` is replaced by `\Nette\Database\Helpers::toPairs($rows, $key, null)`.
+70: Class `Nette\Database\IConventions` is replaced by `Nette\Database\Conventions`.
+72: Constructor `Nette\Database\Table\Selection::__construct()` is replaced by `new \Nette\Database\Table\Selection(explorer: $explorer, ...)`.
+73: Constructor `Nette\Database\Connection::__construct()` is replaced by `new \Nette\Database\Connection($dsn, $user, $password, ['driverClass' => $driverClass] + (array) $options)`.
+79: Class `Nette\Database\Drivers\Sqlite2Driver` is removed: there is no replacement; SQLite 2 is no longer supported, since nette/database 3.0.
+83: Class `Nette\Database\IRow` is deprecated: use `Nette\Database\Row` as the type, or `Nette\Database\Table\ActiveRow` for a row of a selection, since nette/database 3.1.
+83: Class `Nette\Database\IRowContainer` is deprecated: use `Nette\Database\ResultSet` as the type, or `Nette\Database\Table\Selection` for a selection, since nette/database 3.1.
+83: Class `Nette\Database\Table\IRow` is replaced by `Nette\Database\Table\ActiveRow`.
+83: Class `Nette\Database\Table\IRowContainer` is replaced by `Nette\Database\Table\Selection`.
+85: Class `Nette\Database\Table\IRow` is replaced by `Nette\Database\Table\ActiveRow`.
+91: Class `Nette\Database\Table\IRow` is replaced by `Nette\Database\Table\ActiveRow`, but `Nette\Database\Table\ActiveRow` is a class, which is not implemented.
+100: Static method `Nette\Database\Helpers::initializeTracy()` is replaced by `Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()`.
+100: Static method `Nette\Database\Helpers::createDebugPanel()` is replaced by `\Nette\Database\Helpers::initializeTracy($connection, true)`.
+101: Static method `Nette\Database\Helpers::initializeTracy()` is replaced by `Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()`.
+101: Static method `Nette\Database\Helpers::createDebugPanel()` is replaced by `\Nette\Database\Helpers::initializeTracy($connection, true, '', $explain)`.
+102: Static method `Nette\Database\Helpers::initializeTracy()` is replaced by `Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()`.
+102: Static method `Nette\Database\Helpers::createDebugPanel()` is replaced by `\Nette\Database\Helpers::initializeTracy($connection, true, $name, $explain)`.
+103: Static method `Nette\Database\Helpers::initializeTracy()` is replaced by `Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()`.
+103: Static method `Nette\Database\Helpers::createDebugPanel()` is replaced by `\Nette\Database\Helpers::initializeTracy($connection, true, $name, $explain, $bar, $blueScreen)`.
+104: Static method `Nette\Database\Helpers::initializeTracy()` is replaced by `Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize()`.
+105: Method `Nette\Bridges\DatabaseTracy\ConnectionPanel::logQuery()` is deprecated: there is no replacement; the panel logs the queries of the connection it was created for by itself, since nette/database 3.1.
+114: Method `Nette\Database\Table\Selection::emptyResultSet()` is replaced by `emptyResultSet(deleteReferencedCache: $delete, ...)`.
+115: Property `Nette\Database\Table\Selection::$context` is replaced by `Selection::$explorer`.
+116: Method `Nette\Database\Table\Selection::createSelectionInstance()` is deprecated: call `Nette\Database\Explorer::table()`, since nette/database 3.2.6.
+120: Method `Nette\Database\Table\Selection::createRow()` is deprecated: override `Nette\Database\Explorer::createActiveRow()` in a subclass of `Nette\Database\Explorer`, since nette/database 3.2.6.
+126: Method `Nette\Database\Table\Selection::createGroupedSelectionInstance()` is deprecated: override `Nette\Database\Explorer::createGroupedSelection()` in a subclass of `Nette\Database\Explorer`, since nette/database 3.2.6.
+128: Method `Nette\Database\Table\Selection::createGroupedSelectionInstance()` is deprecated: override `Nette\Database\Explorer::createGroupedSelection()` in a subclass of `Nette\Database\Explorer`, since nette/database 3.2.6.
+137: Method `Nette\Database\Table\GroupedSelection::emptyResultSet()` is replaced by `emptyResultSet(clearCache: $clearCache, ...)`.
+138: Method `Nette\Database\Table\Selection::emptyResultSet()` is replaced by `emptyResultSet(deleteReferencedCache: $delete, ...)`.
+138: Method `Nette\Database\Table\GroupedSelection::emptyResultSet()` is replaced by `emptyResultSet(clearCache: $clearCache, ...)`.
+139: Method `Nette\Database\Table\Selection::emptyResultSet()` is replaced by `emptyResultSet(deleteReferencedCache: $delete, ...)`.
