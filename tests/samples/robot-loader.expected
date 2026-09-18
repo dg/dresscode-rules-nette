@@ -1,0 +1,50 @@
+<?php
+
+namespace App;
+
+use Nette\Loaders\RobotLoader;
+
+
+class Bootstrap
+{
+	public static function createLoader(string $appDir, string $tempDir): RobotLoader
+	{
+		$loader = new RobotLoader;
+		$loader->addDirectory($appDir);
+		$loader->excludeDirectory($appDir . '/templates');
+		$loader->setCacheDirectory($tempDir . '/cache');
+		$loader->setAutoRefresh(state: false);
+		$loader->reportParseErrors(state: true);
+		$loader->setAutoRefresh(true);
+		$loader->register();
+		return $loader;
+	}
+
+
+	public function chained(string $appDir, string $tempDir): void
+	{
+		(new RobotLoader)
+			->addDirectory($appDir)
+			->setCacheDirectory($tempDir)
+			->register();
+
+		$limit = RobotLoader::RETRY_LIMIT;
+	}
+}
+
+
+class ModuleLoader extends RobotLoader
+{
+	public function __construct(string $tempDir)
+	{
+		parent::__construct();
+		$this->setCacheDirectory($tempDir);
+		$this->reportParseErrors(state: false);
+	}
+
+
+	protected function generateCacheKey(): array
+	{
+		return [...parent::generateCacheKey(), 'modules', self::RETRY_LIMIT];
+	}
+}

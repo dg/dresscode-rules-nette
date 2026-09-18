@@ -1,0 +1,10 @@
+15: Method Nette\Loaders\RobotLoader::setTempDirectory() is replaced by RobotLoader::setCacheDirectory()
+16: Method Nette\Loaders\RobotLoader::setAutoRefresh() is replaced by setAutoRefresh(state: $state)
+17: Method Nette\Loaders\RobotLoader::reportParseErrors() is replaced by reportParseErrors(state: $state)
+28: Method Nette\Loaders\RobotLoader::setTempDirectory() is replaced by RobotLoader::setCacheDirectory()
+31: Constant Nette\Loaders\RobotLoader::RETRY_LIMIT is forbidden: there is no replacement, the constant is private; write the limit as a value
+41: Method Nette\Loaders\RobotLoader::setTempDirectory() is replaced by RobotLoader::setCacheDirectory()
+42: Method Nette\Loaders\RobotLoader::reportParseErrors() is replaced by reportParseErrors(state: $state)
+46: Method Nette\Loaders\RobotLoader::getCacheKey() is replaced by RobotLoader::generateCacheKey()
+48: Method Nette\Loaders\RobotLoader::getCacheKey() is replaced by RobotLoader::generateCacheKey()
+48: Constant Nette\Loaders\RobotLoader::RETRY_LIMIT is forbidden: there is no replacement, the constant is private; write the limit as a value
