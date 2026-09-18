@@ -1,0 +1,22 @@
+5: Class Nette\Bridges\Framework\TracyBridge is replaced by Tracy\Bridges\Nette\Bridge
+15: Class Nette\Configurator is replaced by Nette\Bootstrap\Configurator
+16: Method Nette\Configurator::enableDebugger() is replaced by Configurator::enableTracy()
+17: Method Nette\Bootstrap\Configurator::addParameters() is replaced by Configurator::addStaticParameters()
+20: Method Nette\Configurator::addConfig() is forbidden: the second argument selecting a section is ignored, sections being gone; split the configuration into files and add the one needed
+20: Constant Nette\Configurator::AUTO is forbidden: there is no replacement, sections of a configuration file are gone; split the configuration into files and add the one for the mode, such as by isDebugMode()
+21: Method Nette\Configurator::addConfig() is forbidden: the second argument selecting a section is ignored, sections being gone; split the configuration into files and add the one needed
+21: Constant Nette\Configurator::NONE is forbidden: there is no replacement, sections of a configuration file are gone; add the configuration file without a section
+22: Class Nette\Configurator is replaced by Nette\Bootstrap\Configurator
+22: Constant Nette\Bootstrap\Configurator::COOKIE_SECRET is replaced by Configurator::CookieSecret
+23: Class Nette\Bridges\Framework\TracyBridge is replaced by Tracy\Bridges\Nette\Bridge
+36: Class Nette\Configurator is replaced by Nette\Bootstrap\Configurator
+41: Property Nette\Configurator::$parameters is replaced by Configurator::$staticParameters
+42: Property Nette\Configurator::$files is replaced by Configurator::$configs
+48: Method Nette\Configurator::enableDebugger() is replaced by Configurator::enableTracy()
+49: Method Nette\Bootstrap\Configurator::addParameters() is replaced by Configurator::addStaticParameters()
+49: Constant Nette\Bootstrap\Configurator::COOKIE_SECRET is replaced by Configurator::CookieSecret
+50: Method Nette\Bootstrap\Configurator::onCompile() is replaced by \Nette\Utils\Arrays::invoke($this->onCompile, ...$args)
+54: Method Nette\Configurator::fixCompatibility() is forbidden: there is no replacement, the class no longer calls it and the nette.* sections are not translated; rename them, such as nette.application to application
+65: Method Nette\Configurator::enableDebugger() is replaced by Configurator::enableTracy()
+66: Property Nette\Configurator::$parameters is replaced by Configurator::$staticParameters
+67: Method Nette\Configurator::addConfig() is forbidden: the second argument selecting a section is ignored, sections being gone; split the configuration into files and add the one needed
