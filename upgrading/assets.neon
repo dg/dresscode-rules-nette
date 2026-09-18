@@ -1,0 +1,16 @@
+package: nette/assets
+group: deprecations
+
+since 1.0.3:
+	replaced-members:
+		Nette\Bridges\AssetsLatte\Nodes\AssetNode::$try: $optional
+		Nette\Bridges\AssetsLatte\Nodes\NAssetNode::$try: $optional
+
+since 1.0.2:
+	replaced-calls:
+		'Nette\Assets\EntryAsset::__construct(mimeType: $mimeType, ...)': 'new \Nette\Assets\EntryAsset(...)'
+		'Nette\Assets\ScriptAsset::__construct(mimeType: $mimeType, ...)': 'new \Nette\Assets\ScriptAsset(...)'
+		'Nette\Assets\StyleAsset::__construct(mimeType: $mimeType, ...)': 'new \Nette\Assets\StyleAsset(...)'
+	forbidden-members:
+		'Nette\Assets\ScriptAsset::$mimeType': 'there is no replacement, the class of the asset implies the type, a script or an entry point is JavaScript'
+		'Nette\Assets\StyleAsset::$mimeType': 'there is no replacement, the class of the asset implies the type, a stylesheet is CSS'

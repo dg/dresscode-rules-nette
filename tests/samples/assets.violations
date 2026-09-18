@@ -1,0 +1,10 @@
+16: Property Nette\Assets\ScriptAsset::$mimeType is forbidden: there is no replacement, the class of the asset implies the type, a script or an entry point is JavaScript
+16: Property Nette\Assets\StyleAsset::$mimeType is forbidden: there is no replacement, the class of the asset implies the type, a stylesheet is CSS
+16: Property Nette\Assets\ScriptAsset::$mimeType is forbidden: there is no replacement, the class of the asset implies the type, a script or an entry point is JavaScript
+25: Constructor Nette\Assets\ScriptAsset::__construct() is replaced by new \Nette\Assets\ScriptAsset(...)
+26: Constructor Nette\Assets\EntryAsset::__construct() is replaced by new \Nette\Assets\EntryAsset(...)
+27: Constructor Nette\Assets\StyleAsset::__construct() is replaced by new \Nette\Assets\StyleAsset(...)
+39: Constructor Nette\Assets\ScriptAsset::__construct() is replaced by new \Nette\Assets\ScriptAsset(...)
+45: Property Nette\Assets\ScriptAsset::$mimeType is forbidden: there is no replacement, the class of the asset implies the type, a script or an entry point is JavaScript
+54: Property Nette\Bridges\AssetsLatte\Nodes\AssetNode::$try is replaced by AssetNode::$optional
+54: Property Nette\Bridges\AssetsLatte\Nodes\NAssetNode::$try is replaced by NAssetNode::$optional
