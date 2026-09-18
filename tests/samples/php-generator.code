@@ -1,0 +1,133 @@
+<?php
+
+namespace App;
+
+use Nette\PhpGenerator\ClassManipulator;
+use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\Closure;
+use Nette\PhpGenerator\Factory;
+use Nette\PhpGenerator\GlobalFunction;
+use Nette\PhpGenerator\Helpers;
+use Nette\PhpGenerator\Method;
+use Nette\PhpGenerator\Parameter;
+use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\PhpLiteral;
+use Nette\PhpGenerator\PhpNamespace;
+use Nette\PhpGenerator\Printer;
+use Nette\PhpGenerator\Property;
+use Nette\PhpGenerator\PromotedParameter;
+use Nette\PhpGenerator\Type;
+
+class EntityGenerator
+{
+	public function generate(PhpFile $file): string
+	{
+		$file->setStrictTypes(on: true);
+		$strict = $file->getStrictTypes();
+		$namespace = $file->addNamespace(name: 'App\Model');
+		$bracketed = $namespace->getBracketedSyntax();
+
+		$class = ClassType::class('Article');
+		$class->setExtends(names: 'Entity');
+		$class->addExtend('Timestamps');
+		$class->setTraits(names: ['SmartObject']);
+		$class->addTrait('Cache', true)
+			->addResolution('load as protected');
+		$class->addTrait('Logger', ['log as protected']);
+		$namespace->add(class: $class);
+
+		$interface = ClassType::interface('Publishable');
+		$trait = ClassType::trait('Timestamps');
+		$enum = ClassType::enum('Status');
+
+		$constant = $class->addConstant('TABLE', 'article');
+		$constant->setVisibility(val: ClassType::VISIBILITY_PUBLIC);
+		$title = $class->addProperty('title');
+		$title->setVisibility(val: ClassType::VisibilityProtected);
+		$title->setType(val: Type::STRING);
+		$class->addProperty('body')->setVisibility(value: 'private');
+		$getter = $class->addMethod('getTitle');
+		$getter->setVisibility(val: 'public');
+		$getter->setReturnType(val: Type::STRING);
+		$getter->setBody('return $this->title;');
+
+		return (string) $file;
+	}
+
+
+	public function inspect(ClassType $class, Method $method, Parameter $parameter, Property $property): void
+	{
+		$methods = $class->methods;
+		$class->properties = [];
+		$method->body = 'return 1;';
+		$code = $method->body;
+		$default = $parameter->defaultValue;
+		$property->value = new PhpLiteral('[]');
+
+		$parameter->setTypeHint('array');
+		$parameter->setTypeHint(hint: 'iterable');
+		$type = $parameter->getTypeHint();
+		$parameter->setOptional();
+		$nullable = $method->getReturnNullable();
+		$method->setNamespace(null);
+
+		if ($class->getType() === ClassType::TYPE_INTERFACE) {
+			$class->setClass();
+		}
+
+		$class->setInterface();
+		$class->setTrait();
+		$class->setType('trait');
+		$class->addCase('Draft');
+		$cases = $class->getCases();
+
+		$public = ClassType::VisibilityPublic;
+		$private = \Nette\PhpGenerator\InterfaceType::VISIBILITY_PRIVATE;
+	}
+
+
+	public function reflect(Factory $factory, \ReflectionClass $reflection): void
+	{
+		$class = ClassType::withBodiesFrom(\stdClass::class);
+		$class = ClassType::from(\stdClass::class, true, false);
+		$class = $factory->fromClassReflection($reflection, false, true);
+		$function = GlobalFunction::withBodyFrom('trim');
+		$closure = new Closure;
+		$closure->body = 'return 1;';
+	}
+
+
+	public function dump(PhpNamespace $namespace): string
+	{
+		$type = Type::getType(123);
+		$nullable = Type::nullable('int', state: true);
+		$name = $namespace->unresolveName('App\Model\Article');
+		$short = $namespace->unresolveType('?App\Model\Article');
+
+		$namespace->addUse('App\Model\Article', null, PhpNamespace::NAME_NORMAL);
+		$length = Helpers::WRAP_LENGTH;
+		$indent = Helpers::INDENT_LENGTH;
+
+		return Helpers::dump([1, 2])
+			. Helpers::format('$a = ?;', 1)
+			. Helpers::formatArgs('func(...?)', [1, 2]);
+	}
+
+
+	public function manipulate(ClassManipulator $manipulator, PromotedParameter $parameter, ClassType $class): void
+	{
+		$manipulator->implementInterface(\Countable::class);
+		$parameter->setVisibility(value: 'protected');
+		$class->inheritMethod('render');
+		$class->inheritProperty('name', returnIfExists: true);
+	}
+}
+
+
+class CustomPrinter extends Printer
+{
+	protected function printReturnType($function, ?PhpNamespace $namespace): string
+	{
+		return strtolower(parent::printReturnType($function, $namespace));
+	}
+}
