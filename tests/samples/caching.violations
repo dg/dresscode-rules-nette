@@ -1,0 +1,31 @@
+7: Class Nette\Caching\IBulkReader is replaced by Nette\Caching\BulkReader
+8: Class Nette\Caching\IStorage is replaced by Nette\Caching\Storage
+10: Class Nette\Caching\Storages\IJournal is replaced by Nette\Caching\Storages\Journal
+12: Class Nette\Caching\Storages\NewMemcachedStorage is replaced by Nette\Caching\Storages\MemcachedStorage
+20: Class Nette\Caching\IStorage is replaced by Nette\Caching\Storage
+20: Class Nette\Caching\Storages\IJournal is replaced by Nette\Caching\Storages\Journal
+28: Method Nette\Caching\Cache::load() is replaced by load(generator: $f, ...)
+29: Constant Nette\Caching\Cache::EXPIRE is replaced by Cache::Expire
+30: Constant Nette\Caching\Cache::SLIDING is replaced by Cache::Sliding
+31: Constant Nette\Caching\Cache::TAGS is replaced by Cache::Tags
+39: Method Nette\Caching\Cache::bulkLoad() is replaced by bulkLoad(generator: $f, ...)
+46: Constant Nette\Caching\Cache::EXPIRATION is replaced by Cache::Expire
+47: Constant Nette\Caching\Cache::PRIORITY is replaced by Cache::Priority
+48: Constant Nette\Caching\Cache::FILES is replaced by Cache::Files
+49: Constant Nette\Caching\Cache::ITEMS is replaced by Cache::Items
+50: Constant Nette\Caching\Cache::CONSTS is replaced by Cache::Constants
+51: Constant Nette\Caching\Cache::CALLBACKS is replaced by Cache::Callbacks
+58: Constant Nette\Caching\Cache::TAGS is replaced by Cache::Tags
+58: Constant Nette\Caching\Cache::NAMESPACES is replaced by Cache::Namespaces
+59: Constant Nette\Caching\Cache::ALL is replaced by Cache::All
+65: Method Nette\Caching\Cache::start() is replaced by Cache::capture()
+83: Constant Nette\Caching\Cache::TAGS is replaced by Cache::Tags
+83: Constant Nette\Caching\Cache::PRIORITY is replaced by Cache::Priority
+84: Method Nette\Caching\Cache::start() is replaced by Cache::capture()
+89: Class Nette\Caching\IStorage is replaced by Nette\Caching\Storage
+89: Class Nette\Caching\IBulkReader is replaced by Nette\Caching\BulkReader
+126: Static property Nette\Caching\Storages\FileStorage::$useDirectories is forbidden: there is no replacement, the storage always creates subdirectories
+128: Class Nette\Caching\Storages\NewMemcachedStorage is replaced by Nette\Caching\Storages\MemcachedStorage
+129: Method Nette\Caching\Storages\MemcachedStorage::addServer() is replaced by addServer($host, $port)
+133: Method Nette\Caching\Storages\MemcachedStorage::addServer() is replaced by addServer($host, $port)
+141: Class Nette\Bridges\CacheLatte\CacheMacro is forbidden: support for Latte 2 is gone; use Latte 3 and register Nette\Bridges\CacheLatte\CacheExtension

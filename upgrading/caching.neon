@@ -1,0 +1,41 @@
+package: nette/caching
+group: deprecations
+
+since 3.4:
+	forbidden-classes:
+		Nette\Bridges\CacheLatte\CacheMacro: 'support for Latte 2 is gone; use Latte 3 and register Nette\Bridges\CacheLatte\CacheExtension'
+
+since 3.2.2:
+	forbidden-members:
+		Nette\Caching\Storages\FileStorage::$useDirectories: 'there is no replacement, the storage always creates subdirectories'
+
+since 3.1.3:
+	replaced-members:
+		Nette\Caching\Cache::PRIORITY: Priority
+		Nette\Caching\Cache::EXPIRATION: Expire
+		Nette\Caching\Cache::EXPIRE: Expire
+		Nette\Caching\Cache::SLIDING: Sliding
+		Nette\Caching\Cache::TAGS: Tags
+		Nette\Caching\Cache::FILES: Files
+		Nette\Caching\Cache::ITEMS: Items
+		Nette\Caching\Cache::CONSTS: Constants
+		Nette\Caching\Cache::CALLBACKS: Callbacks
+		Nette\Caching\Cache::NAMESPACES: Namespaces
+		Nette\Caching\Cache::ALL: All
+
+since 3.1:
+	replaced-classes:
+		Nette\Caching\IStorage: Nette\Caching\Storage
+		Nette\Caching\Storages\IJournal: Nette\Caching\Storages\Journal
+		Nette\Caching\IBulkReader: Nette\Caching\BulkReader
+	replaced-members:
+		Nette\Caching\Cache::start: capture
+	replaced-calls:
+		'Nette\Caching\Cache::load(fallback: $f, ...)': 'load(generator: $f, ...)'
+		'Nette\Caching\Cache::bulkLoad(fallback: $f, ...)': 'bulkLoad(generator: $f, ...)'
+
+since 3.0:
+	replaced-classes:
+		Nette\Caching\Storages\NewMemcachedStorage: Nette\Caching\Storages\MemcachedStorage
+	replaced-calls:
+		'Nette\Caching\Storages\MemcachedStorage::addServer($host, $port, $timeout)': 'addServer($host, $port)'
