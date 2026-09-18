@@ -1,0 +1,31 @@
+7: Class Nette\Mail\IMailer is replaced by Nette\Mail\Mailer
+15: Class Nette\Mail\IMailer is replaced by Nette\Mail\Mailer
+22: Constant Nette\Mail\Message::HIGH is replaced by Message::High
+23: Constant Nette\Mail\Message::LOW is replaced by Message::Low
+24: Constant Nette\Mail\Message::NORMAL is replaced by Message::Normal
+25: Constant Nette\Mail\MimePart::ENCODING_BASE64 is replaced by MimePart::EncodingBase64
+26: Constant Nette\Mail\MimePart::ENCODING_7BIT is replaced by MimePart::Encoding7Bit
+27: Constant Nette\Mail\MimePart::ENCODING_8BIT is replaced by MimePart::Encoding8Bit
+28: Constant Nette\Mail\MimePart::ENCODING_QUOTED_PRINTABLE is replaced by MimePart::EncodingQuotedPrintable
+29: Constant Nette\Mail\MimePart::LINE_LENGTH is replaced by MimePart::LineLength
+31: Property Nette\Mail\Message::$subject is replaced by setSubject($value)
+32: Property Nette\Mail\Message::$subject is replaced by getSubject()
+33: Property Nette\Mail\Message::$htmlBody is replaced by setHtmlBody($value)
+34: Property Nette\Mail\Message::$htmlBody is replaced by getHtmlBody()
+35: Property Nette\Mail\MimePart::$body is replaced by setBody($value)
+36: Property Nette\Mail\MimePart::$body is replaced by getBody()
+37: Property Nette\Mail\MimePart::$body is replaced by getBody()
+46: Constructor Nette\Mail\SmtpMailer::__construct() is forbidden: the constructor takes the host, the user name and the password as arguments and no longer reads the SMTP setting of php.ini
+47: Constructor Nette\Mail\SmtpMailer::__construct() is forbidden: pass the options as named arguments, new SmtpMailer(host: ..., username: ..., password: ...), encryption for secure and streamOptions for context
+48: Constructor Nette\Mail\SmtpMailer::__construct() is forbidden: pass the options as named arguments, new SmtpMailer(host: ..., username: ..., password: ...), encryption for secure and streamOptions for context
+51: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options)
+52: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options)
+53: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options, signHeaders: $signHeaders)
+62: Method Nette\Mail\FallbackMailer::onFailure() is replaced by \Nette\Utils\Arrays::invoke($this->onFailure, ...$args)
+70: Constant Nette\Mail\Message::LOW is replaced by Message::Low
+73: Method Nette\Mail\Message::buildText() is forbidden: there is no replacement, the class no longer calls it; the plain text comes from the static Nette\Mail\HtmlComposer::htmlToText(), which no override changes
+81: Property Nette\Mail\Message::$subject is replaced by setSubject($value)
+82: Constant Nette\Mail\Message::HIGH is replaced by Message::High
+83: Method Nette\Mail\Message::buildText() is forbidden: there is no replacement, the class no longer calls it; the plain text comes from the static Nette\Mail\HtmlComposer::htmlToText(), which no override changes
+83: Property Nette\Mail\Message::$htmlBody is replaced by getHtmlBody()
+84: Property Nette\Mail\MimePart::$body is replaced by setBody($value)

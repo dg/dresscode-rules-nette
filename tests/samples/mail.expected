@@ -1,0 +1,87 @@
+<?php
+
+namespace App;
+
+use Nette\Mail\DkimSigner;
+use Nette\Mail\FallbackMailer;
+use Nette\Mail\Mailer;
+use Nette\Mail\Message;
+use Nette\Mail\MimePart;
+use Nette\Mail\SmtpMailer;
+use Nette\Utils\Arrays;
+
+class MailSender
+{
+	public function __construct(
+		private Mailer $mailer,
+	) {
+	}
+
+
+	public function send(Message $mail, MimePart $part): void
+	{
+		$mail->setPriority(Message::High);
+		$low = Message::Low;
+		$normal = Message::Normal;
+		$part->setEncoding(MimePart::EncodingBase64);
+		$part->setEncoding(MimePart::Encoding7Bit);
+		$part->setEncoding(MimePart::Encoding8Bit);
+		$part->setEncoding(MimePart::EncodingQuotedPrintable);
+		$width = MimePart::LineLength;
+
+		$mail->setSubject('Hello');
+		$title = $mail->getSubject();
+		$mail->setHtmlBody('<p>Hello</p>');
+		$html = $mail->getHtmlBody();
+		$part->setBody('text');
+		$text = $part->getBody();
+		$plain = $mail->getBody();
+
+		$this->mailer->send($mail);
+	}
+
+
+	public function create(array $options, array $headers): array
+	{
+		return [
+			new SmtpMailer(),
+			new SmtpMailer(['host' => 'smtp.example.com', 'secure' => 'ssl']),
+			new SmtpMailer($options),
+			new SmtpMailer('smtp.example.com', 'joe', 'secret'),
+			new SmtpMailer(...$options),
+			new DkimSigner(domain: 'example.com', selector: 'mail', privateKey: 'key'),
+			new DkimSigner(...$options),
+			new DkimSigner(...$options, signHeaders: $headers),
+			new DkimSigner('example.com', 'mail', 'key'),
+			new DkimSigner(...$options),
+		];
+	}
+
+
+	public function fallback(FallbackMailer $mailer, \Throwable $e, Message $mail): void
+	{
+		Arrays::invoke($mailer->onFailure, $mailer, $e, $mailer, $mail);
+		$mailer->onFailure[] = fn() => null;
+	}
+}
+
+
+class NewsletterMessage extends Message
+{
+	public const Priority = self::Low;
+
+
+	protected function buildText(string $html): string
+	{
+		return strip_tags($html);
+	}
+
+
+	public function prepare(): void
+	{
+		$this->setSubject('Newsletter');
+		$this->setPriority(self::High);
+		$text = $this->buildText($this->getHtmlBody());
+		$this->setBody($text);
+	}
+}

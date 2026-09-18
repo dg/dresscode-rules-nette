@@ -1,0 +1,37 @@
+package: nette/mail
+group: deprecations
+
+since 4.1.2:
+	forbidden-members:
+		Nette\Mail\Message::buildText: 'there is no replacement, the class no longer calls it; the plain text comes from the static Nette\Mail\HtmlComposer::htmlToText(), which no override changes'
+
+since 4.0.1:
+	replaced-calls:
+		'Nette\Mail\FallbackMailer::onFailure(...$args)': '\Nette\Utils\Arrays::invoke($this->onFailure, ...$args)'
+
+since 4.0:
+	replaced-members:
+		Nette\Mail\MimePart::ENCODING_7BIT: Encoding7Bit
+		Nette\Mail\MimePart::ENCODING_8BIT: Encoding8Bit
+		Nette\Mail\MimePart::ENCODING_BASE64: EncodingBase64
+		Nette\Mail\MimePart::ENCODING_QUOTED_PRINTABLE: EncodingQuotedPrintable
+		Nette\Mail\Message::HIGH: High
+		Nette\Mail\Message::NORMAL: Normal
+		Nette\Mail\Message::LOW: Low
+	replaced-calls:
+		Nette\Mail\Message::$subject: {get: 'getSubject()', set: 'setSubject($value)'}
+		Nette\Mail\Message::$htmlBody: {get: 'getHtmlBody()', set: 'setHtmlBody($value)'}
+		Nette\Mail\MimePart::$body: {get: 'getBody()', set: 'setBody($value)'}
+		'Nette\Mail\DkimSigner::__construct($options)': 'new \Nette\Mail\DkimSigner(...$options)'
+		'Nette\Mail\DkimSigner::__construct($options, $signHeaders)': 'new \Nette\Mail\DkimSigner(...$options, signHeaders: $signHeaders)'
+	forbidden-members:
+		'Nette\Mail\SmtpMailer::__construct()': 'the constructor takes the host, the user name and the password as arguments and no longer reads the SMTP setting of php.ini'
+		'Nette\Mail\SmtpMailer::__construct($options)': 'pass the options as named arguments, new SmtpMailer(host: ..., username: ..., password: ...), encryption for secure and streamOptions for context'
+
+since 3.1.9:
+	replaced-members:
+		Nette\Mail\MimePart::LINE_LENGTH: LineLength
+
+since 3.1:
+	replaced-classes:
+		Nette\Mail\IMailer: Nette\Mail\Mailer
