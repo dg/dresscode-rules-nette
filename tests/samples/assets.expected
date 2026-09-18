@@ -1,0 +1,56 @@
+<?php
+
+namespace App;
+
+use Nette\Assets\Asset;
+use Nette\Assets\EntryAsset;
+use Nette\Assets\ImageAsset;
+use Nette\Assets\Mapper;
+use Nette\Assets\ScriptAsset;
+use Nette\Assets\StyleAsset;
+use Nette\Bridges\AssetsLatte\Nodes\AssetNode;
+use Nette\Bridges\AssetsLatte\Nodes\NAssetNode;
+
+function describe(ScriptAsset $script, StyleAsset $style, EntryAsset $entry, ImageAsset $image): array
+{
+	return [$script->mimeType, $style->mimeType, $entry->mimeType, $image->mimeType];
+}
+
+
+class CdnMapper implements Mapper
+{
+	public function getAsset(string $reference, array $options = []): Asset
+	{
+		return match (pathinfo($reference, PATHINFO_EXTENSION)) {
+			'js' => new ScriptAsset("https://cdn.example.com/$reference", type: 'module'),
+			'mjs' => new EntryAsset(url: "https://cdn.example.com/$reference", imports: []),
+			'css' => new StyleAsset("https://cdn.example.com/$reference", media: 'print'),
+			'png' => new ImageAsset("https://cdn.example.com/$reference", mimeType: 'image/png'),
+			default => new ScriptAsset("https://cdn.example.com/$reference", file: null),
+		};
+	}
+}
+
+
+class ModuleAsset extends ScriptAsset
+{
+	public function __construct(string $url)
+	{
+		parent::__construct($url, type: 'module');
+	}
+
+
+	public function isJavaScript(): bool
+	{
+		return $this->mimeType === 'text/javascript';
+	}
+}
+
+
+class NodeInspector
+{
+	public function isOptional(AssetNode $node, NAssetNode $attribute): bool
+	{
+		return $node->optional || $attribute->optional;
+	}
+}
