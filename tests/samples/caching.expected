@@ -1,0 +1,141 @@
+<?php
+
+namespace App\Model;
+
+use Nette\Bridges\CacheLatte\CacheMacro;
+use Nette\Caching\Cache;
+use Nette\Caching\BulkReader;
+use Nette\Caching\Storage;
+use Nette\Caching\Storages\FileStorage;
+use Nette\Caching\Storages\Journal;
+use Nette\Caching\Storages\MemcachedStorage;
+
+
+class ArticleRepository
+{
+	private Cache $cache;
+
+
+	public function __construct(Storage $storage, ?Journal $journal = null)
+	{
+		$this->cache = new Cache($storage, 'articles');
+	}
+
+
+	public function find(int $id): array
+	{
+		return $this->cache->load("article-$id", generator: function (&$dependencies) use ($id) {
+			$dependencies[Cache::Expire] = '20 minutes';
+			$dependencies[Cache::Sliding] = true;
+			$dependencies[Cache::Tags] = ["article/$id"];
+			return ['id' => $id];
+		});
+	}
+
+
+	public function findMany(array $ids): array
+	{
+		return $this->cache->bulkLoad($ids, generator: fn($id) => ['id' => $id]);
+	}
+
+
+	public function save(int $id, array $data): void
+	{
+		$this->cache->save("article-$id", $data, [
+			Cache::Expire => '1 hour',
+			Cache::Priority => 50,
+			Cache::Files => [__FILE__],
+			Cache::Items => ['articles'],
+			Cache::Constants => ['App\VERSION'],
+			Cache::Callbacks => [[self::class, 'isFresh']],
+		]);
+	}
+
+
+	public function invalidate(int $id): void
+	{
+		$this->cache->clean([Cache::Tags => ["article/$id"], Cache::Namespaces => ['articles']]);
+		$this->cache->clean([Cache::All => true]);
+	}
+
+
+	public function render(): void
+	{
+		if ($capture = $this->cache->capture('sidebar')) {
+			echo 'sidebar';
+			$capture->end();
+		}
+	}
+
+
+	public static function isFresh(): bool
+	{
+		return true;
+	}
+}
+
+
+class TaggedCache extends Cache
+{
+	public function saveTagged(string $key, mixed $data, array $tags): void
+	{
+		$this->save($key, $data, [self::Tags => $tags, static::Priority => 10]);
+		$output = $this->capture($key);
+	}
+}
+
+
+class NullStorage implements Storage, BulkReader
+{
+	public function read(string $key): mixed
+	{
+		return null;
+	}
+
+
+	public function lock(string $key): void
+	{
+	}
+
+
+	public function write(string $key, $data, array $dependencies): void
+	{
+	}
+
+
+	public function remove(string $key): void
+	{
+	}
+
+
+	public function clean(array $conditions): void
+	{
+	}
+
+
+	public function bulkRead(array $keys): array
+	{
+		return [];
+	}
+}
+
+
+function createStorages(string $dir): array
+{
+	FileStorage::$useDirectories = false;
+
+	$memcached = new MemcachedStorage('localhost');
+	$memcached->addServer('cache2.local', 11211);
+	$memcached->addServer('cache3.local', 11211);
+
+	$storage = new MemcachedStorage('localhost');
+	$storage->addServer('cache4.local', 11212);
+
+	return [new FileStorage($dir), $memcached, $storage];
+}
+
+
+function registerMacros(\Latte\Engine $latte): void
+{
+	$latte->addMacro('cache', new CacheMacro);
+}

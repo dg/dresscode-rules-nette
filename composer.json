@@ -18,6 +18,7 @@
 	"require-dev": {
 		"nette/application": "^3.2",
 		"nette/bootstrap": "^3.3",
+		"nette/caching": "^3.4",
 		"nette/forms": "^3.2",
 		"nette/http": "^3.3",
 		"nette/phpstan-rules": "^1.0",
@@ -44,7 +45,7 @@
 		},
 		"dresscode": {
 			"upgrading-dir": "upgrading",
-			"packages": ["nette/bootstrap", "nette/forms", "nette/http", "nette/schema"]
+			"packages": ["nette/bootstrap", "nette/caching", "nette/forms", "nette/http", "nette/schema"]
 		}
 	}
 }
