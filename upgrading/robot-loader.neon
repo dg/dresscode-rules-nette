@@ -1,0 +1,19 @@
+package: nette/robot-loader
+intent: deprecations
+
+since 4.1.3:
+	replacedMembers:
+		Nette\Loaders\RobotLoader::setTempDirectory: setCacheDirectory
+
+since 4.0.2:
+	replacedCalls:
+		'Nette\Loaders\RobotLoader::reportParseErrors(on: $state)': 'reportParseErrors(state: $state)'
+		'Nette\Loaders\RobotLoader::setAutoRefresh(on: $state)': 'setAutoRefresh(state: $state)'
+
+since 4.0:
+	replacedMembers:
+		Nette\Loaders\RobotLoader::getCacheKey: generateCacheKey
+
+since 3.2:
+	forbiddenMembers:
+		Nette\Loaders\RobotLoader::RETRY_LIMIT: 'there is no replacement; the constant is private; write the limit as a value'
