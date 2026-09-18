@@ -1,0 +1,77 @@
+14: Class `Nette\PhpGenerator\PhpLiteral` is replaced by `Nette\PhpGenerator\Literal`.
+25: Method `Nette\PhpGenerator\PhpFile::setStrictTypes()` is replaced by `setStrictTypes(state: $s)`.
+26: Method `Nette\PhpGenerator\PhpFile::getStrictTypes()` is replaced by `PhpFile::hasStrictTypes()`.
+27: Method `Nette\PhpGenerator\PhpFile::addNamespace()` is replaced by `addNamespace(namespace: $n)`.
+28: Method `Nette\PhpGenerator\PhpNamespace::getBracketedSyntax()` is replaced by `PhpNamespace::hasBracketedSyntax()`.
+30: Static method `Nette\PhpGenerator\ClassType::class()` is replaced by `new \Nette\PhpGenerator\ClassType($name)`.
+31: Method `Nette\PhpGenerator\ClassType::setExtends()` is replaced by `setExtends(name: $n)`.
+32: Method `Nette\PhpGenerator\ClassType::addExtend()` is removed: a class extends at most one class, set it with `setExtends()`; `addExtend()` is left to `Nette\PhpGenerator\InterfaceType`, since nette/php-generator 4.0.1.
+33: Method `Nette\PhpGenerator\ClassType::setTraits()` is replaced by `setTraits(traits: $n)`.
+34: Method `Nette\PhpGenerator\Traits\TraitsAware::addTrait()` is replaced by `addTrait($name)`.
+36: Method `Nette\PhpGenerator\Traits\TraitsAware::addTrait()` is deprecated: call `addResolution()` on the `Nette\PhpGenerator\TraitUse` that `addTrait()` returns, once for each resolution, since nette/php-generator 4.1.
+37: Method `Nette\PhpGenerator\PhpNamespace::add()` is replaced by `add(item: $c)`.
+39: Static method `Nette\PhpGenerator\ClassType::interface()` is replaced by `new \Nette\PhpGenerator\InterfaceType($name)`.
+40: Static method `Nette\PhpGenerator\ClassType::trait()` is replaced by `new \Nette\PhpGenerator\TraitType($name)`.
+41: Static method `Nette\PhpGenerator\ClassType::enum()` is replaced by `new \Nette\PhpGenerator\EnumType($name)`.
+44: Method `Nette\PhpGenerator\Traits\VisibilityAware::setVisibility()` is replaced by `setVisibility(value: $v)`.
+44: Constant `Nette\PhpGenerator\ClassType::VISIBILITY_PUBLIC` is replaced by `ClassType::VisibilityPublic`.
+44: Constant `Nette\PhpGenerator\ClassLike::VisibilityPublic` is replaced by `Nette\PhpGenerator\Visibility::Public`.
+46: Method `Nette\PhpGenerator\Traits\PropertyLike::setVisibility()` is replaced by `setVisibility(get: $v)`.
+46: Method `Nette\PhpGenerator\Traits\PropertyLike::setVisibility()` is replaced by `setVisibility(value: $v)`.
+46: Constant `Nette\PhpGenerator\ClassLike::VisibilityProtected` is replaced by `Nette\PhpGenerator\Visibility::Protected`.
+47: Method `Nette\PhpGenerator\Property::setType()` is replaced by `setType(type: $t)`.
+47: Constant `Nette\PhpGenerator\Type::STRING` is replaced by `Type::String`.
+48: Method `Nette\PhpGenerator\Traits\PropertyLike::setVisibility()` is replaced by `setVisibility(get: $v)`.
+50: Method `Nette\PhpGenerator\Traits\VisibilityAware::setVisibility()` is replaced by `setVisibility(value: $v)`.
+51: Method `Nette\PhpGenerator\Traits\FunctionLike::setReturnType()` is replaced by `setReturnType(type: $t)`.
+51: Constant `Nette\PhpGenerator\Type::STRING` is replaced by `Type::String`.
+60: Property `Nette\PhpGenerator\ClassType::$methods` is replaced by `getMethods()`.
+61: Property `Nette\PhpGenerator\ClassType::$properties` is replaced by `setProperties($value)`.
+62: Property `Nette\PhpGenerator\Method::$body` is replaced by `setBody($value)`.
+63: Property `Nette\PhpGenerator\Method::$body` is replaced by `getBody()`.
+64: Property `Nette\PhpGenerator\Parameter::$defaultValue` is replaced by `getDefaultValue()`.
+65: Property `Nette\PhpGenerator\Property::$value` is replaced by `setValue($value)`.
+65: Class `Nette\PhpGenerator\PhpLiteral` is replaced by `Nette\PhpGenerator\Literal`.
+67: Method `Nette\PhpGenerator\Parameter::setTypeHint()` is replaced by `Parameter::setType()`.
+68: Method `Nette\PhpGenerator\Parameter::setTypeHint()` is replaced by `setType(type: $t)`.
+69: Method `Nette\PhpGenerator\Parameter::getTypeHint()` is replaced by `Parameter::getType()`.
+70: Method `Nette\PhpGenerator\Parameter::setOptional()` is removed: set a default value with `setDefaultValue()`, which is what makes the parameter optional, since nette/php-generator 4.0.
+71: Method `Nette\PhpGenerator\Traits\FunctionLike::getReturnNullable()` is replaced by `FunctionLike::isReturnNullable()`.
+72: Method `Nette\PhpGenerator\Traits\FunctionLike::setNamespace()` is removed: there is no replacement; the call had no effect since it was deprecated, since nette/php-generator 4.0.
+74: Method `Nette\PhpGenerator\ClassType::getType()` is removed: a `Nette\PhpGenerator\ClassType` is always a class; the kind of a `Nette\PhpGenerator\ClassLike` is told by `instanceof` or by `isInterface()`, `isTrait()` and `isEnum()`, since nette/php-generator 4.0.1.
+74: Constant `Nette\PhpGenerator\ClassType::TYPE_INTERFACE` is deprecated: test the kind of a `Nette\PhpGenerator\ClassLike` with `instanceof` or with `isInterface()`, since nette/php-generator 4.0.1.
+75: Method `Nette\PhpGenerator\ClassType::setClass()` is removed: a `Nette\PhpGenerator\ClassType` is always a class; drop the call, since nette/php-generator 4.0.1.
+78: Method `Nette\PhpGenerator\ClassType::setInterface()` is removed: create the interface as `new Nette\PhpGenerator\InterfaceType($name)`, since nette/php-generator 4.0.1.
+79: Method `Nette\PhpGenerator\ClassType::setTrait()` is removed: create the trait as `new Nette\PhpGenerator\TraitType($name)`, since nette/php-generator 4.0.1.
+80: Method `Nette\PhpGenerator\ClassType::setType()` is removed: create an object of the kind wanted, `new Nette\PhpGenerator\InterfaceType($name)` or `new Nette\PhpGenerator\TraitType($name)`, since nette/php-generator 4.0.1.
+81: Method `Nette\PhpGenerator\ClassType::addCase()` is removed: an enum is a `Nette\PhpGenerator\EnumType`, which holds the cases, since nette/php-generator 4.0.1.
+82: Method `Nette\PhpGenerator\ClassType::getCases()` is removed: an enum is a `Nette\PhpGenerator\EnumType`, which holds the cases, since nette/php-generator 4.0.1.
+83: Method `Nette\PhpGenerator\ClassType::getTraitResolutions()` is replaced by `ClassType::getTraits()`.
+84: Constant `Nette\PhpGenerator\ClassType::TYPE_CLASS` is deprecated: test the kind of a `Nette\PhpGenerator\ClassLike` with `instanceof` or with `isClass()`, since nette/php-generator 4.0.1.
+84: Constant `Nette\PhpGenerator\ClassType::TYPE_TRAIT` is deprecated: test the kind of a `Nette\PhpGenerator\ClassLike` with `instanceof` or with `isTrait()`, since nette/php-generator 4.0.1.
+84: Constant `Nette\PhpGenerator\ClassType::TYPE_ENUM` is deprecated: test the kind of a `Nette\PhpGenerator\ClassLike` with `instanceof` or with `isEnum()`, since nette/php-generator 4.0.1.
+86: Constant `Nette\PhpGenerator\ClassLike::VisibilityPublic` is replaced by `Nette\PhpGenerator\Visibility::Public`.
+87: Constant `Nette\PhpGenerator\ClassLike::VISIBILITY_PRIVATE` is replaced by `ClassLike::VisibilityPrivate`.
+87: Constant `Nette\PhpGenerator\ClassLike::VisibilityPrivate` is replaced by `Nette\PhpGenerator\Visibility::Private`.
+93: Static method `Nette\PhpGenerator\ClassLike::withBodiesFrom()` is replaced by `from($class, withBodies: true)`.
+94: Static method `Nette\PhpGenerator\ClassLike::from()` is replaced by `from($class, $withBodies)`.
+95: Method `Nette\PhpGenerator\Factory::fromClassReflection()` is replaced by `fromClassReflection($from, $withBodies)`.
+96: Static method `Nette\PhpGenerator\GlobalFunction::withBodyFrom()` is replaced by `from($function, withBody: true)`.
+98: Property `Nette\PhpGenerator\Closure::$body` is replaced by `setBody($value)`.
+104: Static method `Nette\PhpGenerator\Type::getType()` is replaced by `\get_debug_type($value)`.
+105: Static method `Nette\PhpGenerator\Type::nullable()` is replaced by `nullable(nullable: $s, ...)`.
+106: Method `Nette\PhpGenerator\PhpNamespace::unresolveName()` is replaced by `PhpNamespace::simplifyName()`.
+107: Method `Nette\PhpGenerator\PhpNamespace::unresolveType()` is replaced by `PhpNamespace::simplifyType()`.
+109: Constant `Nette\PhpGenerator\PhpNamespace::NAME_NORMAL` is replaced by `PhpNamespace::NameNormal`.
+110: Constant `Nette\PhpGenerator\Helpers::WRAP_LENGTH` is removed: set the property `$wrapLength` of a `Nette\PhpGenerator\Dumper` object, since nette/php-generator 3.3.
+111: Constant `Nette\PhpGenerator\Helpers::INDENT_LENGTH` is removed: there is no replacement; the width of a tab is a private constant of `Nette\PhpGenerator\Dumper`; write the value `4`, since nette/php-generator 3.3.
+112: Static method `Nette\PhpGenerator\Helpers::indentPhp()` is removed: call `unindent()` to dedent or `Nette\Utils\Strings::indent()` to indent; neither protects the contents of strings and heredocs, since nette/php-generator 3.4.1.
+114: Static method `Nette\PhpGenerator\Helpers::dump()` is replaced by `(new \Nette\PhpGenerator\Dumper)->dump($var)`.
+115: Static method `Nette\PhpGenerator\Helpers::format()` is replaced by `(new \Nette\PhpGenerator\Dumper)->format($statement, ...$args)`.
+116: Static method `Nette\PhpGenerator\Helpers::formatArgs()` is replaced by `(new \Nette\PhpGenerator\Dumper)->format($statement, ...$args)`.
+122: Method `Nette\PhpGenerator\ClassManipulator::implementInterface()` is replaced by `ClassManipulator::implement()`.
+123: Method `Nette\PhpGenerator\Traits\PropertyLike::setVisibility()` is replaced by `setVisibility(get: $v)`.
+124: Method `Nette\PhpGenerator\ClassType::inheritMethod()` is replaced by `(new \Nette\PhpGenerator\ClassManipulator($this))->inheritMethod($name, ...)`.
+125: Method `Nette\PhpGenerator\ClassType::inheritProperty()` is replaced by `(new \Nette\PhpGenerator\ClassManipulator($this))->inheritProperty($name, ...)`.
+132: Method `Nette\PhpGenerator\Printer::printReturnType()` is deprecated: the printer no longer calls it; override `printType()`, which prints every type: of a return value, a parameter and a property, since nette/php-generator 3.3.4.
+134: Method `Nette\PhpGenerator\Printer::printReturnType()` is deprecated: the printer no longer calls it; override `printType()`, which prints every type: of a return value, a parameter and a property, since nette/php-generator 3.3.4.
