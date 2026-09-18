@@ -18,6 +18,7 @@
 	"require-dev": {
 		"nette/application": "^3.2",
 		"nette/bootstrap": "^3.3",
+		"nette/caching": "^3.4",
 		"nette/forms": "^3.2",
 		"nette/http": "^3.3",
 		"nette/phpstan-rules": "^1.0",
@@ -45,6 +46,7 @@
 		"dresscode": {
 			"upgrading": [
 				"upgrading/bootstrap.neon",
+				"upgrading/caching.neon",
 				"upgrading/forms.neon",
 				"upgrading/http.neon",
 				"upgrading/schema.neon"
