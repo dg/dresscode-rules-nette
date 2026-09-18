@@ -1,0 +1,152 @@
+package: nette/php-generator
+group: deprecations
+
+since 4.2.1:
+	replaced-calls:
+		'Nette\PhpGenerator\PhpNamespace::add(class: $c)': 'add(item: $c)'
+
+since 4.2:
+	forbidden-members:
+		Nette\PhpGenerator\ClassType::getType: 'a Nette\PhpGenerator\ClassType is always a class; the kind of a Nette\PhpGenerator\ClassLike is told by instanceof or by isInterface(), isTrait() and isEnum()'
+
+since 4.1.7:
+	replaced-members:
+		Nette\PhpGenerator\ClassManipulator::implementInterface: implement
+	replaced-calls:
+		'Nette\PhpGenerator\Traits\PropertyLike::setVisibility(value: $v)': 'setVisibility(get: $v)'
+
+since 4.1.6:
+	replaced-calls:
+		'Nette\PhpGenerator\ClassType::inheritMethod($name, ...)': '(new \Nette\PhpGenerator\ClassManipulator($this))->inheritMethod($name, ...)'
+		'Nette\PhpGenerator\ClassType::inheritProperty($name, ...)': '(new \Nette\PhpGenerator\ClassManipulator($this))->inheritProperty($name, ...)'
+
+since 4.1.5:
+	replaced-calls:
+		'Nette\PhpGenerator\PhpFile::setStrictTypes(on: $s)': 'setStrictTypes(state: $s)'
+
+since 4.1:
+	forbidden-members:
+		Nette\PhpGenerator\ClassType::setClass: 'a Nette\PhpGenerator\ClassType is always a class, so there is nothing to set'
+		Nette\PhpGenerator\ClassType::setInterface: 'create the interface as new Nette\PhpGenerator\InterfaceType($name)'
+		Nette\PhpGenerator\ClassType::setTrait: 'create the trait as new Nette\PhpGenerator\TraitType($name)'
+		Nette\PhpGenerator\ClassType::setType: 'create an object of the kind wanted, new Nette\PhpGenerator\InterfaceType($name) or new Nette\PhpGenerator\TraitType($name)'
+		'Nette\PhpGenerator\Traits\TraitsAware::addTrait($name, $resolutions)': 'call addResolution() on the Nette\PhpGenerator\TraitUse that addTrait() returns, once for each resolution'
+
+since 4.0.10:
+	replaced-members:
+		Nette\PhpGenerator\ClassLike::VisibilityPublic: Nette\PhpGenerator\Visibility::Public
+		Nette\PhpGenerator\ClassLike::VisibilityProtected: Nette\PhpGenerator\Visibility::Protected
+		Nette\PhpGenerator\ClassLike::VisibilityPrivate: Nette\PhpGenerator\Visibility::Private
+	replaced-calls:
+		'Nette\PhpGenerator\Traits\VisibilityAware::setVisibility(val: $v)': 'setVisibility(value: $v)'
+		'Nette\PhpGenerator\Traits\PropertyLike::setVisibility(val: $v)': 'setVisibility(value: $v)'
+		'Nette\PhpGenerator\Type::nullable(state: $s, ...)': 'nullable(nullable: $s, ...)'
+
+since 4.0.1:
+	replaced-members:
+		Nette\PhpGenerator\ClassLike::VISIBILITY_PUBLIC: VisibilityPublic
+		Nette\PhpGenerator\ClassLike::VISIBILITY_PROTECTED: VisibilityProtected
+		Nette\PhpGenerator\ClassLike::VISIBILITY_PRIVATE: VisibilityPrivate
+	replaced-calls:
+		'Nette\PhpGenerator\ClassType::class($name)': 'new \Nette\PhpGenerator\ClassType($name)'
+		'Nette\PhpGenerator\ClassType::interface($name)': 'new \Nette\PhpGenerator\InterfaceType($name)'
+		'Nette\PhpGenerator\ClassType::trait($name)': 'new \Nette\PhpGenerator\TraitType($name)'
+		'Nette\PhpGenerator\ClassType::enum($name)': 'new \Nette\PhpGenerator\EnumType($name)'
+		'Nette\PhpGenerator\ClassType::setExtends(names: $n)': 'setExtends(name: $n)'
+	forbidden-members:
+		Nette\PhpGenerator\ClassType::addExtend: 'a class extends at most one class, set it with setExtends(); addExtend() is left to Nette\PhpGenerator\InterfaceType'
+		Nette\PhpGenerator\ClassType::addCase: 'an enum is a Nette\PhpGenerator\EnumType, which holds the cases'
+		Nette\PhpGenerator\ClassType::setCases: 'an enum is a Nette\PhpGenerator\EnumType, which holds the cases'
+		Nette\PhpGenerator\ClassType::getCases: 'an enum is a Nette\PhpGenerator\EnumType, which holds the cases'
+		Nette\PhpGenerator\ClassType::removeCase: 'an enum is a Nette\PhpGenerator\EnumType, which holds the cases'
+
+since 4.0:
+	replaced-calls:
+		'Nette\PhpGenerator\ClassType::$methods': {get: 'getMethods()', set: 'setMethods($value)'}
+		'Nette\PhpGenerator\ClassType::$properties': {get: 'getProperties()', set: 'setProperties($value)'}
+		'Nette\PhpGenerator\Method::$body': {get: 'getBody()', set: 'setBody($value)'}
+		'Nette\PhpGenerator\GlobalFunction::$body': {get: 'getBody()', set: 'setBody($value)'}
+		'Nette\PhpGenerator\Closure::$body': {get: 'getBody()', set: 'setBody($value)'}
+		'Nette\PhpGenerator\Parameter::$defaultValue': {get: 'getDefaultValue()', set: 'setDefaultValue($value)'}
+		'Nette\PhpGenerator\Property::$value': {get: 'getValue()', set: 'setValue($value)'}
+		'Nette\PhpGenerator\ClassLike::withBodiesFrom($class)': 'from($class, withBodies: true)'
+		'Nette\PhpGenerator\GlobalFunction::withBodyFrom($function)': 'from($function, withBody: true)'
+		'Nette\PhpGenerator\Type::getType($value)': '\get_debug_type($value)'
+		'Nette\PhpGenerator\ClassLike::from($class, $withBodies, $materializeTraits)': 'from($class, $withBodies)'
+		'Nette\PhpGenerator\Factory::fromClassReflection($from, $withBodies, $materializeTraits)': 'fromClassReflection($from, $withBodies)'
+		'Nette\PhpGenerator\Traits\TraitsAware::addTrait($name, true)': 'addTrait($name)'
+	forbidden-members:
+		Nette\PhpGenerator\Traits\FunctionLike::setNamespace: 'there is no replacement, the call had no effect since it was deprecated'
+		Nette\PhpGenerator\Parameter::setOptional: 'set a default value with setDefaultValue(), which is what makes the parameter optional'
+
+since 3.6.9:
+	replaced-members:
+		Nette\PhpGenerator\Type::STRING: String
+		Nette\PhpGenerator\Type::INT: Int
+		Nette\PhpGenerator\Type::FLOAT: Float
+		Nette\PhpGenerator\Type::BOOL: Bool
+		Nette\PhpGenerator\Type::ARRAY: Array
+		Nette\PhpGenerator\Type::OBJECT: Object
+		Nette\PhpGenerator\Type::CALLABLE: Callable
+		Nette\PhpGenerator\Type::ITERABLE: Iterable
+		Nette\PhpGenerator\Type::VOID: Void
+		Nette\PhpGenerator\Type::NEVER: Never
+		Nette\PhpGenerator\Type::MIXED: Mixed
+		Nette\PhpGenerator\Type::FALSE: 'False'
+		Nette\PhpGenerator\Type::NULL: 'Null'
+		Nette\PhpGenerator\Type::SELF: Self
+		Nette\PhpGenerator\Type::PARENT: Parent
+		Nette\PhpGenerator\Type::STATIC: Static
+
+since 3.6.7:
+	replaced-members:
+		Nette\PhpGenerator\ClassType::VISIBILITY_PUBLIC: VisibilityPublic
+		Nette\PhpGenerator\ClassType::VISIBILITY_PROTECTED: VisibilityProtected
+		Nette\PhpGenerator\ClassType::VISIBILITY_PRIVATE: VisibilityPrivate
+		Nette\PhpGenerator\PhpNamespace::NAME_NORMAL: NameNormal
+		Nette\PhpGenerator\PhpNamespace::NAME_FUNCTION: NameFunction
+		Nette\PhpGenerator\PhpNamespace::NAME_CONSTANT: NameConstant
+
+since 3.6.2:
+	replaced-members:
+		Nette\PhpGenerator\PhpNamespace::unresolveType: simplifyType
+		Nette\PhpGenerator\PhpNamespace::unresolveName: simplifyName
+	replaced-calls:
+		'Nette\PhpGenerator\ClassType::setTraits(names: $n)': 'setTraits(traits: $n)'
+
+since 3.6:
+	replaced-members:
+		Nette\PhpGenerator\PhpNamespace::unresolveUnionType: unresolveType
+
+since 3.5.4:
+	replaced-calls:
+		'Nette\PhpGenerator\Property::setType(val: $t)': 'setType(type: $t)'
+		'Nette\PhpGenerator\Traits\FunctionLike::setReturnType(val: $t)': 'setReturnType(type: $t)'
+
+since 3.5:
+	replaced-calls:
+		'Nette\PhpGenerator\PhpFile::addNamespace(name: $n)': 'addNamespace(namespace: $n)'
+
+since 3.3.4:
+	forbidden-members:
+		Nette\PhpGenerator\Printer::printReturnType: 'the printer no longer calls it; override printType(), which prints every type: of a return value, a parameter and a property'
+
+since 3.3.3:
+	replaced-classes:
+		Nette\PhpGenerator\PhpLiteral: Nette\PhpGenerator\Literal
+
+since 3.3:
+	replaced-members:
+		Nette\PhpGenerator\Parameter::getTypeHint: getType
+		Nette\PhpGenerator\Parameter::setTypeHint: setType
+		Nette\PhpGenerator\PhpFile::getStrictTypes: hasStrictTypes
+		Nette\PhpGenerator\PhpNamespace::getBracketedSyntax: hasBracketedSyntax
+		Nette\PhpGenerator\Traits\FunctionLike::getReturnNullable: isReturnNullable
+	replaced-calls:
+		'Nette\PhpGenerator\Parameter::setTypeHint(hint: $t)': 'setType(type: $t)'
+		'Nette\PhpGenerator\Helpers::dump($var)': '(new \Nette\PhpGenerator\Dumper)->dump($var)'
+		'Nette\PhpGenerator\Helpers::format($statement, ...$args)': '(new \Nette\PhpGenerator\Dumper)->format($statement, ...$args)'
+		'Nette\PhpGenerator\Helpers::formatArgs($statement, $args)': '(new \Nette\PhpGenerator\Dumper)->format($statement, ...$args)'
+	forbidden-members:
+		Nette\PhpGenerator\Helpers::WRAP_LENGTH: 'set the property $wrapLength of a Nette\PhpGenerator\Dumper object'
+		Nette\PhpGenerator\Helpers::INDENT_LENGTH: 'there is no replacement'

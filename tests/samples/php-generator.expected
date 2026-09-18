@@ -1,0 +1,138 @@
+<?php
+
+namespace App;
+
+use Nette\PhpGenerator\ClassManipulator;
+use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\Closure;
+use Nette\PhpGenerator\Dumper;
+use Nette\PhpGenerator\EnumType;
+use Nette\PhpGenerator\Factory;
+use Nette\PhpGenerator\GlobalFunction;
+use Nette\PhpGenerator\Helpers;
+use Nette\PhpGenerator\InterfaceType;
+use Nette\PhpGenerator\Method;
+use Nette\PhpGenerator\Parameter;
+use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\Literal;
+use Nette\PhpGenerator\PhpNamespace;
+use Nette\PhpGenerator\Printer;
+use Nette\PhpGenerator\Property;
+use Nette\PhpGenerator\PromotedParameter;
+use Nette\PhpGenerator\TraitType;
+use Nette\PhpGenerator\Type;
+use Nette\PhpGenerator\Visibility;
+
+class EntityGenerator
+{
+	public function generate(PhpFile $file): string
+	{
+		$file->setStrictTypes(state: true);
+		$strict = $file->hasStrictTypes();
+		$namespace = $file->addNamespace(namespace: 'App\Model');
+		$bracketed = $namespace->hasBracketedSyntax();
+
+		$class = new ClassType('Article');
+		$class->setExtends(name: 'Entity');
+		$class->addExtend('Timestamps');
+		$class->setTraits(traits: ['SmartObject']);
+		$class->addTrait('Cache')
+			->addResolution('load as protected');
+		$class->addTrait('Logger', ['log as protected']);
+		$namespace->add(item: $class);
+
+		$interface = new InterfaceType('Publishable');
+		$trait = new TraitType('Timestamps');
+		$enum = new EnumType('Status');
+
+		$constant = $class->addConstant('TABLE', 'article');
+		$constant->setVisibility(value: Visibility::Public);
+		$title = $class->addProperty('title');
+		$title->setVisibility(get: Visibility::Protected);
+		$title->setType(type: Type::String);
+		$class->addProperty('body')->setVisibility(get: 'private');
+		$getter = $class->addMethod('getTitle');
+		$getter->setVisibility(value: 'public');
+		$getter->setReturnType(type: Type::String);
+		$getter->setBody('return $this->title;');
+
+		return (string) $file;
+	}
+
+
+	public function inspect(ClassType $class, Method $method, Parameter $parameter, Property $property): void
+	{
+		$methods = $class->getMethods();
+		$class->setProperties([]);
+		$method->setBody('return 1;');
+		$code = $method->getBody();
+		$default = $parameter->getDefaultValue();
+		$property->setValue(new Literal('[]'));
+
+		$parameter->setType('array');
+		$parameter->setType(type: 'iterable');
+		$type = $parameter->getType();
+		$parameter->setOptional();
+		$nullable = $method->isReturnNullable();
+		$method->setNamespace(null);
+
+		if ($class->getType() === ClassType::TYPE_INTERFACE) {
+			$class->setClass();
+		}
+
+		$class->setInterface();
+		$class->setTrait();
+		$class->setType('trait');
+		$class->addCase('Draft');
+		$cases = $class->getCases();
+
+		$public = Visibility::Public;
+		$private = \Nette\PhpGenerator\Visibility::Private;
+	}
+
+
+	public function reflect(Factory $factory, \ReflectionClass $reflection): void
+	{
+		$class = ClassType::from(\stdClass::class, withBodies: true);
+		$class = ClassType::from(\stdClass::class, true);
+		$class = $factory->fromClassReflection($reflection, false);
+		$function = GlobalFunction::from('trim', withBody: true);
+		$closure = new Closure;
+		$closure->setBody('return 1;');
+	}
+
+
+	public function dump(PhpNamespace $namespace): string
+	{
+		$type = \get_debug_type(123);
+		$nullable = Type::nullable('int', nullable: true);
+		$name = $namespace->simplifyName('App\Model\Article');
+		$short = $namespace->simplifyType('?App\Model\Article');
+
+		$namespace->addUse('App\Model\Article', null, PhpNamespace::NameNormal);
+		$length = Helpers::WRAP_LENGTH;
+		$indent = Helpers::INDENT_LENGTH;
+
+		return (new Dumper)->dump([1, 2])
+			. (new Dumper)->format('$a = ?;', 1)
+			. (new Dumper)->format('func(...?)', 1, 2);
+	}
+
+
+	public function manipulate(ClassManipulator $manipulator, PromotedParameter $parameter, ClassType $class): void
+	{
+		$manipulator->implement(\Countable::class);
+		$parameter->setVisibility(get: 'protected');
+		(new ClassManipulator($class))->inheritMethod('render');
+		(new ClassManipulator($class))->inheritProperty('name', returnIfExists: true);
+	}
+}
+
+
+class CustomPrinter extends Printer
+{
+	protected function printReturnType($function, ?PhpNamespace $namespace): string
+	{
+		return strtolower(parent::printReturnType($function, $namespace));
+	}
+}

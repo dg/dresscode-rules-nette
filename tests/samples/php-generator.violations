@@ -1,0 +1,71 @@
+14: Class Nette\PhpGenerator\PhpLiteral is replaced by Nette\PhpGenerator\Literal
+25: Method Nette\PhpGenerator\PhpFile::setStrictTypes() is replaced by setStrictTypes(state: $s)
+26: Method Nette\PhpGenerator\PhpFile::getStrictTypes() is replaced by PhpFile::hasStrictTypes()
+27: Method Nette\PhpGenerator\PhpFile::addNamespace() is replaced by addNamespace(namespace: $n)
+28: Method Nette\PhpGenerator\PhpNamespace::getBracketedSyntax() is replaced by PhpNamespace::hasBracketedSyntax()
+30: Static method Nette\PhpGenerator\ClassType::class() is replaced by new \Nette\PhpGenerator\ClassType($name)
+31: Method Nette\PhpGenerator\ClassType::setExtends() is replaced by setExtends(name: $n)
+32: Method Nette\PhpGenerator\ClassType::addExtend() is forbidden: a class extends at most one class, set it with setExtends(); addExtend() is left to Nette\PhpGenerator\InterfaceType
+33: Method Nette\PhpGenerator\ClassType::setTraits() is replaced by setTraits(traits: $n)
+34: Method Nette\PhpGenerator\Traits\TraitsAware::addTrait() is replaced by addTrait($name)
+36: Method Nette\PhpGenerator\Traits\TraitsAware::addTrait() is forbidden: call addResolution() on the Nette\PhpGenerator\TraitUse that addTrait() returns, once for each resolution
+37: Method Nette\PhpGenerator\PhpNamespace::add() is replaced by add(item: $c)
+39: Static method Nette\PhpGenerator\ClassType::interface() is replaced by new \Nette\PhpGenerator\InterfaceType($name)
+40: Static method Nette\PhpGenerator\ClassType::trait() is replaced by new \Nette\PhpGenerator\TraitType($name)
+41: Static method Nette\PhpGenerator\ClassType::enum() is replaced by new \Nette\PhpGenerator\EnumType($name)
+44: Method Nette\PhpGenerator\Traits\VisibilityAware::setVisibility() is replaced by setVisibility(value: $v)
+44: Constant Nette\PhpGenerator\ClassType::VISIBILITY_PUBLIC is replaced by ClassType::VisibilityPublic
+44: Constant Nette\PhpGenerator\ClassLike::VisibilityPublic is replaced by Nette\PhpGenerator\Visibility::Public
+46: Method Nette\PhpGenerator\Traits\PropertyLike::setVisibility() is replaced by setVisibility(get: $v)
+46: Method Nette\PhpGenerator\Traits\PropertyLike::setVisibility() is replaced by setVisibility(value: $v)
+46: Constant Nette\PhpGenerator\ClassLike::VisibilityProtected is replaced by Nette\PhpGenerator\Visibility::Protected
+47: Method Nette\PhpGenerator\Property::setType() is replaced by setType(type: $t)
+47: Constant Nette\PhpGenerator\Type::STRING is replaced by Type::String
+48: Method Nette\PhpGenerator\Traits\PropertyLike::setVisibility() is replaced by setVisibility(get: $v)
+50: Method Nette\PhpGenerator\Traits\VisibilityAware::setVisibility() is replaced by setVisibility(value: $v)
+51: Method Nette\PhpGenerator\Traits\FunctionLike::setReturnType() is replaced by setReturnType(type: $t)
+51: Constant Nette\PhpGenerator\Type::STRING is replaced by Type::String
+60: Property Nette\PhpGenerator\ClassType::$methods is replaced by getMethods()
+61: Property Nette\PhpGenerator\ClassType::$properties is replaced by setProperties($value)
+62: Property Nette\PhpGenerator\Method::$body is replaced by setBody($value)
+63: Property Nette\PhpGenerator\Method::$body is replaced by getBody()
+64: Property Nette\PhpGenerator\Parameter::$defaultValue is replaced by getDefaultValue()
+65: Property Nette\PhpGenerator\Property::$value is replaced by setValue($value)
+65: Class Nette\PhpGenerator\PhpLiteral is replaced by Nette\PhpGenerator\Literal
+67: Method Nette\PhpGenerator\Parameter::setTypeHint() is replaced by Parameter::setType()
+68: Method Nette\PhpGenerator\Parameter::setTypeHint() is replaced by setType(type: $t)
+69: Method Nette\PhpGenerator\Parameter::getTypeHint() is replaced by Parameter::getType()
+70: Method Nette\PhpGenerator\Parameter::setOptional() is forbidden: set a default value with setDefaultValue(), which is what makes the parameter optional
+71: Method Nette\PhpGenerator\Traits\FunctionLike::getReturnNullable() is replaced by FunctionLike::isReturnNullable()
+72: Method Nette\PhpGenerator\Traits\FunctionLike::setNamespace() is forbidden: there is no replacement, the call had no effect since it was deprecated
+74: Method Nette\PhpGenerator\ClassType::getType() is forbidden: a Nette\PhpGenerator\ClassType is always a class; the kind of a Nette\PhpGenerator\ClassLike is told by instanceof or by isInterface(), isTrait() and isEnum()
+75: Method Nette\PhpGenerator\ClassType::setClass() is forbidden: a Nette\PhpGenerator\ClassType is always a class, so there is nothing to set
+78: Method Nette\PhpGenerator\ClassType::setInterface() is forbidden: create the interface as new Nette\PhpGenerator\InterfaceType($name)
+79: Method Nette\PhpGenerator\ClassType::setTrait() is forbidden: create the trait as new Nette\PhpGenerator\TraitType($name)
+80: Method Nette\PhpGenerator\ClassType::setType() is forbidden: create an object of the kind wanted, new Nette\PhpGenerator\InterfaceType($name) or new Nette\PhpGenerator\TraitType($name)
+81: Method Nette\PhpGenerator\ClassType::addCase() is forbidden: an enum is a Nette\PhpGenerator\EnumType, which holds the cases
+82: Method Nette\PhpGenerator\ClassType::getCases() is forbidden: an enum is a Nette\PhpGenerator\EnumType, which holds the cases
+84: Constant Nette\PhpGenerator\ClassLike::VisibilityPublic is replaced by Nette\PhpGenerator\Visibility::Public
+85: Constant Nette\PhpGenerator\ClassLike::VISIBILITY_PRIVATE is replaced by ClassLike::VisibilityPrivate
+85: Constant Nette\PhpGenerator\ClassLike::VisibilityPrivate is replaced by Nette\PhpGenerator\Visibility::Private
+91: Static method Nette\PhpGenerator\ClassLike::withBodiesFrom() is replaced by from($class, withBodies: true)
+92: Static method Nette\PhpGenerator\ClassLike::from() is replaced by from($class, $withBodies)
+93: Method Nette\PhpGenerator\Factory::fromClassReflection() is replaced by fromClassReflection($from, $withBodies)
+94: Static method Nette\PhpGenerator\GlobalFunction::withBodyFrom() is replaced by from($function, withBody: true)
+96: Property Nette\PhpGenerator\Closure::$body is replaced by setBody($value)
+102: Static method Nette\PhpGenerator\Type::getType() is replaced by \get_debug_type($value)
+103: Static method Nette\PhpGenerator\Type::nullable() is replaced by nullable(nullable: $s, ...)
+104: Method Nette\PhpGenerator\PhpNamespace::unresolveName() is replaced by PhpNamespace::simplifyName()
+105: Method Nette\PhpGenerator\PhpNamespace::unresolveType() is replaced by PhpNamespace::simplifyType()
+107: Constant Nette\PhpGenerator\PhpNamespace::NAME_NORMAL is replaced by PhpNamespace::NameNormal
+108: Constant Nette\PhpGenerator\Helpers::WRAP_LENGTH is forbidden: set the property $wrapLength of a Nette\PhpGenerator\Dumper object
+109: Constant Nette\PhpGenerator\Helpers::INDENT_LENGTH is forbidden: there is no replacement
+111: Static method Nette\PhpGenerator\Helpers::dump() is replaced by (new \Nette\PhpGenerator\Dumper)->dump($var)
+112: Static method Nette\PhpGenerator\Helpers::format() is replaced by (new \Nette\PhpGenerator\Dumper)->format($statement, ...$args)
+113: Static method Nette\PhpGenerator\Helpers::formatArgs() is replaced by (new \Nette\PhpGenerator\Dumper)->format($statement, ...$args)
+119: Method Nette\PhpGenerator\ClassManipulator::implementInterface() is replaced by ClassManipulator::implement()
+120: Method Nette\PhpGenerator\Traits\PropertyLike::setVisibility() is replaced by setVisibility(get: $v)
+121: Method Nette\PhpGenerator\ClassType::inheritMethod() is replaced by (new \Nette\PhpGenerator\ClassManipulator($this))->inheritMethod($name, ...)
+122: Method Nette\PhpGenerator\ClassType::inheritProperty() is replaced by (new \Nette\PhpGenerator\ClassManipulator($this))->inheritProperty($name, ...)
+129: Method Nette\PhpGenerator\Printer::printReturnType() is forbidden: the printer no longer calls it; override printType(), which prints every type: of a return value, a parameter and a property
+131: Method Nette\PhpGenerator\Printer::printReturnType() is forbidden: the printer no longer calls it; override printType(), which prints every type: of a return value, a parameter and a property
