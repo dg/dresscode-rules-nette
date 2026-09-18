@@ -1,0 +1,86 @@
+<?php
+
+namespace App;
+
+use Nette\Mail\DkimSigner;
+use Nette\Mail\FallbackMailer;
+use Nette\Mail\IMailer;
+use Nette\Mail\Message;
+use Nette\Mail\MimePart;
+use Nette\Mail\SmtpMailer;
+
+class MailSender
+{
+	public function __construct(
+		private IMailer $mailer,
+	) {
+	}
+
+
+	public function send(Message $mail, MimePart $part): void
+	{
+		$mail->setPriority(Message::HIGH);
+		$low = Message::LOW;
+		$normal = Message::NORMAL;
+		$part->setEncoding(MimePart::ENCODING_BASE64);
+		$part->setEncoding(MimePart::ENCODING_7BIT);
+		$part->setEncoding(MimePart::ENCODING_8BIT);
+		$part->setEncoding(MimePart::ENCODING_QUOTED_PRINTABLE);
+		$width = MimePart::LINE_LENGTH;
+
+		$mail->subject = 'Hello';
+		$title = $mail->subject;
+		$mail->htmlBody = '<p>Hello</p>';
+		$html = $mail->htmlBody;
+		$part->body = 'text';
+		$text = $part->body;
+		$plain = $mail->body;
+
+		$this->mailer->send($mail);
+	}
+
+
+	public function create(array $options, array $headers): array
+	{
+		return [
+			new SmtpMailer(),
+			new SmtpMailer(['host' => 'smtp.example.com', 'secure' => 'ssl']),
+			new SmtpMailer($options),
+			new SmtpMailer('smtp.example.com', 'joe', 'secret'),
+			new SmtpMailer(...$options),
+			new DkimSigner(['domain' => 'example.com', 'selector' => 'mail', 'privateKey' => 'key']),
+			new DkimSigner($options),
+			new DkimSigner($options, $headers),
+			new DkimSigner('example.com', 'mail', 'key'),
+			new DkimSigner(...$options),
+		];
+	}
+
+
+	public function fallback(FallbackMailer $mailer, \Throwable $e, Message $mail): void
+	{
+		$mailer->onFailure($mailer, $e, $mailer, $mail);
+		$mailer->onFailure[] = fn() => null;
+	}
+}
+
+
+class NewsletterMessage extends Message
+{
+	public const Priority = self::LOW;
+
+
+	protected function buildText(string $html): string
+	{
+		return strip_tags($html);
+	}
+
+
+	public function prepare(): void
+	{
+		$this->subject = 'Newsletter';
+		$this->setPriority(self::HIGH);
+		$text = $this->buildText($this->htmlBody);
+		$this->body = $text;
+	}
+}
