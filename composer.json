@@ -23,6 +23,7 @@
 		"nette/http": "^3.3",
 		"nette/mail": "^4.2",
 		"nette/phpstan-rules": "^1.0",
+		"nette/robot-loader": "^4.1",
 		"nette/schema": "^1.3",
 		"nette/tester": "^2.6",
 		"nette/utils": "^4.0",
@@ -51,6 +52,7 @@
 				"upgrading/forms.neon",
 				"upgrading/http.neon",
 				"upgrading/mail.neon",
+				"upgrading/robot-loader.neon",
 				"upgrading/schema.neon"
 			]
 		}
