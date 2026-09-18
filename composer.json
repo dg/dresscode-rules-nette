@@ -17,6 +17,7 @@
 	},
 	"require-dev": {
 		"nette/application": "^3.2",
+		"nette/assets": "^1.0",
 		"nette/bootstrap": "^3.3",
 		"nette/caching": "^3.4",
 		"nette/forms": "^3.2",
@@ -47,6 +48,7 @@
 		},
 		"dresscode": {
 			"upgrading": [
+				"upgrading/assets.neon",
 				"upgrading/bootstrap.neon",
 				"upgrading/caching.neon",
 				"upgrading/forms.neon",
