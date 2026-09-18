@@ -1,0 +1,70 @@
+<?php
+
+namespace App;
+
+use Tracy\Bridges\Nette\Bridge;
+use Nette\Configurator;
+use Nette\DI\Compiler;
+use Nette\DI\Extensions\ConstantsExtension;
+use Nette\DI\Extensions\PhpExtension;
+use Nette\Utils\Arrays;
+
+class Bootstrap
+{
+	public static function boot(): \Nette\DI\Container
+	{
+		$configurator = new \Nette\Bootstrap\Configurator;
+		$configurator->enableTracy(__DIR__ . '/../log');
+		$configurator->addStaticParameters(['rootDir' => __DIR__ . '/..']);
+		$configurator->setTempDirectory(__DIR__ . '/../temp');
+		$configurator->addConfig(__DIR__ . '/config/common.neon');
+		$configurator->addConfig(__DIR__ . '/config/local.neon', Configurator::AUTO);
+		$configurator->addConfig(__DIR__ . '/config/test.neon', Configurator::NONE);
+		setcookie(\Nette\Bootstrap\Configurator::CookieSecret, 'secret');
+		Bridge::initialize();
+		return $configurator->createContainer();
+	}
+
+
+	public static function extensions(Compiler $compiler): void
+	{
+		$compiler->addExtension('constants', new ConstantsExtension([]));
+		$compiler->addExtension('php', new PhpExtension);
+	}
+}
+
+
+class MyConfigurator extends \Nette\Bootstrap\Configurator
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->staticParameters['appDir'] = __DIR__;
+		$this->configs[] = __DIR__ . '/config/extra.neon';
+	}
+
+
+	public function boot(Compiler $compiler): void
+	{
+		$this->enableTracy();
+		$this->addStaticParameters(['secret' => self::CookieSecret]);
+		Arrays::invoke($this->onCompile, $this, $compiler);
+	}
+
+
+	protected function fixCompatibility($config)
+	{
+		return $config;
+	}
+}
+
+
+class ModernConfigurator extends \Nette\Bootstrap\Configurator
+{
+	public function boot(): void
+	{
+		$this->enableTracy();
+		$this->staticParameters['appDir'] = __DIR__;
+		$this->addConfig(__DIR__ . '/config/common.neon', 'production');
+	}
+}
