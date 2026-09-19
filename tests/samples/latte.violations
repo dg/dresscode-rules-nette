@@ -1,0 +1,66 @@
+18: Class Latte\Compiler\Nodes\Php\Expression\StaticCallNode is replaced by Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode
+23: Class Latte\Compiler\Nodes\Php\Scalar\EncapsedStringPartNode is replaced by Latte\Compiler\Nodes\Php\InterpolatedStringPartNode
+45: Method Latte\Engine::setTempDirectory() is replaced by Engine::setCacheDirectory()
+46: Method Latte\Engine::setAutoRefresh() is replaced by setAutoRefresh(state: $s)
+47: Method Latte\Engine::setSandboxMode() is replaced by setSandboxMode(state: $s)
+48: Method Latte\Engine::setStrictTypes() is replaced by setFeature(\Latte\Feature::StrictTypes)
+49: Method Latte\Engine::setStrictParsing() is replaced by setFeature(\Latte\Feature::StrictParsing, $state)
+50: Method Latte\Engine::setMigrationWarnings() is replaced by setFeature(\Latte\Feature::MigrationWarnings, $state)
+51: Method Latte\Engine::setExceptionHandler() is replaced by setExceptionHandler(handler: $c)
+52: Method Latte\Engine::addProvider() is replaced by addProvider(provider: $v, ...)
+53: Method Latte\Engine::addFilterLoader() is forbidden: register each filter with addFilter()
+54: Constant Latte\Engine::CONTENT_XML is replaced by Latte\ContentType::Xml
+55: Method Latte\Engine::isStrictParsing() is replaced by hasFeature(\Latte\Feature::StrictParsing)
+56: Method Latte\Engine::setStrictParsing() is replaced by setFeature(\Latte\Feature::StrictParsing, $state)
+56: Method Latte\Engine::setStrictParsing() is replaced by setStrictParsing(state: $s)
+59: Static method Latte\Bridges\Tracy\LattePanel::initialize() is replaced by $latte->addExtension(new \Latte\Bridges\Tracy\TracyExtension)
+60: Static method Latte\Bridges\Tracy\LattePanel::initialize() is replaced by $latte->addExtension(new \Latte\Bridges\Tracy\TracyExtension($name))
+61: Static method Latte\Bridges\Tracy\LattePanel::initialize() is forbidden: register Latte\Bridges\Tracy\TracyExtension with Latte\Engine::addExtension(), which adds the panel to the bar of Tracy itself
+62: Constructor Latte\Bridges\Tracy\LattePanel::__construct() is forbidden: register Latte\Bridges\Tracy\TracyExtension with Latte\Engine::addExtension(), which adds the panel itself
+64: Static property Latte\Runtime\Filters::$dateFormat is forbidden: pass the format to the |date filter or register another date filter
+65: Constant Latte\Engine::VERSION is replaced by Engine::Version
+66: Method Latte\Engine::parse() is replaced by parse(template: $s)
+73: Method Latte\Tools\Linter::scanDirectory() is replaced by scanDirectory(path: $d)
+86: Annotation @filter is replaced by the attribute #[Latte\Attributes\TemplateFilter]
+93: Annotation @function is replaced by the attribute #[Latte\Attributes\TemplateFunction]
+112: Method Latte\Loader::isExpired() is forbidden: there is no replacement, the engine derives the expiration from the cache signature, so a loader does not implement the method
+133: Method Latte\Engine::getCacheKey() is replaced by Engine::generateConfigurationSignature()
+135: Method Latte\Engine::getCacheKey() is replaced by Engine::generateConfigurationSignature()
+142: Class Latte\Strict is forbidden: there is no replacement, the trait only made access to undeclared members throw
+150: Method Latte\Compiler\Tag::closestTag() is replaced by closestTag(classes: $n, ...)
+151: Property Latte\Compiler\Tag::$data is forbidden: there is no replacement, keep the data in the node the tag creates
+152: Property Latte\Compiler\Tag::$location is forbidden: read $inHead and $inTag, or call isInHead() and isInText()
+153: Property Latte\Compiler\Tag::$nAttributeNode is replaced by Tag::$nAttribute
+154: Constructor Latte\Compiler\Nodes\Php\ModifierNode::__construct() is replaced by new \Latte\Compiler\Nodes\Php\ModifierNode($filters, $escape, $position)
+155: Method Latte\Compiler\TagParser::tryConsumeModifier() is replaced by TagParser::tryConsumeTokenBeforeUnquotedString()
+156: Method Latte\Compiler\Position::toWords() is replaced by Position::__toString()
+171: Method Latte\Compiler\Nodes\Php\FilterNode::printSimple() is replaced by \Latte\Compiler\Nodes\Php\FilterNode::printSimple($context, [$this], $expr)
+173: Property Latte\Compiler\Nodes\Php\NameNode::$parts is forbidden: read $name, one string holding the whole qualified name
+174: Constant Latte\Compiler\Nodes\Php\FilterNode::Escape is forbidden: there is no replacement, write the name of the filter, 'escape'
+175: Property Latte\Compiler\Nodes\Html\ElementNode::$variableName is forbidden: read $dynamicTag, a Latte\Compiler\Nodes\Html\TagNode that holds the expression of the name in its $name
+175: Property Latte\Compiler\Nodes\Html\ElementNode::$customName is forbidden: read $dynamicTag, a Latte\Compiler\Nodes\Html\TagNode that holds the expression of the name in its $name
+176: Property Latte\Compiler\Nodes\Html\ElementNode::$captureTagName is forbidden: test whether $dynamicTag is set
+177: Property Latte\Compiler\Nodes\Html\ElementNode::$tagNode is forbidden: there is no replacement, the element prints its start tag itself and a dynamic tag name is held by $dynamicTag
+178: Property Latte\Essential\Nodes\ForeachNode::$elseLine is forbidden: read the position of {else} from $tagRanges
+179: Property Latte\Essential\Nodes\JumpNode::$endTag is forbidden: there is no replacement, the node closes the HTML elements itself
+180: Constant Latte\Compiler\Token::NAMES is replaced by Token::Names
+181: Constant Latte\Runtime\Template::Source is forbidden: call getName(), which returns the name of the template
+188: Method Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isFirstClassCallable() is replaced by FunctionCallNode::isPartialFunction()
+188: Method Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isFirstClassCallable() is replaced by MethodCallNode::isPartialFunction()
+190: Class Latte\Compiler\Nodes\Php\Expression\NotNode is forbidden: the ! operator is a Latte\Compiler\Nodes\Php\Expression\UnaryOpNode; test its $operator
+190: Class Latte\Compiler\Nodes\Php\Expression\ErrorSuppressNode is forbidden: the @ operator is a Latte\Compiler\Nodes\Php\Expression\UnaryOpNode; test its $operator
+191: Method Latte\Compiler\PrintContext::prefixOp() is forbidden: implement Latte\Compiler\Nodes\Php\OperatorNode in the node and print the operand with parenthesize() after the operator
+192: Class Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode is forbidden: the first-class callable syntax is a Latte\Compiler\Nodes\Php\Expression\FunctionCallNode whose isPartialFunction() returns true
+192: Class Latte\Compiler\Nodes\Php\Expression\NullsafeMethodCallNode is forbidden: a nullsafe call is a Latte\Compiler\Nodes\Php\Expression\MethodCallNode whose $nullsafe is true
+193: Method Latte\Compiler\PrintContext::infixOp() is forbidden: implement Latte\Compiler\Nodes\Php\OperatorNode in the node and print both operands with parenthesize(), the operator between them
+194: Class Latte\Compiler\Nodes\Php\Expression\StaticCallNode is replaced by Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode
+194: Class Latte\Compiler\Nodes\Html\QuotedValue is forbidden: the value is no longer wrapped; the quote is held by $quote of Latte\Compiler\Nodes\Html\AttributeNode
+194: Class Latte\Compiler\Nodes\Php\Scalar\EncapsedStringPartNode is replaced by Latte\Compiler\Nodes\Php\InterpolatedStringPartNode
+195: Method Latte\Compiler\PrintContext::postfixOp() is forbidden: implement Latte\Compiler\Nodes\Php\OperatorNode in the node and print the operand with parenthesize() before the operator
+196: Class Latte\Compiler\Nodes\Php\Expression\StaticCallableNode is forbidden: the first-class callable syntax is a Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode whose isPartialFunction() returns true
+200: Static method Latte\Compiler\Nodes\Php\Expression\ArrayNode::fromArguments() is forbidden: call argumentsAsArray() of Latte\Compiler\PrintContext, which returns the printed array instead of a node
+201: Static method Latte\Compiler\Nodes\Php\Scalar\StringNode::parse() is replaced by parse(start: $p, ...)
+202: Class Latte\Compiler\ExpressionBuilder is forbidden: there is no replacement, build the nodes directly
+210: Method Latte\Compiler\TemplateParser::parse() is replaced by parse($template)
+211: Class Latte\RegexpException is forbidden: catch Latte\CompileException for an error during compilation and Latte\RuntimeException for one during rendering
+214: Static method Latte\Essential\Passes::moveTemplatePrintToHeadPass() is replaced by Latte\Essential\Nodes\TemplatePrintNode::moveToHeadPass()

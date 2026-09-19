@@ -1,0 +1,201 @@
+package: latte/latte
+group: deprecations
+
+since 3.1.5:
+	replaced-calls:
+		'Latte\Compiler\Nodes\Php\Scalar\StringNode::parse(position: $p, ...)': 'parse(start: $p, ...)'
+		'Latte\Compiler\Nodes\Php\Scalar\IntegerNode::parse(position: $p, ...)': 'parse(start: $p, ...)'
+		'Latte\Compiler\Nodes\Php\Scalar\FloatNode::parse(position: $p, ...)': 'parse(start: $p, ...)'
+		'Latte\Compiler\Nodes\Php\Scalar\InterpolatedStringNode::parse(position: $p, ...)': 'parse(start: $p, ...)'
+
+since 3.1.4:
+	forbidden-members:
+		Latte\Essential\Nodes\FirstLastSepNode::$elseLine: 'read the position of {else} from $tagRanges'
+		Latte\Essential\Nodes\ForeachNode::$elseLine: 'read the position of {else} from $tagRanges'
+		Latte\Essential\Nodes\IfChangedNode::$elseLine: 'read the position of {else} from $tagRanges'
+
+since 3.1.2:
+	replaced-calls:
+		'Latte\Engine::setStrictParsing()': 'setFeature(\Latte\Feature::StrictParsing)'
+		'Latte\Engine::setStrictParsing($state)': 'setFeature(\Latte\Feature::StrictParsing, $state)'
+		'Latte\Engine::isStrictParsing()': 'hasFeature(\Latte\Feature::StrictParsing)'
+		'Latte\Engine::setStrictTypes()': 'setFeature(\Latte\Feature::StrictTypes)'
+		'Latte\Engine::setStrictTypes($state)': 'setFeature(\Latte\Feature::StrictTypes, $state)'
+		'Latte\Engine::setMigrationWarnings()': 'setFeature(\Latte\Feature::MigrationWarnings)'
+		'Latte\Engine::setMigrationWarnings($state)': 'setFeature(\Latte\Feature::MigrationWarnings, $state)'
+
+since 3.1.1:
+	replaced-classes:
+		# StaticMethodCallableNode gave way to StaticMethodCallNode and its isPartialFunction()
+		Latte\Compiler\Nodes\Php\Expression\StaticCallableNode: keep
+		Latte\Sandbox\Nodes\StaticCallableNode: keep
+	replaced-members:
+		Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isFirstClassCallable: isPartialFunction
+		Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isFirstClassCallable: isPartialFunction
+		Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isFirstClassCallable: isPartialFunction
+	forbidden-classes:
+		Latte\Compiler\Nodes\Php\VariadicPlaceholderNode: keep
+		Latte\Compiler\Nodes\Php\Expression\ErrorSuppressNode: 'the @ operator is a Latte\Compiler\Nodes\Php\Expression\UnaryOpNode; test its $operator'
+		Latte\Compiler\Nodes\Php\Expression\NotNode: 'the ! operator is a Latte\Compiler\Nodes\Php\Expression\UnaryOpNode; test its $operator'
+		Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode: 'the first-class callable syntax is a Latte\Compiler\Nodes\Php\Expression\FunctionCallNode whose isPartialFunction() returns true'
+		Latte\Compiler\Nodes\Php\Expression\MethodCallableNode: 'the first-class callable syntax is a Latte\Compiler\Nodes\Php\Expression\MethodCallNode whose isPartialFunction() returns true'
+		Latte\Compiler\Nodes\Php\Expression\StaticMethodCallableNode: 'the first-class callable syntax is a Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode whose isPartialFunction() returns true'
+		Latte\Compiler\Nodes\Php\Expression\StaticCallableNode: 'the first-class callable syntax is a Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode whose isPartialFunction() returns true'
+		Latte\Sandbox\Nodes\FunctionCallableNode: 'the first-class callable syntax is a Latte\Sandbox\Nodes\FunctionCallNode whose isPartialFunction() returns true'
+		Latte\Sandbox\Nodes\MethodCallableNode: 'the first-class callable syntax is a Latte\Sandbox\Nodes\MethodCallNode whose isPartialFunction() returns true'
+		Latte\Sandbox\Nodes\StaticMethodCallableNode: 'the first-class callable syntax is a Latte\Sandbox\Nodes\StaticMethodCallNode whose isPartialFunction() returns true'
+		Latte\Sandbox\Nodes\StaticCallableNode: 'the first-class callable syntax is a Latte\Sandbox\Nodes\StaticMethodCallNode whose isPartialFunction() returns true'
+	forbidden-members:
+		Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isFirstClassCallable: keep
+		Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isFirstClassCallable: keep
+		Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isFirstClassCallable: keep
+		Latte\Compiler\PrintContext::infixOp: 'implement Latte\Compiler\Nodes\Php\OperatorNode in the node and print both operands with parenthesize(), the operator between them'
+		Latte\Compiler\PrintContext::prefixOp: 'implement Latte\Compiler\Nodes\Php\OperatorNode in the node and print the operand with parenthesize() after the operator'
+		Latte\Compiler\PrintContext::postfixOp: 'implement Latte\Compiler\Nodes\Php\OperatorNode in the node and print the operand with parenthesize() before the operator'
+
+since 3.1:
+	replaced-members:
+		# $variableName gave way to $dynamicTag, which is used differently
+		Latte\Compiler\Nodes\Html\ElementNode::$customName: keep
+		Latte\Engine::getCacheKey: generateConfigurationSignature
+		Latte\Compiler\Tag::$nAttributeNode: $nAttribute
+	replaced-calls:
+		'Latte\Compiler\Nodes\Php\FilterNode::printSimple($context, $expr)': '\Latte\Compiler\Nodes\Php\FilterNode::printSimple($context, [$this], $expr)'
+	forbidden-classes:
+		Latte\Compiler\ExpressionBuilder: 'there is no replacement, build the nodes directly'
+	forbidden-members:
+		Latte\Engine::addFilterLoader: 'register each filter with addFilter()'
+		Latte\Loader::isExpired: 'there is no replacement, the engine derives the expiration from the cache signature, so a loader does not implement the method'
+		Latte\Runtime\Template::Source: 'call getName(), which returns the name of the template'
+		Latte\Runtime\Filters::$dateFormat: 'pass the format to the |date filter or register another date filter'
+		Latte\Compiler\Nodes\Html\ElementNode::$tagNode: 'there is no replacement, the element prints its start tag itself and a dynamic tag name is held by $dynamicTag'
+		Latte\Compiler\Nodes\Html\ElementNode::$variableName: 'read $dynamicTag, a Latte\Compiler\Nodes\Html\TagNode that holds the expression of the name in its $name'
+		Latte\Compiler\Nodes\Html\ElementNode::$customName: 'read $dynamicTag, a Latte\Compiler\Nodes\Html\TagNode that holds the expression of the name in its $name'
+		Latte\Compiler\Nodes\Html\ElementNode::$captureTagName: 'test whether $dynamicTag is set'
+		Latte\Bridges\Tracy\LattePanel::__construct: 'register Latte\Bridges\Tracy\TracyExtension with Latte\Engine::addExtension(), which adds the panel itself'
+		'Latte\Bridges\Tracy\LattePanel::initialize($latte, $name, $bar)': 'register Latte\Bridges\Tracy\TracyExtension with Latte\Engine::addExtension(), which adds the panel to the bar of Tracy itself'
+
+since 3.0.26:
+	replaced-members:
+		Latte\Engine::setTempDirectory: setCacheDirectory
+
+since 3.0.25:
+	replaced-members:
+		# Escaper::check() was removed, a compiler pass does its work
+		Latte\Compiler\Escaper::sanitize: keep
+	replaced-calls:
+		'Latte\Compiler\Nodes\Php\ModifierNode::__construct($filters, $escape, $check, $position)': 'new \Latte\Compiler\Nodes\Php\ModifierNode($filters, $escape, $position)'
+
+since 3.0.23:
+	replaced-classes:
+		Latte\Essential\Nodes\PrintNode: Latte\Compiler\Nodes\PrintNode
+
+since 3.0.16:
+	replaced-calls:
+		'Latte\Engine::addFilterLoader(callback: $c)': 'addFilterLoader(loader: $c)'
+		'Latte\Engine::addProvider(value: $v, ...)': 'addProvider(provider: $v, ...)'
+		'Latte\Engine::parse(source: $s)': 'parse(template: $s)'
+		'Latte\Engine::setExceptionHandler(callback: $c)': 'setExceptionHandler(handler: $c)'
+		'Latte\Engine::setAutoRefresh(on: $s)': 'setAutoRefresh(state: $s)'
+		'Latte\Engine::setSandboxMode(on: $s)': 'setSandboxMode(state: $s)'
+		'Latte\Engine::setStrictParsing(on: $s)': 'setStrictParsing(state: $s)'
+		'Latte\Engine::setStrictTypes(on: $s)': 'setStrictTypes(state: $s)'
+
+since 3.0.14:
+	forbidden-members:
+		Latte\Compiler\Nodes\Php\NameNode::$parts: 'read $name, one string holding the whole qualified name'
+
+since 3.0.13:
+	replaced-members:
+		Latte\Essential\Passes::moveTemplatePrintToHeadPass: Latte\Essential\Nodes\TemplatePrintNode::moveToHeadPass
+		Latte\Essential\Passes::overwrittenVariablesPass: Latte\Essential\Nodes\ForeachNode::overwrittenVariablesPass
+
+since 3.0.12:
+	replaced-classes:
+		Latte\Compiler\Nodes\Php\Expression\StaticCallNode: Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode
+		Latte\Compiler\Nodes\Php\Expression\StaticCallableNode: Latte\Compiler\Nodes\Php\Expression\StaticMethodCallableNode
+		Latte\Sandbox\Nodes\StaticCallNode: Latte\Sandbox\Nodes\StaticMethodCallNode
+		Latte\Sandbox\Nodes\StaticCallableNode: Latte\Sandbox\Nodes\StaticMethodCallableNode
+	replaced-calls:
+		'Latte\Compiler\Tag::closestTag(names: $n, ...)': 'closestTag(classes: $n, ...)'
+	forbidden-classes:
+		Latte\Strict: 'there is no replacement, the trait only made access to undeclared members throw'
+		Latte\RegexpException: 'catch Latte\CompileException for an error during compilation and Latte\RuntimeException for one during rendering'
+	forbidden-members:
+		Latte\Compiler\Tag::$data: 'there is no replacement, keep the data in the node the tag creates'
+		Latte\Essential\Nodes\JumpNode::$endTag: 'there is no replacement, the node closes the HTML elements itself'
+
+since 3.0.10:
+	replaced-calls:
+		'Latte\Compiler\TemplateParser::parse($template, $lexer)': 'parse($template)'
+
+since 3.0.9:
+	replaced-members:
+		Latte\Engine::VERSION: Version
+		Latte\Engine::VERSION_ID: VersionId
+		Latte\Compiler\Position::toWords: __toString
+
+since 3.0.8:
+	replaced-members:
+		Latte\Compiler\Token::NAMES: Names
+		Latte\Compiler\Nodes\Html\ElementNode::$customName: $variableName
+	forbidden-members:
+		Latte\Compiler\Tag::$location: 'read $inHead and $inTag, or call isInHead() and isInText()'
+
+since 3.0.7:
+	forbidden-classes:
+		Latte\Compiler\Nodes\Html\QuotedValue: 'the value is no longer wrapped; the quote is held by $quote of Latte\Compiler\Nodes\Html\AttributeNode'
+	forbidden-members:
+		Latte\Compiler\Nodes\Php\Expression\ArrayNode::fromArguments: 'call argumentsAsArray() of Latte\Compiler\PrintContext, which returns the printed array instead of a node'
+
+since 3.0.6:
+	replaced-classes:
+		Latte\Compiler\Nodes\Php\Expression\ArrayItemNode: Latte\Compiler\Nodes\Php\ArrayItemNode
+		Latte\Compiler\Nodes\Php\Expression\ClosureUseNode: Latte\Compiler\Nodes\Php\ClosureUseNode
+		Latte\Compiler\Nodes\Php\Scalar\EncapsedStringNode: Latte\Compiler\Nodes\Php\Scalar\InterpolatedStringNode
+		Latte\Compiler\Nodes\Php\Scalar\EncapsedStringPartNode: Latte\Compiler\Nodes\Php\InterpolatedStringPartNode
+
+since 3.0.5:
+	replaced-classes:
+		Latte\Compiler\Nodes\Php\Expression\InRangeNode: Latte\Compiler\Nodes\Php\Expression\InNode
+		Latte\Essential\Nodes\SkipNode: Latte\Essential\Nodes\JumpNode
+	replaced-members:
+		Latte\Compiler\TagParser::tryConsumeModifier: tryConsumeTokenBeforeUnquotedString
+	replaced-calls:
+		'Latte\Bridges\Tracy\LattePanel::initialize($latte)': '$latte->addExtension(new \Latte\Bridges\Tracy\TracyExtension)'
+		'Latte\Bridges\Tracy\LattePanel::initialize($latte, $name)': '$latte->addExtension(new \Latte\Bridges\Tracy\TracyExtension($name))'
+
+since 3.0.3:
+	forbidden-members:
+		Latte\Compiler\Nodes\Php\FilterNode::Escape: 'there is no replacement, write the name of the filter, ''escape'''
+		Latte\Compiler\Nodes\Php\FilterNode::NoEscape: 'there is no replacement, write the name of the filter, ''noescape'''
+
+since 3.0.2:
+	forbidden-classes:
+		Latte\Compiler\Nodes\Php\VariadicPlaceholderNode: 'the first-class callable syntax is a node of its own, such as Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode'
+		Latte\Compiler\Nodes\Php\Expression\NullsafeMethodCallNode: 'a nullsafe call is a Latte\Compiler\Nodes\Php\Expression\MethodCallNode whose $nullsafe is true'
+		Latte\Compiler\Nodes\Php\Expression\NullsafePropertyFetchNode: 'a nullsafe fetch is a Latte\Compiler\Nodes\Php\Expression\PropertyFetchNode whose $nullsafe is true'
+		Latte\Compiler\Nodes\Php\Expression\UndefinedsafeMethodCallNode: 'the call is a nullsafe Latte\Compiler\Nodes\Php\Expression\MethodCallNode over a binary operation combining the object with null'
+		Latte\Compiler\Nodes\Php\Expression\UndefinedsafePropertyFetchNode: 'the fetch is a nullsafe Latte\Compiler\Nodes\Php\Expression\PropertyFetchNode over a binary operation combining the object with null'
+	forbidden-members:
+		Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isFirstClassCallable: 'the first-class callable syntax is a node of its own; test whether the node is a Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode'
+		Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isFirstClassCallable: 'the first-class callable syntax is a node of its own; test whether the node is a Latte\Compiler\Nodes\Php\Expression\MethodCallableNode'
+		Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isFirstClassCallable: 'the first-class callable syntax is a node of its own; test whether the node is a Latte\Compiler\Nodes\Php\Expression\StaticMethodCallableNode'
+
+since 3.0.1:
+	replaced-members:
+		Latte\Compiler\Escaper::sanitize: check
+	replaced-calls:
+		'Latte\Tools\Linter::scanDirectory(dir: $d)': 'scanDirectory(path: $d)'
+
+since 3.0:
+	replaced-members:
+		Latte\Engine::CONTENT_HTML: Latte\ContentType::Html
+		Latte\Engine::CONTENT_XML: Latte\ContentType::Xml
+		Latte\Engine::CONTENT_JS: Latte\ContentType::JavaScript
+		Latte\Engine::CONTENT_CSS: Latte\ContentType::Css
+		Latte\Engine::CONTENT_ICAL: Latte\ContentType::ICal
+		Latte\Engine::CONTENT_TEXT: Latte\ContentType::Text
+	attribute-for-annotation:
+		filter: Latte\Attributes\TemplateFilter
+		function: Latte\Attributes\TemplateFunction

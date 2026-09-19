@@ -16,6 +16,7 @@
 		"dresscode/dresscode": "dev-master"
 	},
 	"require-dev": {
+		"latte/latte": "^3.1",
 		"nette/application": "^3.2",
 		"nette/assets": "^1.0",
 		"nette/bootstrap": "^3.3",
@@ -56,6 +57,7 @@
 				"upgrading/database.neon",
 				"upgrading/forms.neon",
 				"upgrading/http.neon",
+				"upgrading/latte.neon",
 				"upgrading/mail.neon",
 				"upgrading/php-generator.neon",
 				"upgrading/robot-loader.neon",
