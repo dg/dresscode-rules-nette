@@ -5,8 +5,8 @@ namespace App;
 use Tracy\Bridges\Nette\Bridge;
 use Nette\Configurator;
 use Nette\DI\Compiler;
-use Nette\DI\Extensions\ConstantsExtension;
-use Nette\DI\Extensions\PhpExtension;
+use Nette\Bootstrap\Extensions\ConstantsExtension;
+use Nette\Bootstrap\Extensions\PhpExtension;
 use Nette\Utils\Arrays;
 
 class Bootstrap

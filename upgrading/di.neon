@@ -1,0 +1,114 @@
+package: nette/di
+group: deprecations
+
+since 3.2.2:
+	forbidden-members:
+		Nette\DI\Container::$types: 'call getServiceType(), which returns the type of a service'
+
+since 3.2:
+	forbidden-members:
+		Nette\DI\Definitions\FactoryDefinition::$parameters: 'there is no replacement, the parameters are taken from the create() method of the implemented interface'
+		Nette\DI\Definitions\FactoryDefinition::getParameters: 'there is no replacement, the parameters are taken from the create() method of the implemented interface'
+		Nette\DI\Definitions\FactoryDefinition::setParameters: 'there is no replacement, the parameters are taken from the create() method of the implemented interface'
+		Nette\DI\PhpGenerator::convertParameters: 'there is no replacement'
+
+since 3.1.10:
+	forbidden-members:
+		'Nette\DI\Container::createService($name, $args)': 'the arguments are no longer passed to the factory of the service; drop the arguments'
+
+since 3.1.8:
+	replaced-calls:
+		Nette\DI\Container::$parameters: {get: 'getParameters()'}
+
+since 3.1:
+	replaced-classes:
+		Nette\DI\Config\DefinitionSchema: Nette\DI\Extensions\DefinitionSchema
+		Nette\DI\Extensions\ConstantsExtension: Nette\Bootstrap\Extensions\ConstantsExtension
+		Nette\DI\Extensions\PhpExtension: Nette\Bootstrap\Extensions\PhpExtension
+	replaced-members:
+		Nette\DI\ContainerBuilder::THIS_CONTAINER: ThisContainer
+		Nette\DI\ContainerBuilder::THIS_SERVICE: ThisService
+		Nette\DI\Definitions\Reference::SELF: Self
+		Nette\DI\DependencyChecker::VERSION: Version
+		Nette\DI\Extensions\InjectExtension::TAG_INJECT: TagInject
+	replaced-calls:
+		'Nette\DI\Definitions\ServiceDefinition::setCreator(factory: $f, ...)': 'setCreator(creator: $f, ...)'
+	forbidden-members:
+		Nette\DI\Config\Loader::save: 'render the configuration with an adapter, such as (new Nette\DI\Config\Adapters\NeonAdapter)->dump($data), and write the file'
+		Nette\DI\Definitions\Definition::isDynamic: 'test with instanceof Nette\DI\Definitions\ImportedDefinition'
+		Nette\DI\Definitions\ServiceDefinition::getImplement: 'test with instanceof Nette\DI\Definitions\FactoryDefinition or Nette\DI\Definitions\AccessorDefinition'
+
+since 3.0.12:
+	replaced-members:
+		Nette\DI\Definitions\ServiceDefinition::setFactory: setCreator
+		Nette\DI\Definitions\ServiceDefinition::getFactory: getCreator
+
+since 3.0.10:
+	replaced-calls:
+		'Nette\DI\Definitions\AccessorDefinition::setImplement(type: $t)': 'setImplement(interface: $t)'
+		'Nette\DI\Definitions\FactoryDefinition::setImplement(type: $t)': 'setImplement(interface: $t)'
+		'Nette\DI\Definitions\LocatorDefinition::setImplement(type: $t)': 'setImplement(interface: $t)'
+
+since 3.0:
+	replaced-classes:
+		Nette\DI\Config\IAdapter: Nette\DI\Config\Adapter
+		Nette\DI\ServiceDefinition: Nette\DI\Definitions\ServiceDefinition
+		Nette\DI\Statement: Nette\DI\Definitions\Statement
+	replaced-members:
+		Nette\DI\Compiler::filterArguments: Nette\DI\Helpers::filterArguments
+		Nette\DI\ContainerBuilder::prepareClassList: resolve
+		Nette\DI\Config\Helpers::EXTENDS_KEY: PREVENT_MERGING
+		Nette\DI\Definitions\Definition::getClass: getType
+	replaced-calls:
+		'Nette\DI\Compiler::compile(null, $className)': 'setClassName($className)->compile()'
+		'Nette\DI\Compiler::compile($config)': 'addConfig($config)->compile()'
+		'Nette\DI\Compiler::compile($config, $className)': 'addConfig($config)->setClassName($className)->compile()'
+		'Nette\DI\Container::__get($name)': 'getService($name)'
+		'Nette\DI\Container::__set($name, $value)': 'addService($name, $value)'
+		'Nette\DI\Container::__isset($name)': 'hasService($name)'
+		'Nette\DI\Container::__unset($name)': 'removeService($name)'
+		'Nette\DI\Definitions\Definition::addTag(''inject'', ...)': 'addTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT, ...)'
+		'Nette\DI\Definitions\FactoryDefinition::getEntity()': 'getResultDefinition()->getEntity()'
+		'Nette\DI\Definitions\FactoryDefinition::getFactory()': 'getResultDefinition()->getFactory()'
+		'Nette\DI\Definitions\FactoryDefinition::getSetup()': 'getResultDefinition()->getSetup()'
+		'Nette\DI\Definitions\ServiceDefinition::getInject()': 'getTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT)'
+		'Nette\DI\Definitions\ServiceDefinition::setClass($type)': 'setType($type)'
+		'Nette\DI\Definitions\ServiceDefinition::setClass($type, $args)': 'setFactory($type, $args)'
+		'Nette\DI\Definitions\ServiceDefinition::setInject(...$args)': 'addTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT, ...$args)'
+	forbidden-classes:
+		Nette\DI\Config\Adapters\IniAdapter: 'INI configuration files are no longer supported; convert the configuration to NEON'
+	forbidden-members:
+		Nette\DI\Compiler::loadDefinition: 'call loadDefinitionsFromConfig() on the compiler, which takes the list of all definitions'
+		Nette\DI\Compiler::loadDefinitions: 'call loadDefinitionsFromConfig() on the compiler, which takes the list of all definitions'
+		Nette\DI\Compiler::parseService: 'call loadDefinitionsFromConfig() on the compiler, which takes the list of all definitions'
+		Nette\DI\Compiler::parseServices: 'call loadDefinitionsFromConfig() on the compiler, which takes the list of all definitions'
+		'Nette\DI\CompilerExtension::getConfig($defaults)': 'the argument with defaults is ignored; describe the configuration and its defaults in getConfigSchema()'
+		Nette\DI\Config\Helpers::OVERWRITE: 'write true as the value of the key PREVENT_MERGING'
+		Nette\DI\Config\Helpers::isInheriting: 'there is no replacement, configuration sections are no longer inherited'
+		Nette\DI\Config\Helpers::isOverwriting: 'call takeParent(), which tells whether merging is prevented'
+		Nette\DI\Container::$meta: 'there is no replacement; call getServiceType(), findByType() or findByTag() for what it held'
+		Nette\DI\Container::ALIASES: 'there is no replacement, only a child of the container reads $aliases'
+		Nette\DI\Container::SERVICES: 'call getServiceType(), which returns the type of a service'
+		Nette\DI\Container::TAGS: 'call findByTag(), which returns the services of a tag'
+		Nette\DI\Container::TYPES: 'call findByType(), which returns the services of a type'
+		Nette\DI\Container::expand: 'there is no replacement, read the parameters with getParameters() instead of expanding %placeholders%'
+		Nette\DI\ContainerBuilder::completeStatement: 'there is no replacement, Nette\DI\Resolver completes the statements while the container is resolved'
+		Nette\DI\ContainerBuilder::expand: 'there is no replacement, read the value from the property $parameters instead of expanding %placeholders%'
+		Nette\DI\ContainerBuilder::formatStatement: 'call formatStatement() of Nette\DI\PhpGenerator, which is created with the builder'
+		Nette\DI\ContainerBuilder::generateClasses: 'call generate() of Nette\DI\PhpGenerator, which is created with the builder'
+		Nette\DI\ContainerBuilder::getClassName: 'there is no replacement, the class name is set by Nette\DI\Compiler::setClassName()'
+		Nette\DI\ContainerBuilder::setClassName: 'call setClassName() of Nette\DI\Compiler'
+		Nette\DI\Definitions\FactoryDefinition::addSetup: 'call getResultDefinition()->addSetup(), which returns the definition of the service, not of the factory'
+		Nette\DI\Definitions\FactoryDefinition::setArguments: 'call getResultDefinition()->setArguments(), which returns the definition of the service, not of the factory'
+		Nette\DI\Definitions\FactoryDefinition::setFactory: 'call getResultDefinition()->setFactory(), which returns the definition of the service, not of the factory'
+		Nette\DI\Definitions\FactoryDefinition::setSetup: 'call getResultDefinition()->setSetup(), which returns the definition of the service, not of the factory'
+		Nette\DI\Definitions\ServiceDefinition::$parameters: 'there is no replacement, declare the arguments in the configuration of the service'
+		Nette\DI\Definitions\ServiceDefinition::getImplementMode: 'there is no replacement, the mode follows from whether the definition is a FactoryDefinition or an AccessorDefinition'
+		Nette\DI\Definitions\ServiceDefinition::getImplementType: 'there is no replacement, the mode follows from whether the definition is a FactoryDefinition or an AccessorDefinition'
+		Nette\DI\Definitions\ServiceDefinition::getParameters: 'there is no replacement, declare the arguments in the configuration of the service'
+		Nette\DI\Definitions\ServiceDefinition::setDynamic: 'register the service with addImportedDefinition() of the builder'
+		Nette\DI\Definitions\ServiceDefinition::setImplement: 'register the service with addFactoryDefinition() or addAccessorDefinition() of the builder'
+		Nette\DI\Definitions\ServiceDefinition::setImplementMode: 'register the service with addFactoryDefinition() or addAccessorDefinition() of the builder'
+		Nette\DI\Definitions\ServiceDefinition::setImplementType: 'register the service with addFactoryDefinition() or addAccessorDefinition() of the builder'
+		Nette\DI\Definitions\ServiceDefinition::setParameters: 'there is no replacement, declare the arguments in the configuration of the service'
+		Nette\DI\Definitions\Statement::setEntity: 'create a new Nette\DI\Definitions\Statement instead of changing the entity of an existing one'

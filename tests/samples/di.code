@@ -1,0 +1,196 @@
+<?php
+
+namespace App;
+
+use Nette\DI\Compiler;
+use Nette\DI\CompilerExtension;
+use Nette\DI\Config\Adapters\IniAdapter;
+use Nette\DI\Config\DefinitionSchema;
+use Nette\DI\Config\Helpers;
+use Nette\DI\Config\IAdapter;
+use Nette\DI\Config\Loader;
+use Nette\DI\Container;
+use Nette\DI\ContainerBuilder;
+use Nette\DI\Definitions\AccessorDefinition;
+use Nette\DI\Definitions\Definition;
+use Nette\DI\Definitions\FactoryDefinition;
+use Nette\DI\Definitions\LocatorDefinition;
+use Nette\DI\Definitions\Reference;
+use Nette\DI\DependencyChecker;
+use Nette\DI\Extensions\ConstantsExtension;
+use Nette\DI\Extensions\InjectExtension;
+use Nette\DI\PhpGenerator;
+use Nette\DI\ServiceDefinition;
+use Nette\DI\Statement;
+
+
+class MailerExtension extends CompilerExtension
+{
+	public function loadConfiguration(): void
+	{
+		$config = $this->getConfig(['host' => 'localhost']);
+		$builder = $this->getContainerBuilder();
+
+		$mailer = $builder->addDefinition($this->prefix('mailer'));
+		assert($mailer instanceof ServiceDefinition);
+		$mailer->setClass(Mailer::class);
+		$mailer->setClass(Mailer::class, [$config['host']]);
+		$mailer->setFactory(Mailer::class, [$config['host']]);
+		$mailer->setCreator(factory: Mailer::class);
+		$mailer->setInject();
+		$mailer->setInject(false);
+		$mailer->addTag('inject');
+		$mailer->addTag(InjectExtension::TAG_INJECT);
+		$mailer->addSetup('setLogger', [new Statement('@logger')]);
+		$mailer->setDynamic();
+		$mailer->setImplement(IMailerFactory::class);
+		$mailer->setImplementMode('create');
+		$mailer->setParameters(['host']);
+		$mailer->parameters = [];
+		$params = $mailer->getParameters();
+
+		if ($mailer->getInject() && $mailer->getImplement() === null && !$mailer->isDynamic()) {
+			$type = $mailer->getClass();
+			$factory = $mailer->getFactory();
+		}
+
+		$builder->addDefinition($this->prefix('self'))
+			->setFactory(ContainerBuilder::THIS_CONTAINER);
+		$builder->prepareClassList();
+		$builder->setClassName('MyContainer');
+		$className = $builder->getClassName();
+		$mode = $mailer->getImplementMode();
+		$builder->expand('%tempDir%');
+		$builder->completeStatement(new Statement(Mailer::class));
+		$reference = Reference::SELF;
+		$version = DependencyChecker::VERSION;
+	}
+
+
+	public function beforeCompile(): void
+	{
+		$builder = $this->getContainerBuilder();
+		$factory = $builder->addFactoryDefinition($this->prefix('factory'));
+		$factory->setImplement(type: IMailerFactory::class);
+		$factory->addSetup('setLogger');
+		$factory->setArguments(['localhost']);
+		$entity = $factory->getEntity();
+		$setup = $factory->getSetup();
+		$created = $factory->getFactory();
+		$factory->setParameters(['host']);
+		$factory->parameters = [];
+
+		$accessor = $builder->addAccessorDefinition($this->prefix('accessor'));
+		$accessor->setImplement(type: IMailerAccessor::class);
+		$locator = $builder->addLocatorDefinition($this->prefix('locator'));
+		$locator->setImplement(type: IMailerLocator::class);
+
+		foreach ($builder->getDefinitions() as $def) {
+			if ($def->isDynamic()) {
+				$def->addTag(InjectExtension::TAG_INJECT);
+			}
+		}
+
+		$arguments = Compiler::filterArguments(['@mailer']);
+		$code = $builder->formatStatement(new Statement(Mailer::class));
+		$classes = $builder->generateClasses();
+		(new PhpGenerator($builder))->convertParameters([]);
+	}
+}
+
+
+class OverwritingExtension extends MailerExtension
+{
+	public function getConfig()
+	{
+		$config = parent::getConfig(['debug' => false]);
+		$config[Helpers::EXTENDS_KEY] = Helpers::OVERWRITE;
+		if (Helpers::isOverwriting($config) || Helpers::isInheriting($config)) {
+			return Helpers::merge($config, []);
+		}
+
+		return $config;
+	}
+}
+
+
+class Bootstrap
+{
+	public static function compile(Compiler $compiler, Loader $loader, IAdapter $adapter): string
+	{
+		$compiler->addExtension('constants', new ConstantsExtension);
+		$compiler->addExtension('ini', new IniAdapter);
+		$compiler->loadDefinitions();
+		Compiler::parseServices($compiler->getContainerBuilder(), []);
+		$loader->save(['services' => []], __DIR__ . '/config.neon');
+		$schema = new DefinitionSchema;
+		$compiler->compile(['parameters' => []], 'MyContainer');
+		$compiler->compile(null, 'MyContainer');
+		return $compiler->compile(['parameters' => []]);
+	}
+
+
+	public static function run(Container $container): void
+	{
+		$mailer = $container->mailer;
+		$container->logger = new Logger;
+		if (isset($container->cache)) {
+			unset($container->cache);
+		}
+
+		$appDir = $container->parameters['appDir'];
+		$tempDir = $container->expand('%tempDir%');
+		$container->createService('mailer', ['localhost']);
+		$container->createService('mailer');
+	}
+}
+
+
+class MyContainer extends Container
+{
+	public function describe(): array
+	{
+		$keys = [self::TYPES, self::SERVICES, self::ALIASES, self::TAGS];
+		$wiring = $this->meta[self::TYPES] + $this->types;
+		return $keys + $wiring + ['debug' => $this->parameters['debugMode']];
+	}
+}
+
+
+class StatementFactory
+{
+	public function create(Statement $statement, Definition $definition): Statement
+	{
+		$statement->setEntity(Mailer::class);
+		$type = $definition->getClass();
+		return $statement;
+	}
+}
+
+
+class Mailer
+{
+}
+
+
+class Logger
+{
+}
+
+
+interface IMailerFactory
+{
+	function create(): Mailer;
+}
+
+
+interface IMailerAccessor
+{
+	function get(): Mailer;
+}
+
+
+interface IMailerLocator
+{
+	function getMailer(): Mailer;
+}

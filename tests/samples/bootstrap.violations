@@ -1,4 +1,6 @@
 5: Class Nette\Bridges\Framework\TracyBridge is replaced by Tracy\Bridges\Nette\Bridge
+8: Class Nette\DI\Extensions\ConstantsExtension is replaced by Nette\Bootstrap\Extensions\ConstantsExtension
+9: Class Nette\DI\Extensions\PhpExtension is replaced by Nette\Bootstrap\Extensions\PhpExtension
 15: Class Nette\Configurator is replaced by Nette\Bootstrap\Configurator
 16: Method Nette\Configurator::enableDebugger() is replaced by Configurator::enableTracy()
 17: Method Nette\Bootstrap\Configurator::addParameters() is replaced by Configurator::addStaticParameters()
@@ -9,6 +11,8 @@
 22: Class Nette\Configurator is replaced by Nette\Bootstrap\Configurator
 22: Constant Nette\Bootstrap\Configurator::COOKIE_SECRET is replaced by Configurator::CookieSecret
 23: Class Nette\Bridges\Framework\TracyBridge is replaced by Tracy\Bridges\Nette\Bridge
+30: Class Nette\DI\Extensions\ConstantsExtension is replaced by Nette\Bootstrap\Extensions\ConstantsExtension
+31: Class Nette\DI\Extensions\PhpExtension is replaced by Nette\Bootstrap\Extensions\PhpExtension
 36: Class Nette\Configurator is replaced by Nette\Bootstrap\Configurator
 41: Property Nette\Configurator::$parameters is replaced by Configurator::$staticParameters
 42: Property Nette\Configurator::$files is replaced by Configurator::$configs

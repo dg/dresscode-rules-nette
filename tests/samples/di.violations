@@ -1,0 +1,95 @@
+8: Class Nette\DI\Config\DefinitionSchema is replaced by Nette\DI\Extensions\DefinitionSchema
+10: Class Nette\DI\Config\IAdapter is replaced by Nette\DI\Config\Adapter
+20: Class Nette\DI\Extensions\ConstantsExtension is replaced by Nette\Bootstrap\Extensions\ConstantsExtension
+23: Class Nette\DI\ServiceDefinition is replaced by Nette\DI\Definitions\ServiceDefinition
+24: Class Nette\DI\Statement is replaced by Nette\DI\Definitions\Statement
+31: Method Nette\DI\CompilerExtension::getConfig() is forbidden: the argument with defaults is ignored; describe the configuration and its defaults in getConfigSchema()
+35: Class Nette\DI\ServiceDefinition is replaced by Nette\DI\Definitions\ServiceDefinition
+36: Method Nette\DI\Definitions\ServiceDefinition::setClass() is replaced by setType($type)
+37: Method Nette\DI\Definitions\ServiceDefinition::setFactory() is replaced by ServiceDefinition::setCreator()
+37: Method Nette\DI\Definitions\ServiceDefinition::setClass() is replaced by setFactory($type, $args)
+38: Method Nette\DI\Definitions\ServiceDefinition::setFactory() is replaced by ServiceDefinition::setCreator()
+39: Method Nette\DI\Definitions\ServiceDefinition::setCreator() is replaced by setCreator(creator: $f, ...)
+40: Constant Nette\DI\Extensions\InjectExtension::TAG_INJECT is replaced by InjectExtension::TagInject
+40: Method Nette\DI\Definitions\ServiceDefinition::setInject() is replaced by addTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT, ...$args)
+41: Constant Nette\DI\Extensions\InjectExtension::TAG_INJECT is replaced by InjectExtension::TagInject
+41: Method Nette\DI\Definitions\ServiceDefinition::setInject() is replaced by addTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT, ...$args)
+42: Constant Nette\DI\Extensions\InjectExtension::TAG_INJECT is replaced by InjectExtension::TagInject
+42: Method Nette\DI\Definitions\Definition::addTag() is replaced by addTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT, ...)
+43: Constant Nette\DI\Extensions\InjectExtension::TAG_INJECT is replaced by InjectExtension::TagInject
+44: Class Nette\DI\Statement is replaced by Nette\DI\Definitions\Statement
+45: Method Nette\DI\Definitions\ServiceDefinition::setDynamic() is forbidden: register the service with addImportedDefinition() of the builder
+46: Method Nette\DI\Definitions\ServiceDefinition::setImplement() is forbidden: register the service with addFactoryDefinition() or addAccessorDefinition() of the builder
+47: Method Nette\DI\Definitions\ServiceDefinition::setImplementMode() is forbidden: register the service with addFactoryDefinition() or addAccessorDefinition() of the builder
+48: Method Nette\DI\Definitions\ServiceDefinition::setParameters() is forbidden: there is no replacement, declare the arguments in the configuration of the service
+49: Property Nette\DI\Definitions\ServiceDefinition::$parameters is forbidden: there is no replacement, declare the arguments in the configuration of the service
+50: Method Nette\DI\Definitions\ServiceDefinition::getParameters() is forbidden: there is no replacement, declare the arguments in the configuration of the service
+52: Constant Nette\DI\Extensions\InjectExtension::TAG_INJECT is replaced by InjectExtension::TagInject
+52: Method Nette\DI\Definitions\ServiceDefinition::getInject() is replaced by getTag(\Nette\DI\Extensions\InjectExtension::TAG_INJECT)
+52: Method Nette\DI\Definitions\ServiceDefinition::getImplement() is forbidden: test with instanceof Nette\DI\Definitions\FactoryDefinition or Nette\DI\Definitions\AccessorDefinition
+52: Method Nette\DI\Definitions\Definition::isDynamic() is forbidden: test with instanceof Nette\DI\Definitions\ImportedDefinition
+53: Method Nette\DI\Definitions\Definition::getClass() is replaced by Definition::getType()
+54: Method Nette\DI\Definitions\ServiceDefinition::getFactory() is replaced by ServiceDefinition::getCreator()
+58: Method Nette\DI\Definitions\ServiceDefinition::setFactory() is replaced by ServiceDefinition::setCreator()
+58: Constant Nette\DI\ContainerBuilder::THIS_CONTAINER is replaced by ContainerBuilder::ThisContainer
+59: Method Nette\DI\ContainerBuilder::prepareClassList() is replaced by ContainerBuilder::resolve()
+60: Method Nette\DI\ContainerBuilder::setClassName() is forbidden: call setClassName() of Nette\DI\Compiler
+61: Method Nette\DI\ContainerBuilder::getClassName() is forbidden: there is no replacement, the class name is set by Nette\DI\Compiler::setClassName()
+62: Method Nette\DI\Definitions\ServiceDefinition::getImplementMode() is forbidden: there is no replacement, the mode follows from whether the definition is a FactoryDefinition or an AccessorDefinition
+63: Method Nette\DI\ContainerBuilder::expand() is forbidden: there is no replacement, read the value from the property $parameters instead of expanding %placeholders%
+64: Method Nette\DI\ContainerBuilder::completeStatement() is forbidden: there is no replacement, Nette\DI\Resolver completes the statements while the container is resolved
+64: Class Nette\DI\Statement is replaced by Nette\DI\Definitions\Statement
+65: Constant Nette\DI\Definitions\Reference::SELF is replaced by Reference::Self
+66: Constant Nette\DI\DependencyChecker::VERSION is replaced by DependencyChecker::Version
+74: Method Nette\DI\Definitions\FactoryDefinition::setImplement() is replaced by setImplement(interface: $t)
+75: Method Nette\DI\Definitions\FactoryDefinition::addSetup() is forbidden: call getResultDefinition()->addSetup(), which returns the definition of the service, not of the factory
+76: Method Nette\DI\Definitions\FactoryDefinition::setArguments() is forbidden: call getResultDefinition()->setArguments(), which returns the definition of the service, not of the factory
+77: Method Nette\DI\Definitions\FactoryDefinition::getEntity() is replaced by getResultDefinition()->getEntity()
+78: Method Nette\DI\Definitions\FactoryDefinition::getSetup() is replaced by getResultDefinition()->getSetup()
+79: Method Nette\DI\Definitions\ServiceDefinition::getFactory() is replaced by ServiceDefinition::getCreator()
+79: Method Nette\DI\Definitions\FactoryDefinition::getFactory() is replaced by getResultDefinition()->getFactory()
+80: Method Nette\DI\Definitions\FactoryDefinition::setParameters() is forbidden: there is no replacement, the parameters are taken from the create() method of the implemented interface
+81: Property Nette\DI\Definitions\FactoryDefinition::$parameters is forbidden: there is no replacement, the parameters are taken from the create() method of the implemented interface
+84: Method Nette\DI\Definitions\AccessorDefinition::setImplement() is replaced by setImplement(interface: $t)
+86: Method Nette\DI\Definitions\LocatorDefinition::setImplement() is replaced by setImplement(interface: $t)
+89: Method Nette\DI\Definitions\Definition::isDynamic() is forbidden: test with instanceof Nette\DI\Definitions\ImportedDefinition
+90: Constant Nette\DI\Extensions\InjectExtension::TAG_INJECT is replaced by InjectExtension::TagInject
+94: Static method Nette\DI\Compiler::filterArguments() is replaced by Nette\DI\Helpers::filterArguments()
+95: Method Nette\DI\ContainerBuilder::formatStatement() is forbidden: call formatStatement() of Nette\DI\PhpGenerator, which is created with the builder
+95: Class Nette\DI\Statement is replaced by Nette\DI\Definitions\Statement
+96: Method Nette\DI\ContainerBuilder::generateClasses() is forbidden: call generate() of Nette\DI\PhpGenerator, which is created with the builder
+97: Method Nette\DI\PhpGenerator::convertParameters() is forbidden: there is no replacement
+106: Method Nette\DI\CompilerExtension::getConfig() is forbidden: the argument with defaults is ignored; describe the configuration and its defaults in getConfigSchema()
+107: Constant Nette\DI\Config\Helpers::EXTENDS_KEY is replaced by Helpers::PREVENT_MERGING
+107: Constant Nette\DI\Config\Helpers::OVERWRITE is forbidden: write true as the value of the key PREVENT_MERGING
+108: Static method Nette\DI\Config\Helpers::isOverwriting() is forbidden: call takeParent(), which tells whether merging is prevented
+108: Static method Nette\DI\Config\Helpers::isInheriting() is forbidden: there is no replacement, configuration sections are no longer inherited
+119: Class Nette\DI\Config\IAdapter is replaced by Nette\DI\Config\Adapter
+121: Class Nette\DI\Extensions\ConstantsExtension is replaced by Nette\Bootstrap\Extensions\ConstantsExtension
+122: Class Nette\DI\Config\Adapters\IniAdapter is forbidden: INI configuration files are no longer supported; convert the configuration to NEON
+123: Method Nette\DI\Compiler::loadDefinitions() is forbidden: call loadDefinitionsFromConfig() on the compiler, which takes the list of all definitions
+124: Static method Nette\DI\Compiler::parseServices() is forbidden: call loadDefinitionsFromConfig() on the compiler, which takes the list of all definitions
+125: Method Nette\DI\Config\Loader::save() is forbidden: render the configuration with an adapter, such as (new Nette\DI\Config\Adapters\NeonAdapter)->dump($data), and write the file
+126: Class Nette\DI\Config\DefinitionSchema is replaced by Nette\DI\Extensions\DefinitionSchema
+127: Method Nette\DI\Compiler::compile() is replaced by addConfig($config)->setClassName($className)->compile()
+128: Method Nette\DI\Compiler::compile() is replaced by setClassName($className)->compile()
+129: Method Nette\DI\Compiler::compile() is replaced by addConfig($config)->compile()
+135: Method Nette\DI\Container::__get() is replaced by getService($name)
+136: Method Nette\DI\Container::__set() is replaced by addService($name, $value)
+137: Method Nette\DI\Container::__isset() is replaced by hasService($name)
+138: Method Nette\DI\Container::__unset() is replaced by removeService($name)
+141: Property Nette\DI\Container::$parameters is replaced by getParameters()
+142: Method Nette\DI\Container::expand() is forbidden: there is no replacement, read the parameters with getParameters() instead of expanding %placeholders%
+143: Method Nette\DI\Container::createService() is forbidden: the arguments are no longer passed to the factory of the service; drop the arguments
+153: Constant Nette\DI\Container::TYPES is forbidden: call findByType(), which returns the services of a type
+153: Constant Nette\DI\Container::SERVICES is forbidden: call getServiceType(), which returns the type of a service
+153: Constant Nette\DI\Container::ALIASES is forbidden: there is no replacement, only a child of the container reads $aliases
+153: Constant Nette\DI\Container::TAGS is forbidden: call findByTag(), which returns the services of a tag
+154: Property Nette\DI\Container::$meta is forbidden: there is no replacement; call getServiceType(), findByType() or findByTag() for what it held
+154: Constant Nette\DI\Container::TYPES is forbidden: call findByType(), which returns the services of a type
+154: Property Nette\DI\Container::$types is forbidden: call getServiceType(), which returns the type of a service
+155: Property Nette\DI\Container::$parameters is replaced by getParameters()
+162: Class Nette\DI\Statement is replaced by Nette\DI\Definitions\Statement
+162: Class Nette\DI\Statement is replaced by Nette\DI\Definitions\Statement
+164: Method Nette\DI\Definitions\Statement::setEntity() is forbidden: create a new Nette\DI\Definitions\Statement instead of changing the entity of an existing one
+165: Method Nette\DI\Definitions\Definition::getClass() is replaced by Definition::getType()
