@@ -1,0 +1,216 @@
+<?php
+
+namespace App;
+
+use Latte;
+use Latte\Bridges\Tracy\LattePanel;
+use Latte\Compiler\ExpressionBuilder;
+use Latte\Compiler\Nodes\Html\ElementNode;
+use Latte\Compiler\Nodes\Html\QuotedValue;
+use Latte\Compiler\Nodes\Php\Expression\ArrayNode;
+use Latte\Compiler\Nodes\Php\Expression\ErrorSuppressNode;
+use Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode;
+use Latte\Compiler\Nodes\Php\Expression\FunctionCallNode;
+use Latte\Compiler\Nodes\Php\Expression\MethodCallNode;
+use Latte\Compiler\Nodes\Php\Expression\NotNode;
+use Latte\Compiler\Nodes\Php\Expression\NullsafeMethodCallNode;
+use Latte\Compiler\Nodes\Php\Expression\StaticCallableNode;
+use Latte\Compiler\Nodes\Php\Expression\StaticCallNode;
+use Latte\Compiler\Nodes\Php\FilterNode;
+use Latte\Compiler\Nodes\Php\ModifierNode;
+use Latte\Compiler\Nodes\Php\NameNode;
+use Latte\Compiler\Nodes\Php\VariadicPlaceholderNode;
+use Latte\Compiler\Nodes\Php\Scalar\EncapsedStringPartNode;
+use Latte\Compiler\Nodes\Php\Scalar\StringNode;
+use Latte\Compiler\Nodes\StatementNode;
+use Latte\Compiler\Position;
+use Latte\Compiler\PrintContext;
+use Latte\Compiler\Tag;
+use Latte\Compiler\TemplateLexer;
+use Latte\Compiler\TemplateParser;
+use Latte\Compiler\Token;
+use Latte\Essential\Nodes\ForeachNode;
+use Latte\Essential\Nodes\JumpNode;
+use Latte\Essential\Passes;
+use Latte\Runtime\Filters;
+use Latte\Runtime\Template;
+use Latte\Tools\Linter;
+
+
+class LatteFactory
+{
+	public function create(string $tempDir, \Tracy\Bar $bar): Latte\Engine
+	{
+		$latte = new Latte\Engine;
+		$latte->setTempDirectory($tempDir);
+		$latte->setAutoRefresh(on: true);
+		$latte->setSandboxMode(on: false);
+		$latte->setStrictTypes();
+		$latte->setStrictParsing(true);
+		$latte->setMigrationWarnings(false);
+		$latte->setExceptionHandler(callback: fn(\Throwable $e) => null);
+		$latte->addProvider('formatter', value: new \stdClass);
+		$latte->addFilterLoader([$this, 'loadFilter']);
+		$latte->setContentType(Latte\Engine::CONTENT_XML);
+		if (!$latte->isStrictParsing()) {
+			$latte->setStrictParsing(on: true);
+		}
+
+		LattePanel::initialize($latte);
+		LattePanel::initialize($latte, 'mail');
+		LattePanel::initialize($latte, 'admin', $bar);
+		$bar->addPanel(new LattePanel($latte));
+
+		Filters::$dateFormat = 'j. n. Y';
+		$version = Latte\Engine::VERSION;
+		$template = $latte->parse(source: '{$foo}');
+		return $latte;
+	}
+
+
+	public function lint(Linter $linter): bool
+	{
+		return $linter->scanDirectory(dir: __DIR__);
+	}
+
+
+	public function loadFilter(string $name): ?callable
+	{
+		return null;
+	}
+}
+
+
+class TemplateHelpers
+{
+	/** @filter */
+	public function money(float $value): string
+	{
+		return number_format($value, 2);
+	}
+
+
+	/**
+	 * Tells whether the user may see the item.
+	 * @function
+	 */
+	public function isVisible(string $item): bool
+	{
+		return true;
+	}
+}
+
+
+class DatabaseLoader implements Latte\Loader
+{
+	public function getContent(string $name): string
+	{
+		return '';
+	}
+
+
+	public function isExpired(string $name, int $time): bool
+	{
+		return false;
+	}
+
+
+	public function getReferredName(string $name, string $referringName): string
+	{
+		return $name;
+	}
+
+
+	public function getUniqueId(string $name): string
+	{
+		return $name;
+	}
+}
+
+
+class CachingEngine extends Latte\Engine
+{
+	protected function getCacheKey(): array
+	{
+		return parent::getCacheKey();
+	}
+}
+
+
+class IconNode extends StatementNode
+{
+	use Latte\Strict;
+
+	public ?ModifierNode $modifier = null;
+
+
+	public static function create(Tag $tag): static
+	{
+		$node = new static;
+		$foreach = $tag->closestTag(names: [ForeachNode::class]);
+		$data = $tag->data;
+		$location = $tag->location;
+		$attribute = $tag->nAttributeNode;
+		$node->modifier = new ModifierNode([], true, false, $tag->position);
+		if ($tag->parser->tryConsumeModifier('as')) {
+			$words = $tag->position->toWords();
+		}
+
+		return $node;
+	}
+
+
+	public function print(PrintContext $context): string
+	{
+		return '';
+	}
+
+
+	public function describe(PrintContext $context, FilterNode $filter, NameNode $name, ElementNode $element, ForeachNode $foreach, JumpNode $jump): string
+	{
+		$code = $filter->printSimple($context, '$value');
+		$chain = FilterNode::printSimple($context, [$filter], '$value');
+		$parts = $name->parts;
+		$escape = FilterNode::Escape;
+		$tagName = $element->variableName ?? $element->customName;
+		$captured = $element->captureTagName;
+		$tag = $element->tagNode;
+		$else = $foreach->elseLine;
+		$end = $jump->endTag;
+		$names = Token::NAMES;
+		$source = Template::Source;
+		return $code . $escape;
+	}
+
+
+	public function inspect(PrintContext $context, FunctionCallNode $call, MethodCallNode $method, mixed $node): string
+	{
+		if ($call->isFirstClassCallable() || $method->isFirstClassCallable()) {
+			return '';
+		} elseif ($node instanceof NotNode || $node instanceof ErrorSuppressNode) {
+			return $context->prefixOp($node, '!', $node->expr);
+		} elseif ($node instanceof FunctionCallableNode || $node instanceof NullsafeMethodCallNode) {
+			return $context->infixOp($node, $node->object, '?->', $node->name);
+		} elseif ($node instanceof StaticCallNode || $node instanceof QuotedValue || $node instanceof EncapsedStringPartNode) {
+			return $context->postfixOp($node, $node, '++');
+		} elseif ($node instanceof StaticCallableNode || $node instanceof VariadicPlaceholderNode) {
+			return '';
+		}
+
+		$array = ArrayNode::fromArguments($call->args);
+		$string = StringNode::parse('"a"', position: null);
+		$builder = new ExpressionBuilder;
+		return '';
+	}
+
+
+	public function parse(TemplateParser $parser, TemplateLexer $lexer, Latte\Compiler\Nodes\TemplateNode $templateNode): void
+	{
+		try {
+			$parser->parse('{$a}', $lexer);
+		} catch (Latte\RegexpException $e) {
+		}
+
+		Passes::moveTemplatePrintToHeadPass($templateNode);
+	}
+}

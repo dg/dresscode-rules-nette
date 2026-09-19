@@ -1,0 +1,216 @@
+<?php
+
+namespace App;
+
+use Latte;
+use Latte\Bridges\Tracy\LattePanel;
+use Latte\Compiler\ExpressionBuilder;
+use Latte\Compiler\Nodes\Html\ElementNode;
+use Latte\Compiler\Nodes\Html\QuotedValue;
+use Latte\Compiler\Nodes\Php\Expression\ArrayNode;
+use Latte\Compiler\Nodes\Php\Expression\ErrorSuppressNode;
+use Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode;
+use Latte\Compiler\Nodes\Php\Expression\FunctionCallNode;
+use Latte\Compiler\Nodes\Php\Expression\MethodCallNode;
+use Latte\Compiler\Nodes\Php\Expression\NotNode;
+use Latte\Compiler\Nodes\Php\Expression\NullsafeMethodCallNode;
+use Latte\Compiler\Nodes\Php\Expression\StaticCallableNode;
+use Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode;
+use Latte\Compiler\Nodes\Php\FilterNode;
+use Latte\Compiler\Nodes\Php\ModifierNode;
+use Latte\Compiler\Nodes\Php\NameNode;
+use Latte\Compiler\Nodes\Php\VariadicPlaceholderNode;
+use Latte\Compiler\Nodes\Php\InterpolatedStringPartNode;
+use Latte\Compiler\Nodes\Php\Scalar\StringNode;
+use Latte\Compiler\Nodes\StatementNode;
+use Latte\Compiler\Position;
+use Latte\Compiler\PrintContext;
+use Latte\Compiler\Tag;
+use Latte\Compiler\TemplateLexer;
+use Latte\Compiler\TemplateParser;
+use Latte\Compiler\Token;
+use Latte\Essential\Nodes\ForeachNode;
+use Latte\Essential\Nodes\JumpNode;
+use Latte\Essential\Passes;
+use Latte\Runtime\Filters;
+use Latte\Runtime\Template;
+use Latte\Tools\Linter;
+
+
+class LatteFactory
+{
+	public function create(string $tempDir, \Tracy\Bar $bar): Latte\Engine
+	{
+		$latte = new Latte\Engine;
+		$latte->setCacheDirectory($tempDir);
+		$latte->setAutoRefresh(state: true);
+		$latte->setSandboxMode(state: false);
+		$latte->setFeature(Latte\Feature::StrictTypes);
+		$latte->setFeature(Latte\Feature::StrictParsing, true);
+		$latte->setFeature(Latte\Feature::MigrationWarnings, false);
+		$latte->setExceptionHandler(handler: fn(\Throwable $e) => null);
+		$latte->addProvider('formatter', provider: new \stdClass);
+		$latte->addFilterLoader([$this, 'loadFilter']);
+		$latte->setContentType(Latte\ContentType::Xml);
+		if (!$latte->hasFeature(Latte\Feature::StrictParsing)) {
+			$latte->setFeature(Latte\Feature::StrictParsing, true);
+		}
+
+		$latte->addExtension(new Latte\Bridges\Tracy\TracyExtension);
+		$latte->addExtension(new Latte\Bridges\Tracy\TracyExtension('mail'));
+		LattePanel::initialize($latte, 'admin', $bar);
+		$bar->addPanel(new LattePanel($latte));
+
+		Filters::$dateFormat = 'j. n. Y';
+		$version = Latte\Engine::Version;
+		$template = $latte->parse(template: '{$foo}');
+		return $latte;
+	}
+
+
+	public function lint(Linter $linter): bool
+	{
+		return $linter->scanDirectory(path: __DIR__);
+	}
+
+
+	public function loadFilter(string $name): ?callable
+	{
+		return null;
+	}
+}
+
+
+class TemplateHelpers
+{
+	#[Latte\Attributes\TemplateFilter]
+	public function money(float $value): string
+	{
+		return number_format($value, 2);
+	}
+
+
+	/**
+	 * Tells whether the user may see the item.
+	 */
+	#[Latte\Attributes\TemplateFunction]
+	public function isVisible(string $item): bool
+	{
+		return true;
+	}
+}
+
+
+class DatabaseLoader implements Latte\Loader
+{
+	public function getContent(string $name): string
+	{
+		return '';
+	}
+
+
+	public function isExpired(string $name, int $time): bool
+	{
+		return false;
+	}
+
+
+	public function getReferredName(string $name, string $referringName): string
+	{
+		return $name;
+	}
+
+
+	public function getUniqueId(string $name): string
+	{
+		return $name;
+	}
+}
+
+
+class CachingEngine extends Latte\Engine
+{
+	protected function generateConfigurationSignature(): array
+	{
+		return parent::generateConfigurationSignature();
+	}
+}
+
+
+class IconNode extends StatementNode
+{
+	use Latte\Strict;
+
+	public ?ModifierNode $modifier = null;
+
+
+	public static function create(Tag $tag): static
+	{
+		$node = new static;
+		$foreach = $tag->closestTag(classes: [ForeachNode::class]);
+		$data = $tag->data;
+		$location = $tag->location;
+		$attribute = $tag->nAttribute;
+		$node->modifier = new ModifierNode([], true, $tag->position);
+		if ($tag->parser->tryConsumeTokenBeforeUnquotedString('as')) {
+			$words = $tag->position->__toString();
+		}
+
+		return $node;
+	}
+
+
+	public function print(PrintContext $context): string
+	{
+		return '';
+	}
+
+
+	public function describe(PrintContext $context, FilterNode $filter, NameNode $name, ElementNode $element, ForeachNode $foreach, JumpNode $jump): string
+	{
+		$code = FilterNode::printSimple($context, [$filter], '$value');
+		$chain = FilterNode::printSimple($context, [$filter], '$value');
+		$parts = $name->parts;
+		$escape = FilterNode::Escape;
+		$tagName = $element->variableName ?? $element->customName;
+		$captured = $element->captureTagName;
+		$tag = $element->tagNode;
+		$else = $foreach->elseLine;
+		$end = $jump->endTag;
+		$names = Token::Names;
+		$source = Template::Source;
+		return $code . $escape;
+	}
+
+
+	public function inspect(PrintContext $context, FunctionCallNode $call, MethodCallNode $method, mixed $node): string
+	{
+		if ($call->isPartialFunction() || $method->isPartialFunction()) {
+			return '';
+		} elseif ($node instanceof NotNode || $node instanceof ErrorSuppressNode) {
+			return $context->prefixOp($node, '!', $node->expr);
+		} elseif ($node instanceof FunctionCallableNode || $node instanceof NullsafeMethodCallNode) {
+			return $context->infixOp($node, $node->object, '?->', $node->name);
+		} elseif ($node instanceof StaticMethodCallNode || $node instanceof QuotedValue || $node instanceof InterpolatedStringPartNode) {
+			return $context->postfixOp($node, $node, '++');
+		} elseif ($node instanceof StaticCallableNode || $node instanceof VariadicPlaceholderNode) {
+			return '';
+		}
+
+		$array = ArrayNode::fromArguments($call->args);
+		$string = StringNode::parse('"a"', start: null);
+		$builder = new ExpressionBuilder;
+		return '';
+	}
+
+
+	public function parse(TemplateParser $parser, TemplateLexer $lexer, Latte\Compiler\Nodes\TemplateNode $templateNode): void
+	{
+		try {
+			$parser->parse('{$a}');
+		} catch (Latte\RegexpException $e) {
+		}
+
+		Latte\Essential\Nodes\TemplatePrintNode::moveToHeadPass($templateNode);
+	}
+}
