@@ -32,7 +32,8 @@
 		"nette/tester": "^2.6",
 		"nette/utils": "^4.0",
 		"phpstan/extension-installer": "^1.4",
-		"phpstan/phpstan": "^2.2"
+		"phpstan/phpstan": "^2.2",
+		"tracy/tracy": "^2.12"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
@@ -61,7 +62,8 @@
 				"upgrading/mail.neon",
 				"upgrading/php-generator.neon",
 				"upgrading/robot-loader.neon",
-				"upgrading/schema.neon"
+				"upgrading/schema.neon",
+				"upgrading/tracy.neon"
 			]
 		}
 	}
