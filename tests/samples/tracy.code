@@ -1,0 +1,97 @@
+<?php
+
+namespace App;
+
+use Tracy\BlueScreen;
+use Tracy\Debugger;
+use Tracy\Dumper;
+use Tracy\FireLogger;
+use Tracy\IBarPanel;
+use Tracy\ILogger;
+use Tracy\Logger;
+
+
+class Bootstrap
+{
+	public static function boot(string $rootDir, bool $debug): void
+	{
+		Debugger::$maxLen = 500;
+		Debugger::$showFireLogger = false;
+		Debugger::enable($debug ? Debugger::DEVELOPMENT : Debugger::PRODUCTION, $rootDir . '/log', 'admin@example.com');
+		Debugger::enable(Debugger::DETECT);
+		Debugger::getBar()->addPanel(new VersionPanel);
+		Debugger::getBlueScreen()->addPanel([ErrorPanels::class, 'renderInfo']);
+		Debugger::getBlueScreen()->collapsePaths[] = $rootDir . '/vendor/acme';
+
+		$secret = $_COOKIE[Debugger::COOKIE_SECRET] ?? null;
+		$fireLogger = Debugger::getFireLogger();
+		Debugger::fireLog('booted');
+	}
+
+
+	public static function report(\Throwable $e, ILogger $logger): void
+	{
+		Debugger::log($e, priority: ILogger::EXCEPTION);
+		Debugger::log('plain message', ILogger::WARNING);
+		$logger->log($e, priority: ILogger::CRITICAL);
+		Debugger::getLogger()->log('disk is full', priority: ILogger::ERROR);
+		echo Dumper::toHtml($e, [Dumper::LOCATION => Dumper::LOCATION_LINK, Dumper::DEPTH => 5]);
+	}
+}
+
+
+class VersionPanel implements IBarPanel
+{
+	public function getTab(): string
+	{
+		return '<span>Tracy ' . Debugger::VERSION . '</span>';
+	}
+
+
+	public function getPanel(): string
+	{
+		return BlueScreen::highlightFile(__FILE__, __LINE__) ?? '';
+	}
+}
+
+
+class ErrorPanels
+{
+	public static function renderInfo(?\Throwable $e): ?array
+	{
+		return $e ? ['tab' => 'Info', 'panel' => Dumper::toHtml($e, [Dumper::LOCATION => Dumper::LOCATION_LINK])] : null;
+	}
+}
+
+
+class MailLogger extends Logger
+{
+	public function log(mixed $message, string $level = self::INFO)
+	{
+		$file = parent::log($message, priority: $level);
+		$this->sendEmail($message);
+		return $file;
+	}
+}
+
+
+class AppDebugger extends Debugger
+{
+	public static function isDev(): bool
+	{
+		self::$maxLen = 1000;
+		self::log('checked', priority: self::INFO);
+		return self::$productionMode === self::DEVELOPMENT;
+	}
+}
+
+
+class LegacyLogger extends FireLogger
+{
+}
+
+
+function firelog(FireLogger $logger): void
+{
+	$logger->log('message');
+}
