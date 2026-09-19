@@ -1,0 +1,81 @@
+18: Class `Latte\Compiler\Nodes\Php\Expression\StaticCallNode` is replaced by `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode`.
+23: Class `Latte\Compiler\Nodes\Php\Scalar\EncapsedStringPartNode` is replaced by `Latte\Compiler\Nodes\Php\InterpolatedStringPartNode`.
+46: Method `Latte\Engine::setTempDirectory()` is replaced by `Engine::setCacheDirectory()`.
+47: Method `Latte\Engine::setAutoRefresh()` is replaced by `setAutoRefresh(state: $s)`.
+48: Method `Latte\Engine::setSandboxMode()` is replaced by `setSandboxMode(state: $s)`.
+49: Method `Latte\Engine::setStrictTypes()` is replaced by `setFeature(\Latte\Feature::StrictTypes)`.
+50: Method `Latte\Engine::setStrictParsing()` is replaced by `setFeature(\Latte\Feature::StrictParsing, $state)`.
+51: Method `Latte\Engine::setMigrationWarnings()` is replaced by `setFeature(\Latte\Feature::MigrationWarnings, $state)`.
+52: Method `Latte\Engine::setExceptionHandler()` is replaced by `setExceptionHandler(handler: $c)`.
+53: Method `Latte\Engine::addProvider()` is replaced by `addProvider(provider: $v, ...)`.
+54: Method `Latte\Engine::addFilterLoader()` is deprecated: register each filter with `addFilter()`, since latte/latte 3.1.
+55: Constant `Latte\Engine::CONTENT_XML` is replaced by `Latte\ContentType::Xml`.
+56: Method `Latte\Engine::isStrictParsing()` is replaced by `hasFeature(\Latte\Feature::StrictParsing)`.
+57: Method `Latte\Engine::setStrictParsing()` is replaced by `setFeature(\Latte\Feature::StrictParsing, $state)`.
+57: Method `Latte\Engine::setStrictParsing()` is replaced by `setStrictParsing(state: $s)`.
+60: Static method `Latte\Bridges\Tracy\LattePanel::initialize()` is replaced by `$latte->addExtension(new \Latte\Bridges\Tracy\TracyExtension)`.
+61: Static method `Latte\Bridges\Tracy\LattePanel::initialize()` is replaced by `$latte->addExtension(new \Latte\Bridges\Tracy\TracyExtension($name))`.
+62: Static method `Latte\Bridges\Tracy\LattePanel::initialize()` is deprecated: register `Latte\Bridges\Tracy\TracyExtension` with `Latte\Engine::addExtension()`, which adds the panel to the bar of Tracy itself, since latte/latte 3.0.5.
+63: Constructor `Latte\Bridges\Tracy\LattePanel::__construct()` is deprecated: register `Latte\Bridges\Tracy\TracyExtension` with `Latte\Engine::addExtension()`, which adds the panel itself, since latte/latte 3.0.5.
+65: Static property `Latte\Runtime\Filters::$dateFormat` is removed: pass the format to the `|date` filter or register another date filter, since latte/latte 3.1.
+66: Constant `Latte\Engine::VERSION` is replaced by `Engine::Version`.
+67: Method `Latte\Engine::parse()` is replaced by `parse(template: $s)`.
+74: Method `Latte\Tools\Linter::scanDirectory()` is replaced by `scanDirectory(path: $d)`.
+87: Annotation `@filter` is replaced by the attribute `#[Latte\Attributes\TemplateFilter]`.
+94: Annotation `@function` is replaced by the attribute `#[Latte\Attributes\TemplateFunction]`.
+113: Method `Latte\Loader::isExpired()` is removed: there is no replacement; the engine derives the expiration from the cache signature, so a loader does not implement the method, since latte/latte 3.0.16.
+134: Method `Latte\Engine::getCacheKey()` is replaced by `Engine::generateConfigurationSignature()`.
+136: Method `Latte\Engine::getCacheKey()` is replaced by `Engine::generateConfigurationSignature()`.
+143: Class `Latte\Strict` is removed: there is no replacement; the trait only made access to undeclared members throw, since latte/latte 3.0.12.
+151: Method `Latte\Compiler\Tag::closestTag()` is replaced by `closestTag(classes: $n, ...)`.
+152: Property `Latte\Compiler\Tag::$data` is removed: keep the data in the node the tag creates, since latte/latte 3.0.12.
+153: Property `Latte\Compiler\Tag::$location` is removed: read `$inHead` and `$inTag`, or call `isInHead()` and `isInText()`, since latte/latte 3.0.8.
+154: Property `Latte\Compiler\Tag::$nAttributeNode` is replaced by `Tag::$nAttribute`.
+155: Constructor `Latte\Compiler\Nodes\Php\ModifierNode::__construct()` is replaced by `new \Latte\Compiler\Nodes\Php\ModifierNode($filters, $escape, $position)`.
+156: Property `Latte\Compiler\Nodes\Php\ModifierNode::$check` is deprecated: the property has no effect; drop the setting, since latte/latte 3.0.25.
+157: Static method `Latte\Essential\Nodes\NTagNode::check()` is removed: there is no replacement; the generated code validates the tag change itself, since latte/latte 3.0.23.
+158: Method `Latte\Compiler\TagParser::tryConsumeModifier()` is replaced by `TagParser::tryConsumeTokenBeforeUnquotedString()`.
+159: Method `Latte\Compiler\Position::toWords()` is replaced by `Position::__toString()`.
+174: Method `Latte\Compiler\Nodes\Php\FilterNode::printSimple()` is replaced by `\Latte\Compiler\Nodes\Php\FilterNode::printSimple($context, [$this], $expr)`.
+176: Property `Latte\Compiler\Nodes\Php\NameNode::$parts` is removed: read `$name`, one string holding the whole qualified name, since latte/latte 3.0.14.
+177: Constant `Latte\Compiler\Nodes\Php\FilterNode::Escape` is removed: write the name of the filter, `'escape'`, since latte/latte 3.0.3.
+178: Property `Latte\Compiler\Nodes\Html\ElementNode::$variableName` is removed: read `$dynamicTag`, a `Latte\Compiler\Nodes\Html\TagNode` that holds the expression of the name in its `$name`, since latte/latte 3.1.
+178: Property `Latte\Compiler\Nodes\Html\ElementNode::$customName` is removed: read `$dynamicTag`, a `Latte\Compiler\Nodes\Html\TagNode` that holds the expression of the name in its `$name`, since latte/latte 3.1.
+179: Property `Latte\Compiler\Nodes\Html\ElementNode::$captureTagName` is removed: test whether `$dynamicTag` is set, since latte/latte 3.1.
+180: Property `Latte\Compiler\Nodes\Html\ElementNode::$tagNode` is removed: there is no replacement; the element prints its start tag itself and a dynamic tag name is held by `$dynamicTag`, since latte/latte 3.1.
+181: Property `Latte\Essential\Nodes\ForeachNode::$elseLine` is removed: read the position of `{else}` from `$tagRanges`, since latte/latte 3.1.4.
+182: Property `Latte\Essential\Nodes\JumpNode::$endTag` is removed: there is no replacement; the node closes the HTML elements itself, since latte/latte 3.0.12.
+183: Constant `Latte\Compiler\Token::NAMES` is replaced by `Token::Names`.
+184: Constant `Latte\Runtime\Template::Source` is removed: call `getName()`, which returns the name of the template, since latte/latte 3.1.
+189: Class `Latte\Compiler\Nodes\Php\Expression\StaticCallNode` is replaced by `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode`.
+191: Method `Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isFirstClassCallable()` is replaced by `FunctionCallNode::isPartialFunction()`.
+191: Method `Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isPartialFunction()` is replaced by `FunctionCallNode::isPartialApplication()`.
+191: Method `Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isFirstClassCallable()` is replaced by `MethodCallNode::isPartialFunction()`.
+191: Method `Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isPartialFunction()` is replaced by `MethodCallNode::isPartialApplication()`.
+191: Method `Latte\Compiler\Nodes\Php\Expression\StaticCallNode::isFirstClassCallable()` is replaced by `StaticCallNode::isPartialFunction()`.
+191: Method `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isPartialFunction()` is replaced by `StaticMethodCallNode::isPartialApplication()`.
+193: Class `Latte\Compiler\Nodes\Php\Expression\NotNode` is removed: the `!` operator is a `Latte\Compiler\Nodes\Php\Expression\UnaryOpNode`; test its `$operator`, since latte/latte 3.1.1.
+193: Class `Latte\Compiler\Nodes\Php\Expression\ErrorSuppressNode` is removed: the `@` operator is a `Latte\Compiler\Nodes\Php\Expression\UnaryOpNode`; test its `$operator`, since latte/latte 3.1.1.
+194: Method `Latte\Compiler\PrintContext::prefixOp()` is deprecated: implement `Latte\Compiler\Nodes\Php\OperatorNode` in the node and print the operand with `parenthesize()` after the operator, since latte/latte 3.1.1.
+195: Class `Latte\Compiler\Nodes\Php\Expression\FunctionCallableNode` is removed: the first-class callable syntax is a `Latte\Compiler\Nodes\Php\Expression\FunctionCallNode` whose `isPartialFunction()` returns `true`, since latte/latte 3.1.1.
+195: Class `Latte\Compiler\Nodes\Php\Expression\NullsafeMethodCallNode` is removed: a nullsafe call is a `Latte\Compiler\Nodes\Php\Expression\MethodCallNode` whose `$nullsafe` is `true`, since latte/latte 3.0.2.
+196: Method `Latte\Compiler\PrintContext::infixOp()` is deprecated: implement `Latte\Compiler\Nodes\Php\OperatorNode` in the node and print both operands with `parenthesize()`, the operator between them, since latte/latte 3.1.1.
+197: Class `Latte\Compiler\Nodes\Php\Expression\StaticCallNode` is replaced by `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode`.
+197: Class `Latte\Compiler\Nodes\Html\QuotedValue` is removed: the value is no longer wrapped; the quote is held by `$quote` of `Latte\Compiler\Nodes\Html\AttributeNode`, since latte/latte 3.0.7.
+197: Class `Latte\Compiler\Nodes\Php\Scalar\EncapsedStringPartNode` is replaced by `Latte\Compiler\Nodes\Php\InterpolatedStringPartNode`.
+198: Method `Latte\Compiler\PrintContext::postfixOp()` is deprecated: implement `Latte\Compiler\Nodes\Php\OperatorNode` in the node and print the operand with `parenthesize()` before the operator, since latte/latte 3.1.1.
+199: Class `Latte\Compiler\Nodes\Php\Expression\StaticCallableNode` is removed: the first-class callable syntax is a `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode` whose `isPartialFunction()` returns `true`, since latte/latte 3.1.1.
+203: Static method `Latte\Compiler\Nodes\Php\Expression\ArrayNode::fromArguments()` is removed: call `argumentsAsArray()` of `Latte\Compiler\PrintContext`, which returns the printed array instead of a node, since latte/latte 3.0.7.
+204: Static method `Latte\Compiler\Nodes\Php\Scalar\StringNode::parse()` is replaced by `parse(start: $p, ...)`.
+205: Class `Latte\Compiler\ExpressionBuilder` is removed: build the nodes directly, since latte/latte 3.0.12.
+213: Method `Latte\Compiler\TemplateParser::parse()` is replaced by `parse($template)`.
+214: Class `Latte\RegexpException` is removed: catch `Latte\CompileException` for an error during compilation and `Latte\RuntimeException` for one during rendering, since latte/latte 3.0.12.
+217: Static method `Latte\Essential\Passes::moveTemplatePrintToHeadPass()` is replaced by `Latte\Essential\Nodes\TemplatePrintNode::moveToHeadPass()`.
+223: Method `Latte\Compiler\Nodes\Php\Expression\FunctionCallNode::isPartialFunction()` is replaced by `FunctionCallNode::isPartialApplication()`.
+223: Method `Latte\Compiler\Nodes\Php\Expression\MethodCallNode::isPartialFunction()` is replaced by `MethodCallNode::isPartialApplication()`.
+223: Method `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isPartialFunction()` is replaced by `StaticMethodCallNode::isPartialApplication()`.
+227: Static method `Latte\Compiler\NodeHelpers::toValue()` is replaced by `$node->toValue(...)`.
+228: Static method `Latte\Compiler\NodeHelpers::toValue()` is replaced by `$node->toValue(...)`.
+235: Method `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isPartialFunction()` is replaced by `StaticMethodCallNode::isPartialApplication()`.
+237: Method `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isPartialFunction()` is replaced by `StaticMethodCallNode::isPartialApplication()`.
+237: Method `Latte\Compiler\Nodes\Php\Expression\StaticMethodCallNode::isPartialFunction()` is replaced by `StaticMethodCallNode::isPartialApplication()`.

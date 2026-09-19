@@ -16,6 +16,7 @@
 		"dresscode/dresscode": "^1.2"
 	},
 	"require-dev": {
+		"latte/latte": "^3.1",
 		"nette/application": "^3.2",
 		"nette/assets": "^1.0",
 		"nette/bootstrap": "^3.3",
@@ -51,6 +52,7 @@
 		"dresscode": {
 			"upgrading-dir": "upgrading",
 			"packages": [
+				"latte/latte",
 				"nette/assets",
 				"nette/bootstrap",
 				"nette/caching",
