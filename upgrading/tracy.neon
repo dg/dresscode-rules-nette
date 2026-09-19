@@ -1,0 +1,34 @@
+package: tracy/tracy
+group: deprecations
+
+since 2.10.5:
+	replaced-members:
+		Tracy\Debugger::VERSION: Version
+
+since 2.10:
+	forbidden-classes:
+		Tracy\FireLogger: 'FireLogger support is gone; log with Tracy\Debugger::log() or dump into the Tracy Bar with Tracy\Debugger::barDump()'
+	forbidden-members:
+		'Tracy\Debugger::fireLog(...$args)': 'FireLogger support is gone; log with log() or dump into the Tracy Bar with barDump()'
+		'Tracy\Debugger::getFireLogger()': 'FireLogger support is gone; log with getLogger()'
+		'Tracy\Debugger::$showFireLogger': 'FireLogger support is gone; drop the setting'
+
+since 2.9.6:
+	replaced-members:
+		Tracy\Debugger::PRODUCTION: Production
+		Tracy\Debugger::DEVELOPMENT: Development
+		Tracy\Debugger::DETECT: Detect
+		Tracy\Debugger::COOKIE_SECRET: CookieSecret
+
+since 2.8:
+	replaced-members:
+		Tracy\Dumper::LOCATION_LINK: LOCATION_SOURCE
+
+since 2.6.4:
+	replaced-calls:
+		'Tracy\ILogger::log($value, priority: $level)': 'log($value, level: $level)'
+		'Tracy\Debugger::log($message, priority: $level)': 'log($message, level: $level)'
+
+since 2.6:
+	replaced-members:
+		Tracy\Debugger::$maxLen: $maxLength

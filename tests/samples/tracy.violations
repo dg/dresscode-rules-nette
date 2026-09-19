@@ -1,0 +1,20 @@
+18: Static property Tracy\Debugger::$maxLen is replaced by Debugger::$maxLength
+19: Static property Tracy\Debugger::$showFireLogger is forbidden: FireLogger support is gone; drop the setting
+20: Constant Tracy\Debugger::DEVELOPMENT is replaced by Debugger::Development
+20: Constant Tracy\Debugger::PRODUCTION is replaced by Debugger::Production
+21: Constant Tracy\Debugger::DETECT is replaced by Debugger::Detect
+26: Constant Tracy\Debugger::COOKIE_SECRET is replaced by Debugger::CookieSecret
+27: Static method Tracy\Debugger::getFireLogger() is forbidden: FireLogger support is gone; log with getLogger()
+28: Static method Tracy\Debugger::fireLog() is forbidden: FireLogger support is gone; log with log() or dump into the Tracy Bar with barDump()
+34: Static method Tracy\Debugger::log() is replaced by log($message, level: $level)
+36: Method Tracy\ILogger::log() is replaced by log($value, level: $level)
+37: Method Tracy\ILogger::log() is replaced by log($value, level: $level)
+38: Constant Tracy\Dumper::LOCATION_LINK is replaced by Dumper::LOCATION_SOURCE
+47: Constant Tracy\Debugger::VERSION is replaced by Debugger::Version
+62: Constant Tracy\Dumper::LOCATION_LINK is replaced by Dumper::LOCATION_SOURCE
+71: Method Tracy\ILogger::log() is replaced by log($value, level: $level)
+82: Static property Tracy\Debugger::$maxLen is replaced by Debugger::$maxLength
+83: Method Tracy\Debugger::log() is replaced by log($message, level: $level)
+84: Constant Tracy\Debugger::DEVELOPMENT is replaced by Debugger::Development
+89: Class Tracy\FireLogger is forbidden: FireLogger support is gone; log with Tracy\Debugger::log() or dump into the Tracy Bar with Tracy\Debugger::barDump()
+94: Class Tracy\FireLogger is forbidden: FireLogger support is gone; log with Tracy\Debugger::log() or dump into the Tracy Bar with Tracy\Debugger::barDump()
