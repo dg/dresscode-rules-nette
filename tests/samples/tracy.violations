@@ -1,0 +1,21 @@
+18: Static property `Tracy\Debugger::$maxLen` is replaced by `Debugger::$maxLength`.
+19: Static property `Tracy\Debugger::$showFireLogger` is removed: FireLogger support is gone; drop the setting, since tracy/tracy 2.10.
+20: Constant `Tracy\Debugger::DEVELOPMENT` is replaced by `Debugger::Development`.
+20: Constant `Tracy\Debugger::PRODUCTION` is replaced by `Debugger::Production`.
+21: Constant `Tracy\Debugger::DETECT` is replaced by `Debugger::Detect`.
+24: Property `Tracy\BlueScreen::$collapsePaths` is deprecated: use the static `Tracy\Debugger::$transparentPaths`, which is already filled with the default paths when the class is loaded, since tracy/tracy 2.12.
+26: Constant `Tracy\Debugger::COOKIE_SECRET` is replaced by `Debugger::CookieSecret`.
+27: Static method `Tracy\Debugger::getFireLogger()` is removed: FireLogger support is gone; log with `getLogger()`, since tracy/tracy 2.10.
+28: Static method `Tracy\Debugger::fireLog()` is removed: FireLogger support is gone; log with `log()` or dump into the Tracy Bar with `barDump()`, since tracy/tracy 2.10.
+34: Static method `Tracy\Debugger::log()` is replaced by `log($message, level: $level)`.
+36: Method `Tracy\ILogger::log()` is replaced by `log($value, level: $level)`.
+37: Method `Tracy\ILogger::log()` is replaced by `log($value, level: $level)`.
+38: Constant `Tracy\Dumper::LOCATION_LINK` is replaced by `Dumper::LOCATION_SOURCE`.
+47: Constant `Tracy\Debugger::VERSION` is replaced by `Debugger::Version`.
+62: Constant `Tracy\Dumper::LOCATION_LINK` is replaced by `Dumper::LOCATION_SOURCE`.
+71: Method `Tracy\ILogger::log()` is replaced by `log($value, level: $level)`.
+82: Static property `Tracy\Debugger::$maxLen` is replaced by `Debugger::$maxLength`.
+83: Method `Tracy\Debugger::log()` is replaced by `log($message, level: $level)`.
+84: Constant `Tracy\Debugger::DEVELOPMENT` is replaced by `Debugger::Development`.
+89: Class `Tracy\FireLogger` is removed: FireLogger support is gone; log with `Tracy\Debugger::log()` or dump into the Tracy Bar with `Tracy\Debugger::barDump()`, since tracy/tracy 2.10.
+94: Class `Tracy\FireLogger` is removed: FireLogger support is gone; log with `Tracy\Debugger::log()` or dump into the Tracy Bar with `Tracy\Debugger::barDump()`, since tracy/tracy 2.10.
