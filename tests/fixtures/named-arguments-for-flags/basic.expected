@@ -1,15 +1,28 @@
 <?php
-// {"Nette\\Utils\\Json::encode($value, $flags)": {"Nette\\Utils\\Json::PRETTY": {"pretty": true}, "Nette\\Utils\\Json::ESCAPE_UNICODE": {"asciiSafe": true}}, "Nette\\Utils\\Strings::match($subject, $pattern, $flags, ...)": {"PREG_OFFSET_CAPTURE": {"captureOffset": true}, "\\PREG_UNMATCHED_AS_NULL": {"unmatchedAsNull": true}, "PREG_SET_ORDER": {}}}
+// {"Nette\\Utils\\Json::encode($value, $flags)": {"Nette\\Utils\\Json::PRETTY": {"pretty": true}, "Nette\\Utils\\Json::ESCAPE_UNICODE": {"asciiSafe": true}}, "Nette\\Utils\\Strings::match($subject, $pattern, $flags, ...)": {"PREG_OFFSET_CAPTURE": {"captureOffset": true}, "\\PREG_UNMATCHED_AS_NULL": {"unmatchedAsNull": true}, "PREG_SET_ORDER": {}}, "Nette\\Routing\\RouteList::add($router, $flags)": {"Nette\\Routing\\Router::ONE_WAY": {"oneWay": 1}}, "Nette\\Routing\\RouteList::prepend($router, $flags)": {"Nette\\Routing\\Router::ONE_WAY": {"oneWay": 1}}}
 
 namespace App;
 
+use Nette\Routing\Route;
+use Nette\Routing\RouteList;
 use Nette\Utils\Json;
 use Nette\Utils\Strings;
 
-function test(mixed $value, int $flags): void
+class Routes extends RouteList
+{
+	public function run(Route $route): void
+	{
+		self::add($route, oneWay: 1);
+		parent::prepend($route, oneWay: 1);
+	}
+}
+
+
+function test(mixed $value, int $flags, RouteList $routes, Route $route): void
 {
 	$a = Json::encode($value, pretty: true);
 	$b = Json::encode($value, pretty: true, asciiSafe: true);
+	$c = $routes->add($route, oneWay: 1); // the interface that declares the constant
 	$d = Strings::match('abc', '~b~', captureOffset: true, unmatchedAsNull: true);
 	$e = \Nette\Utils\Json::encode($value, pretty: true);
 	$l = Strings::match('abc', '~b~', captureOffset: true); // a flag the method now always applies
