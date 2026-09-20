@@ -1,0 +1,58 @@
+package: nette/tester
+group: deprecations
+
+since 2.6:
+	replaced-members:
+		Tester\Dumper::removeColors: Tester\Ansi::stripAnsi
+	replaced-calls:
+		'Tester\Dumper::color()': '\Tester\Ansi::reset()'
+		'Tester\Dumper::color($color)': '\Tester\Ansi::color($color)'
+		'Tester\Dumper::color($color, null)': '\Tester\Ansi::color($color)'
+		'Tester\Dumper::color($color, $s)': '\Tester\Ansi::colorize($s, $color)'
+
+since 2.5:
+	nette/named-arguments-for-flags:
+		'Tester\Runner\Job::run($flags)':
+			Tester\Runner\Job::RUN_ASYNC: {async: true}
+	forbidden-members:
+		Tester\Runner\Job::RUN_ASYNC: 'pass async: true to run()'
+		Tester\Runner\Job::RUN_COLLECT_ERRORS: 'call setTempDirectory() with a writable directory before run(); the captured stderr is then in Tester\Runner\Test::$stderr and Tester\Runner\Test::getOutput()'
+	replaced-members:
+		Tester\CodeCoverage\Collector::ENGINE_PCOV: EnginePcov
+		Tester\CodeCoverage\Collector::ENGINE_PHPDBG: EnginePhpdbg
+		Tester\CodeCoverage\Collector::ENGINE_XDEBUG: EngineXdebug
+		Tester\CodeCoverage\Generators\AbstractGenerator::CODE_TESTED: LineTested
+		Tester\CodeCoverage\Generators\AbstractGenerator::CODE_UNTESTED: LineUntested
+		Tester\CodeCoverage\Generators\AbstractGenerator::CODE_DEAD: LineDead
+		Tester\Runner\CommandLine::Realpath: RealPath
+		Tester\Runner\Job::CODE_NONE: CodeNone
+		Tester\Runner\Job::CODE_OK: CodeOk
+		Tester\Runner\Job::CODE_SKIP: CodeSkip
+		Tester\Runner\Job::CODE_FAIL: CodeFail
+		Tester\Runner\Job::CODE_ERROR: CodeError
+		Tester\Runner\Job::RUN_USLEEP: RunSleep
+		Tester\Environment::COLORS: VariableColors
+		Tester\Environment::COVERAGE: VariableCoverage
+		Tester\Environment::COVERAGE_ENGINE: VariableCoverageEngine
+		Tester\Environment::RUNNER: VariableRunner
+		Tester\Environment::THREAD: VariableThread
+		Tester\Runner\Test::PREPARED: Prepared
+		Tester\Runner\Test::FAILED: Failed
+		Tester\Runner\Test::PASSED: Passed
+		Tester\Runner\Test::SKIPPED: Skipped
+
+since 2.4.2:
+	replaced-members:
+		Tester\Runner\CommandLine::ARGUMENT: Argument
+		Tester\Runner\CommandLine::OPTIONAL: Optional
+		Tester\Runner\CommandLine::REPEATABLE: Repeatable
+		Tester\Runner\CommandLine::ENUM: Enum
+		Tester\Runner\CommandLine::REALPATH: Realpath
+		Tester\Runner\CommandLine::NORMALIZER: Normalizer
+		Tester\Runner\CommandLine::VALUE: Value
+
+since 2.2:
+	forbidden-members:
+		'Tester\CodeCoverage\Collector::start($file)': 'pass the coverage engine as the second argument, Collector::EnginePcov, EnginePhpdbg or EngineXdebug, whichever detectEngines() reports'
+	replaced-members:
+		Tester\CodeCoverage\Generators\AbstractGenerator::getCommonFilesPath: Tester\Helpers::findCommonDirectory

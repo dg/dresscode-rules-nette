@@ -1,0 +1,51 @@
+20: Constant Tester\Environment::RUNNER is replaced by Environment::VariableRunner
+21: Constant Tester\Environment::THREAD is replaced by Environment::VariableThread
+22: Constant Tester\Environment::COLORS is replaced by Environment::VariableColors
+25: Constant Tester\Environment::COVERAGE is replaced by Environment::VariableCoverage
+26: Static method Tester\CodeCoverage\Collector::start() is forbidden: pass the coverage engine as the second argument, Collector::EnginePcov, EnginePhpdbg or EngineXdebug, whichever detectEngines() reports
+26: Constant Tester\Environment::COVERAGE is replaced by Environment::VariableCoverage
+27: Constant Tester\Environment::COVERAGE is replaced by Environment::VariableCoverage
+27: Constant Tester\Environment::COVERAGE_ENGINE is replaced by Environment::VariableCoverageEngine
+28: Constant Tester\Environment::COVERAGE is replaced by Environment::VariableCoverage
+28: Constant Tester\CodeCoverage\Collector::ENGINE_PCOV is replaced by Collector::EnginePcov
+31: Constant Tester\CodeCoverage\Collector::ENGINE_PHPDBG is replaced by Collector::EnginePhpdbg
+31: Constant Tester\CodeCoverage\Collector::ENGINE_XDEBUG is replaced by Collector::EngineXdebug
+46: Static method Tester\Dumper::color() is replaced by \Tester\Ansi::colorize($s, $color)
+47: Static method Tester\Dumper::color() is replaced by \Tester\Ansi::color($color)
+47: Static method Tester\Dumper::color() is replaced by \Tester\Ansi::reset()
+48: Static method Tester\Dumper::color() is replaced by \Tester\Ansi::color($color)
+49: Static method Tester\Dumper::removeColors() is replaced by Tester\Ansi::stripAnsi()
+49: Static method Tester\Dumper::color() is replaced by \Tester\Ansi::colorize($s, $color)
+55: Static method Tester\Dumper::color() is replaced by \Tester\Ansi::reset()
+75: Constant Tester\Runner\Test::PREPARED is replaced by Test::Prepared
+83: Constant Tester\Runner\Test::FAILED is replaced by Test::Failed
+84: Static method Tester\Dumper::removeColors() is replaced by Tester\Ansi::stripAnsi()
+85: Constant Tester\Runner\Test::SKIPPED is replaced by Test::Skipped
+85: Constant Tester\Runner\Test::PASSED is replaced by Test::Passed
+93: Constant Tester\Runner\Test::FAILED is replaced by Test::Failed
+93: Constant Tester\Runner\Job::CODE_FAIL is replaced by Job::CodeFail
+93: Constant Tester\Runner\Job::CODE_OK is replaced by Job::CodeOk
+102: Method Tester\CodeCoverage\Generators\AbstractGenerator::getCommonFilesPath() is replaced by Tester\Helpers::findCommonDirectory()
+103: Method Tester\CodeCoverage\Generators\AbstractGenerator::getCommonFilesPath() is replaced by Tester\Helpers::findCommonDirectory()
+107: Constant Tester\CodeCoverage\Generators\AbstractGenerator::CODE_TESTED is replaced by AbstractGenerator::LineTested
+108: Constant Tester\CodeCoverage\Generators\AbstractGenerator::CODE_UNTESTED is replaced by AbstractGenerator::LineUntested
+109: Constant Tester\CodeCoverage\Generators\AbstractGenerator::CODE_DEAD is replaced by AbstractGenerator::LineDead
+120: Method Tester\Runner\Job::run() takes async: true instead of Job::RUN_ASYNC
+121: Method Tester\Runner\Job::run() takes named arguments instead of Job::RUN_ASYNC | Job::RUN_COLLECT_ERRORS, but Job::RUN_COLLECT_ERRORS is no flag the map names
+121: Constant Tester\Runner\Job::RUN_ASYNC is forbidden: pass async: true to run()
+121: Constant Tester\Runner\Job::RUN_COLLECT_ERRORS is forbidden: call setTempDirectory() with a writable directory before run(); the captured stderr is then in Tester\Runner\Test::$stderr and Tester\Runner\Test::getOutput()
+122: Method Tester\Runner\Job::run() takes named arguments instead of Job::RUN_COLLECT_ERRORS, but Job::RUN_COLLECT_ERRORS is no flag the map names
+122: Constant Tester\Runner\Job::RUN_COLLECT_ERRORS is forbidden: call setTempDirectory() with a writable directory before run(); the captured stderr is then in Tester\Runner\Test::$stderr and Tester\Runner\Test::getOutput()
+126: Constant Tester\Runner\Job::RUN_USLEEP is replaced by Job::RunSleep
+130: Constant Tester\Runner\Job::CODE_NONE is replaced by Job::CodeNone
+130: Constant Tester\Runner\Job::CODE_SKIP is replaced by Job::CodeSkip
+131: Constant Tester\Runner\Job::CODE_ERROR is replaced by Job::CodeError
+140: Constant Tester\Runner\CommandLine::ARGUMENT is replaced by CommandLine::Argument
+140: Constant Tester\Runner\CommandLine::REALPATH is replaced by CommandLine::Realpath
+140: Constant Tester\Runner\CommandLine::Realpath is replaced by CommandLine::RealPath
+140: Constant Tester\Runner\CommandLine::REPEATABLE is replaced by CommandLine::Repeatable
+141: Constant Tester\Runner\CommandLine::OPTIONAL is replaced by CommandLine::Optional
+141: Constant Tester\Runner\CommandLine::VALUE is replaced by CommandLine::Value
+142: Constant Tester\Runner\CommandLine::ENUM is replaced by CommandLine::Enum
+142: Constant Tester\Runner\CommandLine::NORMALIZER is replaced by CommandLine::Normalizer
+143: Constant Tester\Runner\CommandLine::Realpath is replaced by CommandLine::RealPath
