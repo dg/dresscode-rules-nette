@@ -1,0 +1,148 @@
+<?php
+
+use Tester\Ansi;
+use Tester\Assert;
+use Tester\CodeCoverage\Collector;
+use Tester\CodeCoverage\Generators\AbstractGenerator;
+use Tester\DomQuery;
+use Tester\Dumper;
+use Tester\Environment;
+use Tester\Helpers;
+use Tester\Runner\CommandLine;
+use Tester\Runner\Job;
+use Tester\Runner\OutputHandler;
+use Tester\Runner\PhpInterpreter;
+use Tester\Runner\Test;
+use Tester\TestCase;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+Environment::setup();
+
+if (getenv(Environment::VariableRunner)) {
+	$thread = (int) getenv(Environment::VariableThread);
+	$colors = getenv(Environment::VariableColors);
+}
+
+if (getenv(Environment::VariableCoverage) && !Collector::isStarted()) {
+	Collector::start(getenv(Environment::VariableCoverage));
+	Collector::start(getenv(Environment::VariableCoverage), getenv(Environment::VariableCoverageEngine));
+	Collector::start(getenv(Environment::VariableCoverage), Collector::EnginePcov);
+}
+
+$engines = [Collector::EnginePhpdbg, Collector::EngineXdebug];
+
+
+class DomTest extends TestCase
+{
+	public function testTitle(): void
+	{
+		$dom = DomQuery::fromHtml('<h1>Hello</h1>');
+		Assert::true($dom->has('h1'));
+		Assert::exception(fn() => $dom->find('['), Exception::class, '');
+	}
+
+
+	public function testDump(): void
+	{
+		echo Ansi::colorize('failed', 'red');
+		echo Ansi::color('green'), 'ok', Ansi::reset();
+		echo Ansi::color('white/blue');
+		Assert::same('failed', Ansi::stripAnsi(Ansi::colorize('failed', 'red')));
+	}
+
+
+	protected function tearDown(): void
+	{
+		echo Ansi::reset();
+	}
+}
+
+
+(new DomTest)->run();
+
+
+class TextPrinter implements OutputHandler
+{
+	private array $counts = [];
+
+
+	public function begin(): void
+	{
+	}
+
+
+	public function prepare(Test $test): void
+	{
+		$this->counts[Test::Prepared] = 0;
+	}
+
+
+	public function finish(Test $test): void
+	{
+		$result = $test->getResult();
+		$this->counts[$result] = ($this->counts[$result] ?? 0) + 1;
+		if ($result === Test::Failed) {
+			echo Ansi::stripAnsi($test->message);
+		} elseif ($result === Test::Skipped || $result === Test::Passed) {
+			echo '.';
+		}
+	}
+
+
+	public function end(): void
+	{
+		exit($this->counts[Test::Failed] ?? 0 ? Job::CodeFail : Job::CodeOk);
+	}
+}
+
+
+class LineGenerator extends AbstractGenerator
+{
+	protected function renderSelf(): void
+	{
+		$root = Helpers::findCommonDirectory(array_keys($this->data));
+		$other = Helpers::findCommonDirectory([$root]);
+		foreach ($this->data as $file => $lines) {
+			foreach ($lines as $line => $flag) {
+				echo match ($flag) {
+					self::LineTested => 'tested',
+					self::LineUntested => 'untested',
+					static::LineDead => 'dead',
+				};
+			}
+		}
+	}
+}
+
+
+function runJob(Test $test, PhpInterpreter $php): int
+{
+	$job = new Job($test, $php);
+	$job->run(async: true);
+	$job->run(Job::RUN_ASYNC | Job::RUN_COLLECT_ERRORS);
+	$job->run(Job::RUN_COLLECT_ERRORS);
+	$job->run(0);
+	$job->run(async: true);
+	while ($job->isRunning()) {
+		usleep(Job::RunSleep);
+	}
+
+	return match ($job->getExitCode()) {
+		Job::CodeNone, Job::CodeSkip => 0,
+		Job::CodeError => 255,
+		default => 1,
+	};
+}
+
+
+function parseArguments(): array
+{
+	$cmd = new CommandLine('Usage: run [options] <path>', [
+		'path' => [CommandLine::Argument => true, CommandLine::RealPath => true, CommandLine::Repeatable => true],
+		'--log' => [CommandLine::Optional => true, CommandLine::Value => 'php://output'],
+		'--mode' => [CommandLine::Enum => ['a', 'b'], CommandLine::Normalizer => fn($v) => strtolower($v)],
+		'--temp' => [CommandLine::RealPath => true],
+	]);
+	return $cmd->parse();
+}
