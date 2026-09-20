@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Config;
+
+use Nette\Neon\Entity;
+use Nette\Neon\Neon;
+
+
+class ConfigWriter
+{
+	public function write(array $config): string
+	{
+		$inline = Neon::encode($config);
+		$block = Neon::encode($config, Neon::BLOCK);
+		$indented = Neon::encode($config, Neon::BLOCK, '  ');
+		$named = Neon::encode(var: $config);
+		$flagged = Neon::encode($config, flags: Neon::BLOCK);
+		$modern = Neon::encode($config, blockMode: true);
+		return $inline . $block . $indented . $named . $flagged . $modern;
+	}
+
+
+	public function service(string $class, array $args): Entity
+	{
+		$setup = new Entity('setup', attrs: ['inject' => true]);
+		$chain = new Entity(Neon::CHAIN, [$setup]);
+		return new Entity($class, attrs: $args);
+	}
+
+
+	public function isChain(Entity $entity): bool
+	{
+		return $entity->value === Neon::CHAIN;
+	}
+}
+
+
+class Statement extends Entity
+{
+	public function __construct(string $class, array $args = [])
+	{
+		parent::__construct($class, attrs: $args);
+	}
+
+
+	public static function create(string $class): self
+	{
+		return new self($class, attrs: []);
+	}
+}
+
+
+function dump(mixed $value): string
+{
+	return Neon::encode(var: $value, flags: Neon::BLOCK);
+}
