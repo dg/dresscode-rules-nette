@@ -1,0 +1,159 @@
+package: nette/utils
+group: deprecations
+
+since 4.0.10:
+	replaced-calls:
+		'Nette\Utils\Type::allows(type: $t, ...)': keep
+		'Nette\Utils\Type::allows(subtype: $t, ...)': 'allows(type: $t, ...)'
+
+since 4.0.8:
+	forbidden-members:
+		Nette\Utils\Image::__sleep: 'override __serialize(), which returns the data array rather than a list of property names'
+
+since 4.0.7:
+	replaced-calls:
+		'Nette\Utils\DateTime::createFromFormat(time: $t, ...)': 'createFromFormat(datetime: $t, ...)'
+
+since 4.0.5:
+	replaced-calls:
+		'Nette\Iterators\CachingIterator::__construct(iterator: $i, ...)': 'new \Nette\Iterators\CachingIterator(iterable: $i, ...)'
+
+since 4.0.4:
+	replaced-calls:
+		'Nette\Utils\Arrays::every(callback: $c, ...)': 'every(predicate: $c, ...)'
+		'Nette\Utils\Arrays::map(callback: $c, ...)': 'map(transformer: $c, ...)'
+		'Nette\Utils\Arrays::some(callback: $c, ...)': 'some(predicate: $c, ...)'
+
+since 4.0.3:
+	forbidden-members:
+		Nette\Utils\Image::rgb: 'call Nette\Utils\ImageColor::rgb(), which returns an object instead of an array and takes opacity as a float 0..1 instead of transparency 0..127'
+
+since 4.0:
+	replaced-members:
+		Nette\Utils\ObjectMixin::getSuggestion: Nette\Utils\ObjectHelpers::getSuggestion
+		Nette\Utils\Finder::compare: Nette\Utils\Helpers::compare
+		Nette\Utils\FileInfo::getSubPath: getRelativePath
+		Nette\Utils\FileInfo::getSubPathName: getRelativePathname
+		Nette\Utils\Image::EMPTY_GIF: EmptyGIF
+		Nette\Utils\Image::EXACT: Cover
+		Nette\Utils\Image::FILL: OrBigger
+		Nette\Utils\Image::FIT: OrSmaller
+		Nette\Utils\Image::SHRINK_ONLY: ShrinkOnly
+		Nette\Utils\Image::STRETCH: Stretch
+		Nette\Utils\Strings::TRIM_CHARACTERS: TrimCharacters
+		Nette\Utils\Strings::normalizeNewLines: unixNewLines
+		Nette\Utils\Strings::checkEncoding: Nette\Utils\Validators::isUnicode
+		Nette\Utils\Strings::contains: \str_contains
+		Nette\Utils\Strings::endsWith: \str_ends_with
+		Nette\Utils\Strings::startsWith: \str_starts_with
+	replaced-calls:
+		'Nette\Utils\Finder::count()': '\count(collect())'
+		'Nette\Utils\Image::resize(flags: $f, ...)': 'resize(mode: $f, ...)'
+		'Nette\Utils\Image::calculateSize(flags: $f, ...)': 'calculateSize(mode: $f, ...)'
+		'Nette\Utils\Arrays::grep(flags: $f, ...)': 'grep(invert: $f, ...)'
+	nette/named-arguments-for-flags:
+		'Nette\Utils\Arrays::grep($array, $pattern, $flags)':
+			PREG_GREP_INVERT: {invert: true}
+		'Nette\Utils\Json::encode($value, $flags)':
+			Nette\Utils\Json::PRETTY: {pretty: true}
+			Nette\Utils\Json::ESCAPE_UNICODE: {asciiSafe: true}
+		'Nette\Utils\Json::decode($json, $flags)':
+			Nette\Utils\Json::FORCE_ARRAY: {forceArrays: true}
+		'Nette\Utils\Strings::match($subject, $pattern, $flags, ...)':
+			PREG_OFFSET_CAPTURE: {captureOffset: true}
+			PREG_UNMATCHED_AS_NULL: {unmatchedAsNull: true}
+		'Nette\Utils\Strings::matchAll($subject, $pattern, $flags, ...)':
+			PREG_OFFSET_CAPTURE: {captureOffset: true}
+			PREG_UNMATCHED_AS_NULL: {unmatchedAsNull: true}
+			PREG_PATTERN_ORDER: {patternOrder: true}
+			PREG_SET_ORDER: {}
+		'Nette\Utils\Strings::split($subject, $pattern, $flags, ...)':
+			PREG_SPLIT_OFFSET_CAPTURE: {captureOffset: true}
+			PREG_SPLIT_NO_EMPTY: {skipEmpty: true}
+			PREG_SPLIT_DELIM_CAPTURE: {}
+	forbidden-members:
+		Nette\Utils\RegexpException::MESSAGES: 'call preg_last_error_msg()'
+		Nette\Utils\Html::$xhtml: 'there is no replacement, the output is always HTML5; drop the setting'
+		Nette\Utils\Finder::extensionMethod: 'there is no replacement, extension methods are gone'
+		'Nette\Utils\Finder::find($a, $b, ...)': 'the masks are passed as one array, not as several arguments'
+		'Nette\Utils\Finder::findFiles($a, $b, ...)': 'the masks are passed as one array, not as several arguments'
+		'Nette\Utils\Finder::findDirectories($a, $b, ...)': 'the masks are passed as one array, not as several arguments'
+		'Nette\Utils\Finder::exclude($a, $b, ...)': 'the masks are passed as one array, not as several arguments'
+		'Nette\Utils\Finder::in($a, $b, ...)': 'the paths are passed as one array, not as several arguments'
+		'Nette\Utils\Finder::from($a, $b, ...)': 'the paths are passed as one array, not as several arguments'
+
+since 3.2.10:
+	forbidden-members:
+		Nette\Utils\Reflection::getParameterType: 'call Nette\Utils\Type::fromReflection(), which returns a Nette\Utils\Type object instead of a string, and ask it, such as for getSingleName()'
+		Nette\Utils\Reflection::getPropertyType: 'call Nette\Utils\Type::fromReflection(), which returns a Nette\Utils\Type object instead of a string, and ask it, such as for getSingleName()'
+		Nette\Utils\Reflection::getReturnType: 'call Nette\Utils\Type::fromReflection(), which returns a Nette\Utils\Type object instead of a string, and ask it, such as for getSingleName()'
+
+since 3.2.9:
+	replaced-members:
+		Nette\Utils\Reflection::isBuiltinType: Nette\Utils\Validators::isBuiltinType
+		Nette\Utils\Reflection::isClassKeyword: Nette\Utils\Validators::isClassKeyword
+		Nette\Utils\Type::isSingle: isSimple
+	replaced-calls:
+		'Nette\Utils\Type::allows(type: $t, ...)': 'allows(subtype: $t, ...)'
+		'Nette\Utils\Type::resolve(reflection: $r, ...)': 'resolve(of: $r, ...)'
+
+since 3.2:
+	replaced-classes:
+		Nette\Localization\ITranslator: Nette\Localization\Translator
+		Nette\Utils\IHtmlString: Nette\HtmlStringable
+	replaced-members:
+		Nette\Utils\Arrays::searchKey: getKeyOffset
+	replaced-calls:
+		'Nette\Utils\Image::fromFile(detectedFormat: $t, ...)': 'fromFile(type: $t, ...)'
+		'Nette\Utils\Image::fromString(detectedFormat: $t, ...)': 'fromString(type: $t, ...)'
+
+since 3.1.6:
+	forbidden-members:
+		Nette\Utils\Reflection::getParameterTypes: 'call Nette\Utils\Type::fromReflection() and ask the object it returns for getNames()'
+		Nette\Utils\Reflection::getPropertyTypes: 'call Nette\Utils\Type::fromReflection() and ask the object it returns for getNames()'
+		Nette\Utils\Reflection::getReturnTypes: 'call Nette\Utils\Type::fromReflection() and ask the object it returns for getNames()'
+
+since 3.1.3:
+	replaced-members:
+		Nette\Utils\Validators::isList: Nette\Utils\Arrays::isList
+	replaced-calls:
+		'Nette\Utils\ArrayHash::from(arr: $a, ...)': 'from(array: $a, ...)'
+	forbidden-members:
+		Nette\Utils\Image::dashedLine: 'set a style with setStyle() and draw with line(), the GD function behind it being deprecated in PHP'
+
+since 3.0:
+	replaced-classes:
+		Nette\Iterators\Filter: CallbackFilterIterator
+		Nette\Iterators\RecursiveFilter: RecursiveCallbackFilterIterator
+	replaced-members:
+		Nette\Utils\Html::add: addHtml
+		Nette\Utils\Image::ENLARGE: FIT
+		Nette\Utils\Strings::random: Nette\Utils\Random::generate
+		Nette\Utils\ObjectMixin::strictCall: Nette\Utils\ObjectHelpers::strictCall
+		Nette\Utils\ObjectMixin::strictGet: Nette\Utils\ObjectHelpers::strictGet
+		Nette\Utils\ObjectMixin::strictSet: Nette\Utils\ObjectHelpers::strictSet
+		Nette\Utils\ObjectMixin::strictStaticCall: Nette\Utils\ObjectHelpers::strictStaticCall
+		Nette\Utils\ObjectMixin::getMagicProperties: Nette\Utils\ObjectHelpers::getMagicProperties
+		Nette\Utils\ObjectMixin::getSuggestion: Nette\Utils\ObjectHelpers::getSuggestion
+	replaced-calls:
+		'Nette\Utils\Callback::closure($callable, $method)': '\Closure::fromCallable([$callable, $method])'
+		'Nette\Utils\Callback::closure($callable)': '\Closure::fromCallable($callable)'
+		'Nette\Utils\Callback::invoke($callable, ...$args)': '$callable(...$args)'
+		'Nette\Utils\Callback::invokeArgs($callable, $args)': '$callable(...$args)'
+		'Nette\Utils\Callback::invokeArgs($callable)': '$callable()'
+		'Nette\Iterators\CachingIterator::isFirst(width: $w, ...)': 'isFirst(gridWidth: $w, ...)'
+		'Nette\Iterators\CachingIterator::isLast(width: $w, ...)': 'isLast(gridWidth: $w, ...)'
+	forbidden-classes:
+		Nette\Object: 'use the trait Nette\SmartObject instead of extending a base class'
+		Nette\StaticClassException: 'catch \Error, which Nette\StaticClass throws on instantiation'
+	forbidden-members:
+		Nette\Utils\ObjectMixin::call: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::callStatic: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::get: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::set: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::has: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::remove: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::getMagicMethods: 'there is no replacement, the mechanism of Nette\Object it served is gone'
+		Nette\Utils\ObjectMixin::getExtensionMethods: 'there is no replacement, extension methods are gone'
+		Nette\Utils\ObjectMixin::getExtensionMethod: 'there is no replacement, extension methods are gone'
+		Nette\Utils\ObjectMixin::setExtensionMethod: 'there is no replacement, extension methods are gone'

@@ -1,0 +1,57 @@
+6: Class Nette\Iterators\Filter is replaced by CallbackFilterIterator
+8: Class Nette\Localization\ITranslator is replaced by Nette\Localization\Translator
+15: Class Nette\Utils\IHtmlString is replaced by Nette\HtmlStringable
+29: Class Nette\Localization\ITranslator is replaced by Nette\Localization\Translator
+36: Static method Nette\Utils\Strings::contains() is replaced by str_contains()
+36: Static method Nette\Utils\Strings::startsWith() is replaced by str_starts_with()
+37: Static method Nette\Utils\Strings::normalizeNewLines() is replaced by Strings::unixNewLines()
+40: Static method Nette\Utils\Arrays::searchKey() is replaced by Arrays::getKeyOffset()
+41: Static method Nette\Utils\Strings::random() is replaced by Nette\Utils\Random::generate()
+48: Static method Nette\Utils\Arrays::map() is replaced by map(transformer: $c, ...)
+49: Static method Nette\Utils\Arrays::every() is replaced by every(predicate: $c, ...)
+50: Static method Nette\Utils\Arrays::grep() is replaced by grep(invert: $f, ...)
+52: Static method Nette\Utils\Callback::closure() is replaced by \Closure::fromCallable($callable)
+53: Static method Nette\Utils\Callback::closure() is replaced by \Closure::fromCallable([$callable, $method])
+54: Static method Nette\Utils\Callback::invoke() is replaced by $callable(...$args)
+55: Static method Nette\Utils\Callback::invokeArgs() is replaced by $callable(...$args)
+64: Class Nette\Iterators\Filter is replaced by CallbackFilterIterator
+65: Constructor Nette\Iterators\CachingIterator::__construct() is replaced by new \Nette\Iterators\CachingIterator(iterable: $i, ...)
+67: Method Nette\Iterators\CachingIterator::isFirst() is replaced by isFirst(gridWidth: $w, ...)
+77: Static method Nette\Utils\Image::fromFile() is replaced by fromFile(type: $t, ...)
+78: Method Nette\Utils\Image::resize() is replaced by resize(mode: $f, ...)
+78: Constant Nette\Utils\Image::SHRINK_ONLY is replaced by Image::ShrinkOnly
+79: Static method Nette\Utils\Image::calculateSize() is replaced by calculateSize(mode: $f, ...)
+79: Constant Nette\Utils\Image::EXACT is replaced by Image::Cover
+80: Static method Nette\Utils\Image::rgb() is forbidden: call Nette\Utils\ImageColor::rgb(), which returns an object instead of an array and takes opacity as a float 0..1 instead of transparency 0..127
+81: Method Nette\Utils\Image::dashedLine() is forbidden: set a style with setStyle() and draw with line(), the GD function behind it being deprecated in PHP
+82: Constant Nette\Utils\Image::ENLARGE is replaced by Image::FIT
+82: Constant Nette\Utils\Image::FIT is replaced by Image::OrSmaller
+90: Method Nette\Utils\FileInfo::getSubPath() is replaced by FileInfo::getRelativePath()
+90: Method Nette\Utils\FileInfo::getSubPathName() is replaced by FileInfo::getRelativePathname()
+93: Static method Nette\Utils\Finder::findFiles() is forbidden: the masks are passed as one array, not as several arguments
+93: Method Nette\Utils\Finder::in() is forbidden: the paths are passed as one array, not as several arguments
+94: Method Nette\Utils\Finder::count() is replaced by \count(collect())
+95: Static method Nette\Utils\Finder::compare() is replaced by Nette\Utils\Helpers::compare()
+102: Static method Nette\Utils\Reflection::getParameterType() is forbidden: call Nette\Utils\Type::fromReflection(), which returns a Nette\Utils\Type object instead of a string, and ask it, such as for getSingleName()
+103: Static method Nette\Utils\Reflection::getReturnTypes() is forbidden: call Nette\Utils\Type::fromReflection() and ask the object it returns for getNames()
+104: Static method Nette\Utils\Reflection::isBuiltinType() is replaced by Nette\Utils\Validators::isBuiltinType()
+105: Method Nette\Utils\Type::isSingle() is replaced by Type::isSimple()
+106: Method Nette\Utils\Type::allows() is replaced by allows(type: $t, ...)
+107: Static method Nette\Utils\Type::resolve() is replaced by resolve(of: $r, ...)
+112: Class Nette\Utils\IHtmlString is replaced by Nette\HtmlStringable
+114: Static property Nette\Utils\Html::$xhtml is forbidden: there is no replacement, the output is always HTML5; drop the setting
+115: Method Nette\Utils\Html::add() is replaced by Html::addHtml()
+116: Static method Nette\Utils\DateTime::createFromFormat() is replaced by createFromFormat(datetime: $t, ...)
+117: Static method Nette\Utils\ArrayHash::from() is replaced by from(array: $a, ...)
+118: Static method Nette\Utils\Validators::isList() is replaced by Nette\Utils\Arrays::isList()
+119: Static method Nette\Utils\Json::encode() takes pretty: true, asciiSafe: true instead of Json::PRETTY | Json::ESCAPE_UNICODE
+122: Static method Nette\Utils\Json::decode() takes forceArrays: true instead of Json::FORCE_ARRAY
+123: Static method Nette\Utils\Strings::match() takes captureOffset: true instead of PREG_OFFSET_CAPTURE
+124: Static method Nette\Utils\Strings::matchAll() takes no argument instead of PREG_SET_ORDER
+125: Static method Nette\Utils\Strings::split() takes skipEmpty: true instead of PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+126: Static method Nette\Utils\Arrays::grep() takes invert: true instead of PREG_GREP_INVERT
+133: Class Nette\Object is forbidden: use the trait Nette\SmartObject instead of extending a base class
+134: Static method Nette\Utils\ObjectMixin::strictGet() is replaced by Nette\Utils\ObjectHelpers::strictGet()
+138: Static method Nette\Utils\ObjectMixin::call() is forbidden: there is no replacement, the mechanism of Nette\Object it served is gone
+139: Class Nette\StaticClassException is forbidden: catch \Error, which Nette\StaticClass throws on instantiation
+140: Constant Nette\Utils\RegexpException::MESSAGES is forbidden: call preg_last_error_msg()

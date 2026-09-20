@@ -1,0 +1,146 @@
+<?php
+
+namespace App\Model;
+
+use Nette\Iterators\CachingIterator;
+use CallbackFilterIterator;
+use Nette\Iterators\Mapper;
+use Nette\Localization\Translator;
+use Nette\Utils\ArrayHash;
+use Nette\Utils\Arrays;
+use Nette\Utils\Callback;
+use Nette\Utils\DateTime;
+use Nette\Utils\Finder;
+use Nette\Utils\Html;
+use Nette\HtmlStringable;
+use Nette\Utils\Helpers;
+use Nette\Utils\Image;
+use Nette\Utils\Json;
+use Nette\Utils\ObjectHelpers;
+use Nette\Utils\ObjectMixin;
+use Nette\Utils\Random;
+use Nette\Utils\Reflection;
+use Nette\Utils\RegexpException;
+use Nette\Utils\Strings;
+use Nette\Utils\Type;
+use Nette\Utils\Validators;
+
+
+class Catalog
+{
+	public function __construct(
+		private Translator $translator,
+	) {
+	}
+
+
+	public function describe(string $name, array $tags): string
+	{
+		if (\str_contains($name, 'draft') || \str_starts_with($name, '_')) {
+			$name = Strings::unixNewLines($name);
+		}
+
+		$offset = Arrays::getKeyOffset($tags, 'primary');
+		$token = Random::generate(10);
+		return $this->translator->translate($name) . $token . $offset;
+	}
+
+
+	public function collect(array $items, callable $fn, array $args): array
+	{
+		$mapped = Arrays::map($items, transformer: $fn);
+		$ok = Arrays::every($items, predicate: $fn);
+		$odd = Arrays::grep($items, '~\d+~', invert: PREG_GREP_INVERT);
+
+		$closure = \Closure::fromCallable($fn);
+		$bound = \Closure::fromCallable([$this, 'describe']);
+		$result = $fn(...$items);
+		$spread = $fn(...$args);
+
+		return [$mapped, $ok, $odd, $closure, $bound, $result, $spread];
+	}
+
+
+	public function iterate(\Traversable $source, array $items, callable $fn): void
+	{
+		$mapper = new Mapper($source, $fn);
+		$filtered = new CallbackFilterIterator($mapper, $fn);
+		$cache = new CachingIterator(iterable: $items);
+		foreach ($filtered as $value) {
+			if ($cache->isFirst(gridWidth: 3)) {
+				echo $value;
+			}
+		}
+	}
+
+
+	public function thumbnail(Image $image, string $path, int $x, int $y): Image
+	{
+		$format = null;
+		$source = Image::fromFile($path, type: $format);
+		$source->resize(320, 200, mode: Image::ShrinkOnly);
+		$size = Image::calculateSize(1000, 800, 320, 200, mode: Image::Cover);
+		$color = Image::rgb(255, 128, 0, 64);
+		$image->dashedLine($x, $y, $x + 10, $y + 10, $color);
+		return $image->resize($size[0], $size[1], Image::OrSmaller);
+	}
+
+
+	public function scan(string $dir): array
+	{
+		$relative = [];
+		foreach (Finder::findFiles('*.php')->from($dir) as $file) {
+			$relative[] = $file->getRelativePath() . '/' . $file->getRelativePathname();
+		}
+
+		$mixed = Finder::findFiles('*.jpg', '*.png')->in($dir, $dir . '/thumbs');
+		$total = \count($mixed->collect());
+		return [$relative, $total, Helpers::compare($total, '>', 0)];
+	}
+
+
+	public function meta(\ReflectionParameter $parameter, \ReflectionFunction $function, Type $type, \ReflectionProperty $of): array
+	{
+		return [
+			Reflection::getParameterType($parameter),
+			Reflection::getReturnTypes($function),
+			Validators::isBuiltinType('int'),
+			$type->isSimple(),
+			$type->allows(type: 'int'),
+			Type::resolve('self', of: $of),
+		];
+	}
+
+
+	public function render(Html $el, HtmlStringable $fragment, array $data, string $stamp): string
+	{
+		Html::$xhtml = true;
+		$el->addHtml($fragment);
+		$date = DateTime::createFromFormat('Y-m-d', datetime: $stamp);
+		$hash = ArrayHash::from(array: $data);
+		if (Arrays::isList($data)) {
+			$el->setText(Json::encode($data, pretty: true, asciiSafe: true));
+		}
+
+		$decoded = Json::decode($stamp, forceArrays: true);
+		$match = Strings::match($stamp, '~\d+~', captureOffset: true);
+		$all = Strings::matchAll($stamp, '~\d~');
+		$parts = Strings::split($stamp, '~(-)~', skipEmpty: true);
+		$other = Arrays::grep($parts, '~\d~', invert: true);
+		return $el . $date->format('c') . $hash->count() . count($decoded + $match + $all + $other);
+	}
+
+
+	public function legacy(mixed $subject, int $code): mixed
+	{
+		if ($subject instanceof \Nette\Object) {
+			ObjectHelpers::strictGet(self::class, 'missing');
+		}
+
+		try {
+			return ObjectMixin::call($subject, 'render', []);
+		} catch (\Nette\StaticClassException $e) {
+			return RegexpException::MESSAGES[$code] ?? null;
+		}
+	}
+}
