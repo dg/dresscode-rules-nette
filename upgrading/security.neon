@@ -1,0 +1,73 @@
+package: nette/security
+group: deprecations
+
+since 3.2.1:
+	replaced-calls:
+		'Nette\Security\Authenticator::authenticate(user: $u, ...)': 'authenticate(username: $u, ...)'
+		'Nette\Security\User::login(user: $u, ...)': 'login(username: $u, ...)'
+
+since 3.2:
+	replaced-members:
+		Nette\Security\IUserStorage::MANUAL: Nette\Security\User::LogoutManual
+		Nette\Security\IUserStorage::INACTIVITY: Nette\Security\User::LogoutInactivity
+		Nette\Security\UserStorage::LogoutManual: Nette\Security\User::LogoutManual
+		Nette\Security\UserStorage::LogoutInactivity: Nette\Security\User::LogoutInactivity
+	forbidden-classes:
+		Nette\Security\IUserStorage: 'implement Nette\Security\UserStorage, whose saveAuthentication(), clearAuthentication(), getState() and setExpiration() take the place of the old methods'
+
+since 3.1.8:
+	replaced-members:
+		Nette\Security\Authenticator::IDENTITY_NOT_FOUND: IdentityNotFound
+		Nette\Security\Authenticator::INVALID_CREDENTIAL: InvalidCredential
+		Nette\Security\Authenticator::FAILURE: Failure
+		Nette\Security\Authenticator::NOT_APPROVED: NotApproved
+		Nette\Security\Authorizator::ALL: All
+		Nette\Security\Authorizator::ALLOW: Allow
+		Nette\Security\Authorizator::DENY: Deny
+		Nette\Security\User::LOGOUT_MANUAL: LogoutManual
+		Nette\Security\User::LOGOUT_INACTIVITY: LogoutInactivity
+		Nette\Security\UserStorage::LOGOUT_MANUAL: LogoutManual
+		Nette\Security\UserStorage::LOGOUT_INACTIVITY: LogoutInactivity
+
+since 3.1.6:
+	replaced-calls:
+		'Nette\Security\SimpleAuthenticator::__construct(userlist: $p, ...)': 'new \Nette\Security\SimpleAuthenticator(passwords: $p, ...)'
+		'Nette\Security\SimpleAuthenticator::__construct(usersRoles: $r, ...)': 'new \Nette\Security\SimpleAuthenticator(roles: $r, ...)'
+		'Nette\Security\SimpleAuthenticator::__construct(usersData: $d, ...)': 'new \Nette\Security\SimpleAuthenticator(data: $d, ...)'
+
+since 3.1.4:
+	replaced-members:
+		Nette\Security\User::MANUAL: LOGOUT_MANUAL
+		Nette\Security\User::INACTIVITY: LOGOUT_INACTIVITY
+	replaced-calls:
+		'Nette\Security\User::setExpiration($expire, $flags, $clearIdentity)': 'setExpiration($expire, $clearIdentity)'
+	nette/named-arguments-for-flags:
+		'Nette\Security\User::setExpiration($expire, $flags)':
+			Nette\Security\IUserStorage::CLEAR_IDENTITY: {clearIdentity: true}
+			Nette\Security\IUserStorage::BROWSER_CLOSED: {}
+			Nette\Security\User::BROWSER_CLOSED: {}
+
+since 3.1:
+	replaced-classes:
+		Nette\Security\IAuthorizator: Nette\Security\Authorizator
+		Nette\Security\IResource: Nette\Security\Resource
+		Nette\Security\IRole: Nette\Security\Role
+		Nette\Security\Identity: Nette\Security\SimpleIdentity
+
+since 3.0.2:
+	replaced-calls:
+		'Nette\Security\User::getAuthenticator(true)': 'getAuthenticator()'
+		'Nette\Security\User::getAuthenticator(false)': 'getAuthenticatorIfExists()'
+		'Nette\Security\User::getAuthorizator(true)': 'getAuthorizator()'
+		'Nette\Security\User::getAuthorizator(false)': 'getAuthorizatorIfExists()'
+		'Nette\Security\User::hasAuthenticator()': 'getAuthenticatorIfExists() !== null'
+		'Nette\Security\User::hasAuthorizator()': 'getAuthorizatorIfExists() !== null'
+
+since 3.0.1:
+	replaced-calls:
+		'Nette\Security\Passwords::hash($password, $options)': '(new \Nette\Security\Passwords(PASSWORD_BCRYPT, $options))->hash($password)'
+		'Nette\Security\Passwords::needsRehash($hash, $options)': '(new \Nette\Security\Passwords(PASSWORD_BCRYPT, $options))->needsRehash($hash)'
+	forbidden-members:
+		Nette\Security\IUserStorage::BROWSER_CLOSED: 'there is no replacement, the flag had no effect; drop the flag'
+		Nette\Security\User::BROWSER_CLOSED: 'there is no replacement, the flag had no effect; drop the flag'
+		Nette\Security\Passwords::BCRYPT_COST: 'there is no replacement, pass the cost in the options of the constructor, new Passwords(PASSWORD_BCRYPT, [''cost'' => 10])'

@@ -1,0 +1,170 @@
+<?php
+
+namespace App;
+
+use Nette\Security\AuthenticationException;
+use Nette\Security\Authenticator;
+use Nette\Security\Authorizator;
+use Nette\Security\SimpleIdentity;
+use Nette\Security\IIdentity;
+use Nette\Security\Resource;
+use Nette\Security\Role;
+use Nette\Security\IUserStorage;
+use Nette\Security\Passwords;
+use Nette\Security\Permission;
+use Nette\Security\SimpleAuthenticator;
+use Nette\Security\User;
+use Nette\Security\UserStorage;
+
+class DatabaseAuthenticator implements Authenticator
+{
+	public function __construct(
+		private Passwords $passwords,
+	) {
+	}
+
+
+	public function authenticate(string $user, string $password): IIdentity
+	{
+		if ($user === '') {
+			throw new AuthenticationException('User not found.', self::IdentityNotFound);
+		} elseif (!$this->passwords->verify($password, 'hash')) {
+			throw new AuthenticationException('Invalid password.', Authenticator::InvalidCredential);
+		}
+
+		return new SimpleIdentity(1, ['admin'], ['name' => $user]);
+	}
+}
+
+
+class Article implements Resource
+{
+	public function getResourceId(): string
+	{
+		return 'article';
+	}
+}
+
+
+class Member implements Role
+{
+	public function getRoleId(): string
+	{
+		return 'member';
+	}
+}
+
+
+class Acl extends Permission implements Authorizator
+{
+	public function __construct()
+	{
+		$this->addRole('guest');
+		$this->allow('guest', self::All, 'view');
+		$this->deny('guest', Authorizator::All, self::All);
+	}
+}
+
+
+class SignPresenter
+{
+	public function __construct(
+		private User $user,
+		private Authenticator $authenticator,
+	) {
+	}
+
+
+	public function actionIn(string $name, string $password): void
+	{
+		$this->user->login(username: $name, password: $password);
+		$identity = $this->authenticator->authenticate(username: $name, password: $password);
+		$this->user->setExpiration('14 days', clearIdentity: true);
+		$this->user->setExpiration('20 minutes', true);
+		$this->user->setExpiration('1 hour');
+	}
+
+
+	public function actionOut(): void
+	{
+		if ($this->user->getLogoutReason() === User::LogoutInactivity) {
+			$reason = User::LogoutInactivity;
+		} elseif ($this->user->getLogoutReason() === User::LogoutManual) {
+			$reason = User::LogoutManual;
+		}
+
+		$this->user->logout(true);
+	}
+
+
+	public function check(): bool
+	{
+		if (!($this->user->getAuthenticatorIfExists() !== null) || !($this->user->getAuthorizatorIfExists() !== null)) {
+			return false;
+		}
+
+		$authenticator = $this->user->getAuthenticatorIfExists();
+		$authenticator = $this->user->getAuthenticator();
+		$authenticator = $this->user->getAuthenticator();
+		$authorizator = $this->user->getAuthorizator();
+		$authorizator = $this->user->getAuthorizatorIfExists();
+		$this->user->setExpiration('30 minutes', true);
+		$rule = Authorizator::Deny;
+		return $this->user->isAllowed('article', Authorizator::Allow);
+	}
+}
+
+
+class AppUser extends User
+{
+	public function setExpiration($expire, $flags = 0): static
+	{
+		parent::setExpiration($expire, clearIdentity: true);
+		return $this;
+	}
+
+
+	public function wasKickedOut(): bool
+	{
+		return $this->getLogoutReason() === self::LogoutInactivity && $this->getAuthenticatorIfExists() !== null;
+	}
+}
+
+
+class Setup
+{
+	public function create(): SimpleAuthenticator
+	{
+		return new SimpleAuthenticator(roles: ['john' => ['admin']], passwords: ['john' => 'secret']);
+	}
+
+
+	public function createWithData(): SimpleAuthenticator
+	{
+		return new SimpleAuthenticator(['john' => 'secret'], data: ['john' => ['email' => 'john@example.com']]);
+	}
+
+
+	public function hash(Passwords $passwords, string $password, string $hash): bool
+	{
+		$current = $passwords->hash($password);
+		$new = (new Passwords(PASSWORD_BCRYPT, ['cost' => 12]))->hash($password);
+		$cost = Passwords::BCRYPT_COST;
+		return (new Passwords(PASSWORD_BCRYPT, ['cost' => 12]))->needsRehash($hash);
+	}
+
+
+	public function codes(): array
+	{
+		return [
+			Authenticator::Failure,
+			Authenticator::NotApproved,
+			User::LogoutManual,
+			User::LogoutManual,
+			User::LogoutInactivity,
+			User::LogoutInactivity,
+			IUserStorage::BROWSER_CLOSED,
+			User::LogoutInactivity,
+		];
+	}
+}
