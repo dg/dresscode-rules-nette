@@ -1,0 +1,28 @@
+<?php
+// {"Nette\\Utils\\Json::encode($value, $flags)": {"Nette\\Utils\\Json::PRETTY": {"pretty": true}, "Nette\\Utils\\Json::ESCAPE_UNICODE": {"asciiSafe": true}}, "Nette\\Utils\\Strings::match($subject, $pattern, $flags, ...)": {"PREG_OFFSET_CAPTURE": {"captureOffset": true}, "\\PREG_UNMATCHED_AS_NULL": {"unmatchedAsNull": true}, "PREG_SET_ORDER": {}}}
+
+namespace App;
+
+use Nette\Utils\Json;
+use Nette\Utils\Strings;
+
+function test(mixed $value, int $flags): void
+{
+	$a = Json::encode($value, Json::PRETTY);
+	$b = Json::encode($value, Json::PRETTY | Json::ESCAPE_UNICODE);
+	$d = Strings::match('abc', '~b~', PREG_OFFSET_CAPTURE | \PREG_UNMATCHED_AS_NULL);
+	$e = \Nette\Utils\Json::encode($value, (\Nette\Utils\Json::PRETTY));
+	$l = Strings::match('abc', '~b~', PREG_SET_ORDER | PREG_OFFSET_CAPTURE); // a flag the method now always applies
+	$m = Strings::match('abc', '~b~', PREG_OFFSET_CAPTURE, 1); // the offset takes the name of its parameter
+
+	// left alone: no flags, and the call the method takes now, a literal among them
+	$f = Json::encode($value);
+	$g = Json::encode($value, pretty: true);
+	$h = Json::encode($value, true);
+	$n = Json::encode($value, 0);
+
+	// reported with the reason
+	$i = Json::encode($value, $flags);
+	$j = Json::encode($value, Json::PRETTY | Json::FORCE_ARRAY);
+	$k = Strings::match('abc', '~b~', PREG_OFFSET_CAPTURE, 1, 2, 3, 4);
+}

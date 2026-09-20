@@ -1,0 +1,2 @@
+11: Static method Nette\Utils\Json::encode() takes pretty: true, asciiSafe: true instead of Json::PRETTY | Json::ESCAPE_UNICODE
+17: Static method Nette\Utils\Arrays::grep() takes invert: true instead of PREG_GREP_INVERT

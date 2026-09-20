@@ -1,0 +1,18 @@
+<?php
+// {"Nette\\Utils\\Json::encode($value, $flags)": {"Nette\\Utils\\Json::PRETTY": {"pretty": true}, "Nette\\Utils\\Json::ESCAPE_UNICODE": {"asciiSafe": true}}, "Nette\\Utils\\Arrays::grep($array, $pattern, $flags)": {"PREG_GREP_INVERT": {"invert": true}}}
+
+namespace App;
+
+use Nette\Utils\Arrays;
+use Nette\Utils\Json;
+
+function export(array $data): string
+{
+	return Json::encode($data, pretty: true, asciiSafe: true);
+}
+
+
+function withoutDrafts(array $names): array
+{
+	return Arrays::grep($names, '~^draft-~', invert: true);
+}

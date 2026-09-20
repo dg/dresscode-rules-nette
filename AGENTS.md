@@ -10,6 +10,10 @@ One file per library, `upgrading/<library>.neon`, listed under `extra.dresscode.
 libraries themselves are in `require-dev`, so that the data are checked against what is installed. DressCode is
 required as `dresscode/dresscode`.
 
+Besides the data the package ships the rules the data of an ecosystem need and DressCode itself does not carry,
+in `src/` under `DressCode\Nette`, named `nette/<name>`. `DressCode\Nette\Extension` makes them known, `composer.json` names it
+under `extra.dresscode.extension`, and `tests/rules.phpt` runs their fixtures from `tests/fixtures/<name>/`.
+
 Where an entry comes from is the upgrading guide of the library (`docs/upgrading.md` in its repository), checked
 against the code of the library at its tags: the tag decides, not the guide.
 
@@ -29,8 +33,8 @@ against the code of the library at its tags: the tag decides, not the guide.
   sections `since <version>`, newest first, the version without trailing zeros (`since 3.1`). The order decides
   nothing, the sections are merged by version.
 - Decide by what happens to the code, not by the label of the guide: a member called differently and used the same
-  way is `replaced-members`, one used differently but writable as one expression is `replaced-calls`, what
-  has no replacement or one of another nature (another
+  way is `replaced-members`, one used differently but writable as one expression is `replaced-calls`, flags turned
+  into named arguments are `nette/named-arguments-for-flags`, what has no replacement or one of another nature (another
   type, another behavior) is `forbidden-classes` or `forbidden-members` with a sentence, and a change of behavior,
   of configuration, of Latte syntax, an `@internal` symbol or a signature changed only for types is nothing.
 - What a library deprecates only silently does not go into `forbidden-*`; `no-deprecated-classes` and

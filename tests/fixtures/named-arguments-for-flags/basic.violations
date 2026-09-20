@@ -1,0 +1,9 @@
+11: Static method Nette\Utils\Json::encode() takes pretty: true instead of Json::PRETTY
+12: Static method Nette\Utils\Json::encode() takes pretty: true, asciiSafe: true instead of Json::PRETTY | Json::ESCAPE_UNICODE
+13: Static method Nette\Utils\Strings::match() takes captureOffset: true, unmatchedAsNull: true instead of PREG_OFFSET_CAPTURE | \PREG_UNMATCHED_AS_NULL
+14: Static method Nette\Utils\Json::encode() takes pretty: true instead of (\Nette\Utils\Json::PRETTY)
+15: Static method Nette\Utils\Strings::match() takes captureOffset: true instead of PREG_SET_ORDER | PREG_OFFSET_CAPTURE
+16: Static method Nette\Utils\Strings::match() takes captureOffset: true instead of PREG_OFFSET_CAPTURE
+25: Static method Nette\Utils\Json::encode() takes named arguments instead of $flags, but $flags is no flag the map names
+26: Static method Nette\Utils\Json::encode() takes named arguments instead of Json::PRETTY | Json::FORCE_ARRAY, but Json::FORCE_ARRAY is no flag the map names
+27: Static method Nette\Utils\Strings::match() takes captureOffset: true instead of PREG_OFFSET_CAPTURE, but an argument stands behind the flags by its position and the method gives it no name

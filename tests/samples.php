@@ -1,12 +1,18 @@
 <?php declare(strict_types=1);
 
+use DressCode\Nette\NamedArgumentsForFlagsRule;
 use DressCode\Testing\UpgradingTester;
+
+/** The rules of this package its files may name. */
+const PackageRules = [NamedArgumentsForFlagsRule::class];
+
 
 /** The rules the upgrading files feed, which a sample is run with. */
 const UpgradingRules = [
 	'replaced-classes',
 	'replaced-members',
 	'replaced-calls',
+	'nette/named-arguments-for-flags',
 	'forbidden-classes',
 	'forbidden-members',
 	'attribute-for-annotation',
@@ -20,7 +26,7 @@ const UpgradingRules = [
 function lintLibrary(string $library): array
 {
 	$root = dirname(__DIR__);
-	return UpgradingTester::check("$root/upgrading/$library.neon", $root);
+	return UpgradingTester::check("$root/upgrading/$library.neon", $root, PackageRules);
 }
 
 
