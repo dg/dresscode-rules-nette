@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use DressCode\Testing\UpgradingTester;
-
+use DressCodeUpgrade\Nette\Plugin;
 
 /**
  * What the upgrading file of a library has wrong, checked against the installed library.
@@ -10,7 +10,7 @@ use DressCode\Testing\UpgradingTester;
 function lintLibrary(string $library): array
 {
 	$root = dirname(__DIR__);
-	return UpgradingTester::collectProblems("$root/upgrading/$library.neon", $root);
+	return UpgradingTester::collectProblems("$root/upgrading/$library.neon", $root, array_keys((new Plugin)->getManifest()->rules));
 }
 
 
