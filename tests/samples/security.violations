@@ -1,0 +1,68 @@
+9: Class `Nette\Security\IAuthorizator` is replaced by `Nette\Security\Authorizator`.
+10: Class `Nette\Security\Identity` is replaced by `Nette\Security\SimpleIdentity`.
+12: Class `Nette\Security\IResource` is replaced by `Nette\Security\Resource`.
+13: Class `Nette\Security\IRole` is replaced by `Nette\Security\Role`.
+32: Constant `Nette\Security\Authenticator::IDENTITY_NOT_FOUND` is replaced by `Authenticator::IdentityNotFound`.
+34: Constant `Nette\Security\Authenticator::INVALID_CREDENTIAL` is replaced by `Authenticator::InvalidCredential`.
+37: Class `Nette\Security\Identity` is replaced by `Nette\Security\SimpleIdentity`.
+42: Class `Nette\Security\IAuthenticator` is deprecated: implement `Nette\Security\Authenticator`, whose `authenticate()` takes the user name and the password instead of `array $credentials`, since nette/security 3.1.
+47: Class `Nette\Security\IAuthenticator` is deprecated: implement `Nette\Security\Authenticator`, whose `authenticate()` takes the user name and the password instead of `array $credentials`, since nette/security 3.1.
+50: Class `Nette\Security\Identity` is replaced by `Nette\Security\SimpleIdentity`.
+55: Class `Nette\Security\IResource` is replaced by `Nette\Security\Resource`.
+64: Class `Nette\Security\IRole` is replaced by `Nette\Security\Role`.
+73: Class `Nette\Security\IAuthorizator` is replaced by `Nette\Security\Authorizator`.
+78: Constant `Nette\Security\Authorizator::ALL` is replaced by `Authorizator::All`.
+79: Class `Nette\Security\IAuthorizator` is replaced by `Nette\Security\Authorizator`.
+79: Constant `Nette\Security\Authorizator::ALL` is replaced by `Authorizator::All`.
+79: Constant `Nette\Security\Authorizator::ALL` is replaced by `Authorizator::All`.
+95: Method `Nette\Security\User::login()` is replaced by `login(username: $u, ...)`.
+96: Method `Nette\Security\Authenticator::authenticate()` is replaced by `authenticate(username: $u, ...)`.
+97: Method `Nette\Security\User::setExpiration()` takes `clearIdentity: true` instead of `IUserStorage::CLEAR_IDENTITY`.
+98: Method `Nette\Security\User::setExpiration()` is replaced by `setExpiration($expire, $clearIdentity)`.
+99: Method `Nette\Security\User::setExpiration()` needs no argument for `User::BROWSER_CLOSED`, which must be left out.
+105: Constant `Nette\Security\User::INACTIVITY` is replaced by `User::LOGOUT_INACTIVITY`.
+105: Constant `Nette\Security\User::LOGOUT_INACTIVITY` is replaced by `User::LogoutInactivity`.
+106: Constant `Nette\Security\User::LOGOUT_INACTIVITY` is replaced by `User::LogoutInactivity`.
+107: Constant `Nette\Security\IUserStorage::MANUAL` is replaced by `Nette\Security\User::LogoutManual`.
+108: Constant `Nette\Security\UserStorage::LOGOUT_MANUAL` is replaced by `UserStorage::LogoutManual`.
+108: Constant `Nette\Security\UserStorage::LogoutManual` is replaced by `Nette\Security\User::LogoutManual`.
+117: Method `Nette\Security\User::hasAuthenticator()` is replaced by `getAuthenticatorIfExists() !== null`.
+117: Method `Nette\Security\User::hasAuthorizator()` is replaced by `getAuthorizatorIfExists() !== null`.
+121: Method `Nette\Security\User::getAuthenticator()` is replaced by `getAuthenticatorIfExists()`.
+122: Method `Nette\Security\User::getAuthenticator()` is replaced by `getAuthenticator()`.
+124: Method `Nette\Security\User::getAuthorizator()` is replaced by `getAuthorizator()`.
+125: Method `Nette\Security\User::getAuthorizator()` is replaced by `getAuthorizatorIfExists()`.
+127: Constant `Nette\Security\Authorizator::DENY` is replaced by `Authorizator::Deny`.
+128: Constant `Nette\Security\Authorizator::ALLOW` is replaced by `Authorizator::Allow`.
+137: Method `Nette\Security\User::setExpiration()` takes `clearIdentity: true` instead of `IUserStorage::CLEAR_IDENTITY`.
+144: Constant `Nette\Security\User::INACTIVITY` is replaced by `User::LOGOUT_INACTIVITY`.
+144: Constant `Nette\Security\User::LOGOUT_INACTIVITY` is replaced by `User::LogoutInactivity`.
+144: Method `Nette\Security\User::hasAuthenticator()` is replaced by `getAuthenticatorIfExists() !== null`.
+153: Constructor `Nette\Security\SimpleAuthenticator::__construct()` is replaced by `new \Nette\Security\SimpleAuthenticator(passwords: $p, ...)`.
+153: Constructor `Nette\Security\SimpleAuthenticator::__construct()` is replaced by `new \Nette\Security\SimpleAuthenticator(roles: $r, ...)`.
+159: Constructor `Nette\Security\SimpleAuthenticator::__construct()` is replaced by `new \Nette\Security\SimpleAuthenticator(data: $d, ...)`.
+166: Static method `Nette\Security\Passwords::hash()` is replaced by `(new \Nette\Security\Passwords(PASSWORD_BCRYPT, $options))->hash($password)`.
+167: Constant `Nette\Security\Passwords::BCRYPT_COST` is removed: pass the cost in the options of the constructor, `new Passwords(PASSWORD_BCRYPT, ['cost' => 10])`, since nette/security 3.0.1.
+168: Static method `Nette\Security\Passwords::needsRehash()` is replaced by `(new \Nette\Security\Passwords(PASSWORD_BCRYPT, $options))->needsRehash($hash)`.
+172: Class `Nette\Security\IUserStorage` is removed: implement `Nette\Security\UserStorage`, whose `saveAuthentication()`, `clearAuthentication()`, `getState()` and `setExpiration()` take the place of the old methods, since nette/security 3.1.
+174: Method `Nette\Security\IUserStorage::isAuthenticated()` is removed: call `Nette\Security\UserStorage::getState()`, which returns `[bool $authenticated, ?IIdentity $identity, ?int $logoutReason]`, since nette/security 3.1.
+174: Method `Nette\Security\IUserStorage::getIdentity()` is removed: call `Nette\Security\UserStorage::getState()`, which returns `[bool $authenticated, ?IIdentity $identity, ?int $logoutReason]`, since nette/security 3.1.
+175: Method `Nette\Security\IUserStorage::setIdentity()` is removed: call `Nette\Security\UserStorage::saveAuthentication()`, which stores the identity and the authenticated flag in one call, since nette/security 3.1.
+178: Method `Nette\Security\IUserStorage::setAuthenticated()` is removed: call `Nette\Security\UserStorage::saveAuthentication()` or `Nette\Security\UserStorage::clearAuthentication()`, since nette/security 3.1.
+179: Method `Nette\Security\IUserStorage::setExpiration()` is removed: call `Nette\Security\UserStorage::setExpiration()`, whose second parameter is a plain `bool $clearIdentity` instead of a bit flag, since nette/security 3.1.
+179: Class `Nette\Security\IUserStorage` is removed: implement `Nette\Security\UserStorage`, whose `saveAuthentication()`, `clearAuthentication()`, `getState()` and `setExpiration()` take the place of the old methods, since nette/security 3.1.
+179: Constant `Nette\Security\IUserStorage::CLEAR_IDENTITY` is removed: pass `clearIdentity: true` to `Nette\Security\User::setExpiration()`, since nette/security 3.1.4.
+180: Class `Nette\Security\IUserStorage` is removed: implement `Nette\Security\UserStorage`, whose `saveAuthentication()`, `clearAuthentication()`, `getState()` and `setExpiration()` take the place of the old methods, since nette/security 3.1.
+180: Constant `Nette\Security\IUserStorage::CLEAR_IDENTITY` is removed: pass `clearIdentity: true` to `Nette\Security\User::setExpiration()`, since nette/security 3.1.4.
+181: Method `Nette\Security\IUserStorage::getLogoutReason()` is removed: call `Nette\Security\UserStorage::getState()`, which returns `[bool $authenticated, ?IIdentity $identity, ?int $logoutReason]`, since nette/security 3.1.
+188: Constant `Nette\Security\Authenticator::FAILURE` is replaced by `Authenticator::Failure`.
+189: Constant `Nette\Security\Authenticator::NOT_APPROVED` is replaced by `Authenticator::NotApproved`.
+190: Constant `Nette\Security\User::MANUAL` is replaced by `User::LOGOUT_MANUAL`.
+190: Constant `Nette\Security\User::LOGOUT_MANUAL` is replaced by `User::LogoutManual`.
+191: Constant `Nette\Security\User::LOGOUT_MANUAL` is replaced by `User::LogoutManual`.
+192: Constant `Nette\Security\UserStorage::LOGOUT_INACTIVITY` is replaced by `UserStorage::LogoutInactivity`.
+192: Constant `Nette\Security\UserStorage::LogoutInactivity` is replaced by `Nette\Security\User::LogoutInactivity`.
+193: Constant `Nette\Security\IUserStorage::INACTIVITY` is replaced by `Nette\Security\User::LogoutInactivity`.
+194: Class `Nette\Security\IUserStorage` is removed: implement `Nette\Security\UserStorage`, whose `saveAuthentication()`, `clearAuthentication()`, `getState()` and `setExpiration()` take the place of the old methods, since nette/security 3.1.
+194: Constant `Nette\Security\IUserStorage::BROWSER_CLOSED` is removed: there is no replacement; the flag had no effect; drop the flag, since nette/security 3.0.1.
+195: Constant `Nette\Security\UserStorage::LogoutInactivity` is replaced by `Nette\Security\User::LogoutInactivity`.
