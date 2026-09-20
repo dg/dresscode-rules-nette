@@ -79,6 +79,7 @@
 				"nette/routing",
 				"nette/schema",
 				"nette/security",
+				"nette/tester",
 				"nette/utils",
 				"tracy/tracy"
 			]
