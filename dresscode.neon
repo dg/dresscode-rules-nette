@@ -12,6 +12,7 @@ rules:
 types: phpstan
 
 paths:
+	- src
 	- tests
 
 excludePaths:
@@ -20,3 +21,10 @@ excludePaths:
 fileExtensions:
 	- php
 	- phpt
+
+overrides:
+	- paths: [src]
+	  groups: [optimized-calls]
+	  nameResolution: certain
+	  rules:
+	  	name-fallback: {optimizedFunctions: qualified, optimizedConstants: qualified}

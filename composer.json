@@ -38,6 +38,12 @@
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
+	"autoload": {
+		"classmap": ["src/"],
+		"psr-4": {
+			"DressCode\\Nette\\": "src"
+		}
+	},
 	"scripts": {
 		"tester": "tester tests -s",
 		"phpstan": "phpstan analyse"
@@ -52,6 +58,7 @@
 			"dev-master": "1.0-dev"
 		},
 		"dresscode": {
+			"extension": "DressCode\\Nette\\Extension",
 			"upgrading": [
 				"upgrading/assets.neon",
 				"upgrading/bootstrap.neon",
