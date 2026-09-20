@@ -1,0 +1,15 @@
+15: Static method `Nette\Neon\Neon::encode()` takes `blockMode: true` instead of `Neon::BLOCK`.
+16: Static method `Nette\Neon\Neon::encode()` takes `blockMode: true` instead of `Neon::BLOCK`.
+17: Static method `Nette\Neon\Neon::encode()` is replaced by `encode(value: $value, ...)`.
+18: Static method `Nette\Neon\Neon::encode()` is replaced by `encode($value, blockMode: $flags)`.
+18: Constant `Nette\Neon\Neon::BLOCK` is deprecated: pass `blockMode: true` to `encode()`, since nette/neon 3.4.
+26: Constructor `Nette\Neon\Entity::__construct()` is replaced by `new \Nette\Neon\Entity($value, attributes: $attributes)`.
+27: Constant `Nette\Neon\Neon::CHAIN` is replaced by `Neon::Chain`.
+28: Constructor `Nette\Neon\Entity::__construct()` is replaced by `new \Nette\Neon\Entity($value, attributes: $attributes)`.
+34: Constant `Nette\Neon\Neon::CHAIN` is replaced by `Neon::Chain`.
+40: Constant `Nette\Neon\Neon::BLOCK` is deprecated: pass `blockMode: true` to `encode()`, since nette/neon 3.4.
+41: Class `Nette\Neon\Encoder` is deprecated: call `Nette\Neon\Neon::encode()`, since nette/neon 3.2.2.
+52: Constructor `Nette\Neon\Entity::__construct()` is replaced by `new \Nette\Neon\Entity($value, attributes: $attributes)`.
+65: Static method `Nette\Neon\Neon::encode()` is replaced by `encode($value, blockMode: $flags)`.
+65: Static method `Nette\Neon\Neon::encode()` is replaced by `encode(value: $value, ...)`.
+65: Constant `Nette\Neon\Neon::BLOCK` is deprecated: pass `blockMode: true` to `encode()`, since nette/neon 3.4.
