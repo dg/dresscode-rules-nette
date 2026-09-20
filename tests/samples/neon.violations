@@ -1,0 +1,11 @@
+14: Static method Nette\Neon\Neon::encode() takes blockMode: true instead of Neon::BLOCK
+15: Static method Nette\Neon\Neon::encode() takes blockMode: true instead of Neon::BLOCK
+16: Static method Nette\Neon\Neon::encode() is replaced by encode(value: $value, ...)
+17: Static method Nette\Neon\Neon::encode() is replaced by encode($value, blockMode: $flags)
+25: Constructor Nette\Neon\Entity::__construct() is replaced by new \Nette\Neon\Entity($value, attributes: $attributes)
+26: Constant Nette\Neon\Neon::CHAIN is replaced by Neon::Chain
+27: Constructor Nette\Neon\Entity::__construct() is replaced by new \Nette\Neon\Entity($value, attributes: $attributes)
+33: Constant Nette\Neon\Neon::CHAIN is replaced by Neon::Chain
+42: Constructor Nette\Neon\Entity::__construct() is replaced by new \Nette\Neon\Entity($value, attributes: $attributes)
+55: Static method Nette\Neon\Neon::encode() is replaced by encode($value, blockMode: $flags)
+55: Static method Nette\Neon\Neon::encode() is replaced by encode(value: $value, ...)

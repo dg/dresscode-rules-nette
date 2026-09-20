@@ -1,0 +1,21 @@
+package: nette/neon
+group: deprecations
+
+since 3.4:
+	replaced-calls:
+		'Nette\Neon\Entity::__construct($value, attrs: $attributes)': 'new \Nette\Neon\Entity($value, attributes: $attributes)'
+	nette/named-arguments-for-flags:
+		'Nette\Neon\Neon::encode($value, $blockMode, ...)':
+			Nette\Neon\Neon::BLOCK: {blockMode: true}
+
+since 3.3.3:
+	replaced-members:
+		Nette\Neon\Neon::CHAIN: Chain
+
+since 3.3.1:
+	replaced-calls:
+		'Nette\Neon\Neon::encode($value, flags: $flags)': 'encode($value, blockMode: $flags)'
+
+since 3.2.2:
+	replaced-calls:
+		'Nette\Neon\Neon::encode(var: $value, ...)': 'encode(value: $value, ...)'
