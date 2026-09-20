@@ -78,6 +78,7 @@
 				"upgrading/routing.neon",
 				"upgrading/schema.neon",
 				"upgrading/security.neon",
+				"upgrading/tester.neon",
 				"upgrading/tracy.neon",
 				"upgrading/utils.neon"
 			]
