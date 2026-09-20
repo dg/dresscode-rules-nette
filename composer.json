@@ -72,7 +72,8 @@
 				"upgrading/php-generator.neon",
 				"upgrading/robot-loader.neon",
 				"upgrading/schema.neon",
-				"upgrading/tracy.neon"
+				"upgrading/tracy.neon",
+				"upgrading/utils.neon"
 			]
 		}
 	}
