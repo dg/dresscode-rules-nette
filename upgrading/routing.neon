@@ -1,0 +1,26 @@
+package: nette/routing
+group: deprecations
+
+since 3.1.4:
+	nette/named-arguments-for-flags:
+		'Nette\Routing\RouteList::add($router, $flags)':
+			Nette\Routing\Router::ONE_WAY: {oneWay: 1}
+		'Nette\Routing\RouteList::prepend($router, $flags)':
+			Nette\Routing\Router::ONE_WAY: {oneWay: 1}
+		'Nette\Routing\RouteList::addRoute($mask, $metadata, $flags)':
+			Nette\Routing\Router::ONE_WAY: {oneWay: 1}
+
+since 3.1:
+	replaced-calls:
+		'Nette\Routing\RouteList::add(flags: $f, ...)': 'add(oneWay: $f, ...)'
+		'Nette\Routing\RouteList::prepend(flags: $f, ...)': 'prepend(oneWay: $f, ...)'
+		'Nette\Routing\RouteList::addRoute(flags: $f, ...)': 'addRoute(oneWay: $f, ...)'
+
+since 3.0.3:
+	replaced-members:
+		Nette\Routing\Route::VALUE: Value
+		Nette\Routing\Route::PATTERN: Pattern
+		Nette\Routing\Route::FILTER_IN: FilterIn
+		Nette\Routing\Route::FILTER_OUT: FilterOut
+		Nette\Routing\Route::FILTER_TABLE: FilterTable
+		Nette\Routing\Route::FILTER_STRICT: FilterStrict

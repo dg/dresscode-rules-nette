@@ -1,0 +1,64 @@
+<?php
+
+namespace App;
+
+use Nette\Application\Routers\Route as AppRoute;
+use Nette\Application\Routers\RouteList as AppRouteList;
+use Nette\Routing\Route;
+use Nette\Routing\RouteList;
+use Nette\Routing\Router;
+
+final class RouterFactory
+{
+	public static function createRouter(): AppRouteList
+	{
+		$router = new AppRouteList;
+		$router->addRoute('old-product/<id>', 'Product:detail', AppRoute::ONE_WAY);
+		$router->addRoute('index.php', 'Home:default', Router::ONE_WAY);
+		$router->addRoute('legacy/<id>', 'Legacy:default', $router::ONE_WAY);
+		$router->addRoute('archive/<year>', 'Archive:default', flags: Route::ONE_WAY);
+		$router->addRoute('<presenter>/<action>[/<id>]', [
+			'presenter' => [
+				Route::VALUE => 'Home',
+				Route::FILTER_TABLE => ['produkt' => 'Product'],
+				Route::FILTER_STRICT => true,
+			],
+			'id' => [
+				Route::PATTERN => '\d+',
+				Route::FILTER_IN => fn($id) => (int) $id,
+				Route::FILTER_OUT => fn($id) => (string) $id,
+			],
+		]);
+		return $router;
+	}
+
+
+	public function build(RouteList $list): void
+	{
+		$list->add(new Route('old/<id>'), RouteList::ONE_WAY);
+		$list->prepend(new Route('first'), Route::ONE_WAY);
+		$list->add(new Route('both'), flags: 0);
+		$list->prepend(new Route('none'), 0);
+	}
+}
+
+
+class ShopRoute extends Route
+{
+	public function __construct(string $mask)
+	{
+		parent::__construct($mask, [
+			'lang' => [self::PATTERN => 'cs|en', self::VALUE => 'cs'],
+		]);
+	}
+}
+
+
+class AdminRouteList extends RouteList
+{
+	public function setup(): void
+	{
+		$this->addRoute('admin/old', ['presenter' => 'Admin'], self::ONE_WAY);
+		$this->add(new ShopRoute('shop'), static::ONE_WAY);
+	}
+}

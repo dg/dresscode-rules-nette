@@ -1,0 +1,17 @@
+16: Method Nette\Routing\RouteList::addRoute() takes oneWay: 1 instead of AppRoute::ONE_WAY
+17: Method Nette\Routing\RouteList::addRoute() takes oneWay: 1 instead of Router::ONE_WAY
+18: Method Nette\Routing\RouteList::addRoute() takes oneWay: 1 instead of $router::ONE_WAY
+19: Method Nette\Routing\RouteList::addRoute() is replaced by addRoute(oneWay: $f, ...)
+22: Constant Nette\Routing\Route::VALUE is replaced by Route::Value
+23: Constant Nette\Routing\Route::FILTER_TABLE is replaced by Route::FilterTable
+24: Constant Nette\Routing\Route::FILTER_STRICT is replaced by Route::FilterStrict
+27: Constant Nette\Routing\Route::PATTERN is replaced by Route::Pattern
+28: Constant Nette\Routing\Route::FILTER_IN is replaced by Route::FilterIn
+29: Constant Nette\Routing\Route::FILTER_OUT is replaced by Route::FilterOut
+38: Method Nette\Routing\RouteList::add() takes oneWay: 1 instead of RouteList::ONE_WAY
+39: Method Nette\Routing\RouteList::prepend() takes oneWay: 1 instead of Route::ONE_WAY
+40: Method Nette\Routing\RouteList::add() is replaced by add(oneWay: $f, ...)
+51: Constant Nette\Routing\Route::PATTERN is replaced by Route::Pattern
+51: Constant Nette\Routing\Route::VALUE is replaced by Route::Value
+61: Method Nette\Routing\RouteList::addRoute() takes oneWay: 1 instead of self::ONE_WAY
+62: Method Nette\Routing\RouteList::add() takes oneWay: 1 instead of static::ONE_WAY
