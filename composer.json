@@ -73,6 +73,7 @@
 				"nette/php-generator",
 				"nette/robot-loader",
 				"nette/schema",
+				"nette/utils",
 				"tracy/tracy"
 			]
 		}
