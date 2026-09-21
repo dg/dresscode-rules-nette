@@ -12,7 +12,10 @@ required as `dresscode/dresscode`.
 
 Besides the data the package ships the rules the data of an ecosystem need and DressCode itself does not carry,
 in `src/` under `DressCodeRules\Nette`, named `nette/<name>`. `DressCodeRules\Nette\Plugin` makes them known, `composer.json` names it
-under `extra.dresscode.plugin`, and `tests/rules.phpt` runs their fixtures from `tests/fixtures/<name>/`.
+under `extra.dresscode.plugin`, and `tests/rules.phpt` runs their fixtures from `tests/fixtures/<name>/`. A rule
+that reads the code alone, `nette/monitorForAttachedHook`, supersedes the
+entries it would share a use with, so the data hold no sentence for what it converts, and `tests/samples.php` runs it
+with the samples.
 
 Where an entry comes from is the upgrading guide of the library (`docs/upgrading.md` in its repository), checked
 against the code of the library at its tags: the tag decides, not the guide.
