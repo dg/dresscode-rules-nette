@@ -7,18 +7,8 @@ use DressCodeRules\Nette\NamedArgumentsForFlagsRule;
 const PackageRules = [NamedArgumentsForFlagsRule::class];
 
 
-/** The rules of the rules of this package that read the code alone, which a sample runs with beside the upgrading files. */
-const SampleDecisions = [
-	'nette' => ['monitorCallbacks' => 'adopted',
-	'linkArguments',
-	'adopted',
-	'nette/namedArgumentsForFlags',
-	'nette/monitorForAttachedHook',
-	'forbiddenClasses',
-	'forbiddenMembers',
-	'attributeForAnnotation',
-	'attributeForMember',
-];
+/** The decisions of the rules of this package that read the code alone, which a sample runs with beside the upgrading files. */
+const SampleDecisions = ['nette' => ['monitorCallbacks' => 'adopted', 'linkArguments' => 'adopted']];
 
 
 /**
