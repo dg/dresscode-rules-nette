@@ -67,6 +67,7 @@
 			"upgrading-dir": "upgrading",
 			"packages": [
 				"latte/latte",
+				"nette/application",
 				"nette/assets",
 				"nette/bootstrap",
 				"nette/caching",
