@@ -4,7 +4,7 @@ use DressCode\Testing\UpgradingTester;
 use DressCodeUpgrade\Nette\Plugin;
 
 /** The decisions of the rules of this package that read the code alone, which a sample runs with beside the upgrading files. */
-const SampleDecisions = ['nette' => ['monitorCallbacks' => 'required']];
+const SampleDecisions = ['nette' => ['monitorCallbacks' => 'required', 'linkArguments' => 'required']];
 
 
 /**

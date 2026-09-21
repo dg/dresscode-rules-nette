@@ -14,7 +14,11 @@ final class Plugin implements \DressCode\Plugin
 	public function getManifest(): PluginManifest
 	{
 		return new PluginManifest(
-			rules: [NamedArgumentsForFlagsRule::class, MonitorForAttachedHookRule::class],
+			rules: [
+				NamedArgumentsForFlagsRule::class,
+				MonitorForAttachedHookRule::class,
+				LinkDestinationNotationRule::class,
+			],
 			section: 'nette',
 		);
 	}
