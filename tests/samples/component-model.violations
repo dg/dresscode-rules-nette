@@ -1,0 +1,21 @@
+15: Constructor `Nette\ComponentModel\Component::__construct()` is deprecated: the class has no constructor; drop the call and attach the component with `addComponent()` of its container, since nette/component-model 3.0.
+16: Method `Nette\ComponentModel\Component::monitor()` is deprecated: pass the attached callback as the second argument or the detached one as the third; the `attached()` and `detached()` hooks are no longer called, since nette/component-model 3.2.
+21: Method `attached()` is a hook `nette/component-model` no longer calls; its logic belongs to a callback of `monitor()`.
+27: Method `detached()` is a hook `nette/component-model` no longer calls; its logic belongs to a callback of `monitor()`.
+34: Property `Nette\ComponentModel\Component::$name` is replaced by `getName()`.
+34: Constant `Nette\ComponentModel\IComponent::NAME_SEPARATOR` is replaced by `IComponent::NameSeparator`.
+34: Property `Nette\ComponentModel\Component::$parent` is replaced by `getParent()`.
+40: Method `Nette\ComponentModel\IComponent::setParent()` is replaced by `setParent(null)`.
+55: Property `Nette\ComponentModel\Component::$parent` is replaced by `getParent()`.
+55: Property `Nette\ComponentModel\Component::$name` is replaced by `getName()`.
+55: Property `Nette\ComponentModel\Container::$components` is replaced by `getComponents()`.
+64: Property `Nette\ComponentModel\Component::$name` is replaced by `getName()`.
+65: Property `Nette\ComponentModel\Component::$parent` is replaced by `getParent()`.
+66: Property `Nette\ComponentModel\Container::$components` is replaced by `getComponents()`.
+67: Constant `Nette\ComponentModel\IComponent::NAME_SEPARATOR` is replaced by `IComponent::NameSeparator`.
+68: Method `Nette\ComponentModel\Component::__sleep()` is replaced by `Component::__serialize()`.
+69: Method `Nette\ComponentModel\IComponent::setParent()` is replaced by `setParent(null)`.
+73: Method `Nette\ComponentModel\Container::getComponents()` is deprecated: call `getComponentTree()` for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type, since nette/component-model 3.1.
+74: Method `Nette\ComponentModel\Container::getComponents()` is deprecated: call `getComponentTree()` for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type, since nette/component-model 3.1.
+75: Method `Nette\ComponentModel\Container::getComponents()` is deprecated: call `getComponentTree()` for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type, since nette/component-model 3.1.
+78: Constructor `Nette\ComponentModel\Container::__construct()` is deprecated: the class has no constructor and ignores the arguments; attach the container with `addComponent()` of its parent, since nette/component-model 3.0.
