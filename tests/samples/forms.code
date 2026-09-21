@@ -99,6 +99,12 @@ class SignUpFormFactory
 
 class DateInput extends BaseControl
 {
+	protected function attached($form): void
+	{
+		parent::attached($form);
+	}
+
+
 	public function setUp(): void
 	{
 		BaseControl::enableAutoOptionalMode();

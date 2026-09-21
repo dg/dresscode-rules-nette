@@ -13,6 +13,6 @@ final class Extension implements \DressCode\Extension
 {
 	public function getConfig(): Config
 	{
-		return new Config(extensions: [NamedArgumentsForFlagsRule::class]);
+		return new Config(extensions: [NamedArgumentsForFlagsRule::class, MonitorForAttachedHookRule::class]);
 	}
 }

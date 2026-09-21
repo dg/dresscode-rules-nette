@@ -1,0 +1,8 @@
+24: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+47: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+53: Method detached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+68: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+88: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+98: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor(), but the class declares no constructor, and one added would stop passing the arguments to that of its parent
+114: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor(), but it calls the hook of App\Menu, which has to become a callback first
+125: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor(), but it tests the type of the object without instanceof

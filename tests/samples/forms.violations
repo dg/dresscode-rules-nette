@@ -35,4 +35,5 @@
 86: Class Nette\Forms\FormFactory is forbidden: there is no replacement, the class and its DI service are gone; create the form with new Nette\Forms\Form
 88: Constant Nette\Forms\Form::PROTECTION is replaced by Nette\Forms\Controls\CsrfProtection::PROTECTION
 88: Constant Nette\Forms\Controls\CsrfProtection::PROTECTION is replaced by CsrfProtection::Protection
-104: Static method Nette\Forms\Controls\BaseControl::enableAutoOptionalMode() is forbidden: controls are optional automatically; drop the call
+102: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+110: Static method Nette\Forms\Controls\BaseControl::enableAutoOptionalMode() is forbidden: controls are optional automatically; drop the call
