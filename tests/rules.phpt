@@ -8,6 +8,7 @@ use Tester\Assert;
 require __DIR__ . '/bootstrap.php';
 
 $rules = [
+	'monitorForAttachedHook' => DressCodeUpgrade\Nette\MonitorForAttachedHookRule::class,
 	'namedArgumentsForFlags' => DressCodeUpgrade\Nette\NamedArgumentsForFlagsRule::class,
 ];
 

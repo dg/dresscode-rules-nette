@@ -3,6 +3,10 @@
 use DressCode\Testing\UpgradingTester;
 use DressCodeUpgrade\Nette\Plugin;
 
+/** The decisions of the rules of this package that read the code alone, which a sample runs with beside the upgrading files. */
+const SampleDecisions = ['nette' => ['monitorCallbacks' => 'required']];
+
+
 /**
  * What the upgrading file of a library has wrong, checked against the installed library.
  * @return list<string>
@@ -22,7 +26,7 @@ function lintLibrary(string $library): array
 function runSample(string $library): array
 {
 	$code = (string) file_get_contents(__DIR__ . "/samples/$library.code");
-	$result = UpgradingTester::runSample($code, dirname(__DIR__), name: $library);
+	$result = UpgradingTester::runSample($code, dirname(__DIR__), SampleDecisions, $library);
 	$violations = array_map(fn($violation) => "$violation->line: $violation->message", $result->violations);
 	return [(string) $result->output, implode("\n", $violations) . "\n"];
 }

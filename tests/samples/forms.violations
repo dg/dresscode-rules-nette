@@ -41,5 +41,6 @@
 90: Class `Nette\Forms\Controls\CsrfProtection` is deprecated: there is no replacement; the built-in same-origin protection of the form is sufficient, since nette/forms 3.3.
 90: Constant `Nette\Forms\Form::PROTECTION` is replaced by `Nette\Forms\Controls\CsrfProtection::PROTECTION`.
 90: Constant `Nette\Forms\Controls\CsrfProtection::PROTECTION` is replaced by `CsrfProtection::Protection`.
-106: Static method `Nette\Forms\Controls\BaseControl::enableAutoOptionalMode()` is removed: controls are optional automatically; drop the call, since nette/forms 3.0.
-116: Method `Nette\Forms\Form::addProtection()` is deprecated: the built-in same-origin protection of the form is sufficient; drop the call, since nette/forms 3.3.
+104: Method `attached()` is a hook `nette/component-model` no longer calls; its logic belongs to a callback of `monitor()`.
+112: Static method `Nette\Forms\Controls\BaseControl::enableAutoOptionalMode()` is removed: controls are optional automatically; drop the call, since nette/forms 3.0.
+122: Method `Nette\Forms\Form::addProtection()` is deprecated: the built-in same-origin protection of the form is sufficient; drop the call, since nette/forms 3.3.

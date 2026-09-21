@@ -14,7 +14,7 @@ final class Plugin implements \DressCode\Plugin
 	public function getManifest(): PluginManifest
 	{
 		return new PluginManifest(
-			rules: [NamedArgumentsForFlagsRule::class],
+			rules: [NamedArgumentsForFlagsRule::class, MonitorForAttachedHookRule::class],
 			section: 'nette',
 		);
 	}
