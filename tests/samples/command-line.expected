@@ -1,0 +1,73 @@
+<?php
+
+namespace App;
+
+use Nette\CommandLine\ColorDepth;
+use Nette\CommandLine\Console;
+use Nette\CommandLine\Normalizers;
+use Nette\CommandLine\Option;
+use Nette\CommandLine\Parser;
+use Nette\CommandLine\ValueType;
+
+
+class Cli
+{
+	public function run(): void
+	{
+		$parser = new Parser('
+			-o, --output <file>  Output file
+			--format <html|json>  Format (default: html)
+		', [
+			'--output' => [Parser::REALPATH => true],
+			'--format' => [Parser::ENUM => ['html', 'json'], Parser::VALUE => 'html'],
+			'--tag' => [Parser::REPEATABLE => true, Parser::ARGUMENT => true, Parser::OPTIONAL => true],
+		]);
+		$parser->addFromHelp('  --verbose  Verbose', ['--verbose' => [Parser::Argument => false]]);
+		$parser->addSwitch('--help', '-h');
+		$parser->addOption('--level', optionalValue: true, fallback: 1);
+		$parser->addArgument('input', fallback: 'in.txt');
+
+		if ($parser->isEmpty()) {
+			$parser->help();
+			return;
+		}
+
+		$early = $parser->parseOnly(['--help']);
+		$args = $parser->parse();
+		$again = $parser->parse(['--help']);
+		$path = Normalizers::realPath('.');
+		$normalizer = Normalizers::realPath(...);
+		$parser->checkArg([], $path);
+
+		$defaults = [
+			Parser::Optional => true,
+			Parser::Repeatable => true,
+			Parser::Enum => ['a', 'b'],
+			Parser::RealPath => true,
+			Parser::Normalizer => fn($v) => $v,
+			Parser::Default => 'x',
+		];
+	}
+
+
+	public function output(bool $quiet): void
+	{
+		$console = new Console;
+		$console->setColorDepth(ColorDepth::Ansi16);
+		$console->setColorDepth(ColorDepth::Ansi16);
+		$console->setColorDepth(ColorDepth::None);
+		$console->setColorDepth(!$quiet ? ColorDepth::Ansi16 : ColorDepth::None);
+
+		if (Console::detectColors() && Console::detectTerminal()) {
+			echo $console->color('red');
+			echo $console->color('red', null);
+			echo $console->color('lime', 'done');
+		}
+	}
+
+
+	public function kind(Option $option): bool
+	{
+		return $option->type === ValueType::None;
+	}
+}

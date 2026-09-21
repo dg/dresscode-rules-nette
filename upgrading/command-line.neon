@@ -1,0 +1,58 @@
+package: nette/command-line
+
+since 2.0:
+	replacedMembers:
+		Nette\CommandLine\Parser::normalizeRealPath: Nette\CommandLine\Normalizers::realPath
+		Nette\CommandLine\Parser::ARGUMENT: keep
+		Nette\CommandLine\Parser::OPTIONAL: keep
+		Nette\CommandLine\Parser::REPEATABLE: keep
+		Nette\CommandLine\Parser::ENUM: keep
+		Nette\CommandLine\Parser::REALPATH: keep
+		Nette\CommandLine\Parser::VALUE: keep
+	replacedCalls:
+		'Nette\CommandLine\Console::useColors()': 'setColorDepth(\Nette\CommandLine\ColorDepth::Ansi16)'
+		'Nette\CommandLine\Console::useColors(true)': 'setColorDepth(\Nette\CommandLine\ColorDepth::Ansi16)'
+		'Nette\CommandLine\Console::useColors(false)': 'setColorDepth(\Nette\CommandLine\ColorDepth::None)'
+		'Nette\CommandLine\Console::useColors($state)': 'setColorDepth($state ? \Nette\CommandLine\ColorDepth::Ansi16 : \Nette\CommandLine\ColorDepth::None)'
+	forbiddenMembers:
+		'Nette\CommandLine\Parser::__construct($help, ...)': 'create a `Nette\CommandLine\Command`, add the parameters by its `add*()` methods and pass it to `parse()`; the parser takes no help text'
+		Nette\CommandLine\Parser::addFromHelp: 'create a `Nette\CommandLine\Command`, add the parameters by its `add*()` methods and pass it to `parse()`'
+		Nette\CommandLine\Parser::addSwitch: 'call `Nette\CommandLine\Command::addFlag()` and pass the command to `parse()`; its second parameter is the description, so pass `alias:` by name'
+		Nette\CommandLine\Parser::addOption: 'call `Nette\CommandLine\Command::addOption()`, the rest by name, the second is its description; `fallback:` is `default:`, `optionalValue:` is `valueOptional:`'
+		Nette\CommandLine\Parser::addArgument: 'call `Nette\CommandLine\Command::addArgument()`, the rest by name, the second is its description; `fallback:` is `default:`'
+		Nette\CommandLine\Parser::parseOnly: 'pass `standalone: true` to `Nette\CommandLine\Command::addFlag()` of `--help` or `--version`, which `parse()` then answers before checking the rest of the line'
+		Nette\CommandLine\Parser::help: 'call `Nette\CommandLine\HelpRenderer::render()`, which draws the help from the definition of the command'
+		Nette\CommandLine\Parser::isEmpty: 'call `isEmpty()` on the `Nette\CommandLine\ParseResult` returned by `parse()`'
+		'Nette\CommandLine\Parser::parse()': 'pass the `Nette\CommandLine\Command` as the first argument; the result is a `Nette\CommandLine\ParseResult`, which `toArray()` turns into an array'
+		'Nette\CommandLine\Parser::parse(array $args)': 'pass the `Nette\CommandLine\Command` as the first argument; the result is a `Nette\CommandLine\ParseResult`, which `toArray()` turns into an array'
+		Nette\CommandLine\Parser::Argument: 'call `Nette\CommandLine\Command::addOption()` for an option with a value and `Nette\CommandLine\Command::addFlag()` for one without'
+		Nette\CommandLine\Parser::ARGUMENT: 'call `Nette\CommandLine\Command::addOption()` for an option with a value and `Nette\CommandLine\Command::addFlag()` for one without'
+		Nette\CommandLine\Parser::Optional: 'pass `valueOptional: true` to `Nette\CommandLine\Command::addOption()`, or `optional: true` to `Nette\CommandLine\Command::addArgument()` for a positional argument'
+		Nette\CommandLine\Parser::OPTIONAL: 'pass `valueOptional: true` to `Nette\CommandLine\Command::addOption()`, or `optional: true` to `Nette\CommandLine\Command::addArgument()` for a positional argument'
+		Nette\CommandLine\Parser::Repeatable: 'pass `repeatable: true` to the `add*()` method of `Nette\CommandLine\Command`'
+		Nette\CommandLine\Parser::REPEATABLE: 'pass `repeatable: true` to the `add*()` method of `Nette\CommandLine\Command`'
+		Nette\CommandLine\Parser::Enum: 'pass `enum:` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`'
+		Nette\CommandLine\Parser::ENUM: 'pass `enum:` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`'
+		Nette\CommandLine\Parser::RealPath: 'pass `normalizer: Nette\CommandLine\Normalizers::realPath(...)` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`'
+		Nette\CommandLine\Parser::REALPATH: 'pass `normalizer: Nette\CommandLine\Normalizers::realPath(...)` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`'
+		Nette\CommandLine\Parser::Normalizer: 'pass `normalizer:` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`'
+		Nette\CommandLine\Parser::Default: 'pass `default:` to the `add*()` method of `Nette\CommandLine\Command`'
+		Nette\CommandLine\Parser::VALUE: 'pass `default:` to the `add*()` method of `Nette\CommandLine\Command`'
+		Nette\CommandLine\Console::detectColors: 'call `hasColors()` on the console of the stream'
+		Nette\CommandLine\Console::detectTerminal: 'call `isTerminal()` on the console of the stream'
+		'Nette\CommandLine\Console::color($color)': 'pass the text as the second argument; the opening sequence alone is not written'
+		'Nette\CommandLine\Console::color($color, null)': 'pass the text as the second argument; the opening sequence alone is not written'
+	forbiddenClasses:
+		Nette\CommandLine\ValueType: 'use the class of the parameter, `Nette\CommandLine\Parameters\Flag`, `Nette\CommandLine\Parameters\Option` or `Nette\CommandLine\Parameters\Argument`'
+		Nette\CommandLine\Option: 'use `Nette\CommandLine\Parameters\Option` or `Nette\CommandLine\Parameters\Argument`, which the `add*()` methods of `Nette\CommandLine\Command` create'
+
+since 1.9:
+	replacedMembers:
+		Nette\CommandLine\Parser::ARGUMENT: Argument
+		Nette\CommandLine\Parser::OPTIONAL: Optional
+		Nette\CommandLine\Parser::REPEATABLE: Repeatable
+		Nette\CommandLine\Parser::ENUM: Enum
+		Nette\CommandLine\Parser::REALPATH: RealPath
+		Nette\CommandLine\Parser::VALUE: Default
+	forbiddenMembers:
+		Nette\CommandLine\Parser::checkArg: 'there is no replacement; `parse()` applies the enum and the normalizer itself; drop the call'

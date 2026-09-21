@@ -1,0 +1,36 @@
+15: Constructor `Nette\CommandLine\Parser::__construct()` is deprecated: create a `Nette\CommandLine\Command`, add the parameters by its `add*()` methods and pass it to `parse()`; the parser takes no help text, since nette/command-line 2.0.
+19: Constant `Nette\CommandLine\Parser::REALPATH` is removed: pass `normalizer: Nette\CommandLine\Normalizers::realPath(...)` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`, since nette/command-line 2.0.
+20: Constant `Nette\CommandLine\Parser::ENUM` is removed: pass `enum:` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`, since nette/command-line 2.0.
+20: Constant `Nette\CommandLine\Parser::VALUE` is removed: pass `default:` to the `add*()` method of `Nette\CommandLine\Command`, since nette/command-line 2.0.
+21: Constant `Nette\CommandLine\Parser::REPEATABLE` is removed: pass `repeatable: true` to the `add*()` method of `Nette\CommandLine\Command`, since nette/command-line 2.0.
+21: Constant `Nette\CommandLine\Parser::ARGUMENT` is removed: call `Nette\CommandLine\Command::addOption()` for an option with a value and `Nette\CommandLine\Command::addFlag()` for one without, since nette/command-line 2.0.
+21: Constant `Nette\CommandLine\Parser::OPTIONAL` is removed: pass `valueOptional: true` to `Nette\CommandLine\Command::addOption()`, or `optional: true` to `Nette\CommandLine\Command::addArgument()` for a positional argument, since nette/command-line 2.0.
+23: Method `Nette\CommandLine\Parser::addFromHelp()` is removed: create a `Nette\CommandLine\Command`, add the parameters by its `add*()` methods and pass it to `parse()`, since nette/command-line 2.0.
+23: Constant `Nette\CommandLine\Parser::Argument` is removed: call `Nette\CommandLine\Command::addOption()` for an option with a value and `Nette\CommandLine\Command::addFlag()` for one without, since nette/command-line 2.0.
+24: Method `Nette\CommandLine\Parser::addSwitch()` is removed: call `Nette\CommandLine\Command::addFlag()` and pass the command to `parse()`; its second parameter is the description, so pass `alias:` by name, since nette/command-line 2.0.
+25: Method `Nette\CommandLine\Parser::addOption()` is removed: call `Nette\CommandLine\Command::addOption()`, the rest by name, the second is its description; `fallback:` is `default:`, `optionalValue:` is `valueOptional:`, since nette/command-line 2.0.
+26: Method `Nette\CommandLine\Parser::addArgument()` is removed: call `Nette\CommandLine\Command::addArgument()`, the rest by name, the second is its description; `fallback:` is `default:`, since nette/command-line 2.0.
+28: Method `Nette\CommandLine\Parser::isEmpty()` is removed: call `isEmpty()` on the `Nette\CommandLine\ParseResult` returned by `parse()`, since nette/command-line 2.0.
+29: Method `Nette\CommandLine\Parser::help()` is removed: call `Nette\CommandLine\HelpRenderer::render()`, which draws the help from the definition of the command, since nette/command-line 2.0.
+33: Method `Nette\CommandLine\Parser::parseOnly()` is removed: pass `standalone: true` to `Nette\CommandLine\Command::addFlag()` of `--help` or `--version`, which `parse()` then answers before checking the rest of the line, since nette/command-line 2.0.
+34: Method `Nette\CommandLine\Parser::parse()` is deprecated: pass the `Nette\CommandLine\Command` as the first argument; the result is a `Nette\CommandLine\ParseResult`, which `toArray()` turns into an array, since nette/command-line 2.0.
+35: Method `Nette\CommandLine\Parser::parse()` is deprecated: pass the `Nette\CommandLine\Command` as the first argument; the result is a `Nette\CommandLine\ParseResult`, which `toArray()` turns into an array, since nette/command-line 2.0.
+36: Static method `Nette\CommandLine\Parser::normalizeRealPath()` is replaced by `Nette\CommandLine\Normalizers::realPath()`.
+37: Static method `Nette\CommandLine\Parser::normalizeRealPath()` is replaced by `Nette\CommandLine\Normalizers::realPath()`.
+38: Method `Nette\CommandLine\Parser::checkArg()` is removed: there is no replacement; `parse()` applies the enum and the normalizer itself; drop the call, since nette/command-line 1.9.
+41: Constant `Nette\CommandLine\Parser::Optional` is removed: pass `valueOptional: true` to `Nette\CommandLine\Command::addOption()`, or `optional: true` to `Nette\CommandLine\Command::addArgument()` for a positional argument, since nette/command-line 2.0.
+42: Constant `Nette\CommandLine\Parser::Repeatable` is removed: pass `repeatable: true` to the `add*()` method of `Nette\CommandLine\Command`, since nette/command-line 2.0.
+43: Constant `Nette\CommandLine\Parser::Enum` is removed: pass `enum:` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`, since nette/command-line 2.0.
+44: Constant `Nette\CommandLine\Parser::RealPath` is removed: pass `normalizer: Nette\CommandLine\Normalizers::realPath(...)` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`, since nette/command-line 2.0.
+45: Constant `Nette\CommandLine\Parser::Normalizer` is removed: pass `normalizer:` to `Nette\CommandLine\Command::addOption()` or `Nette\CommandLine\Command::addArgument()`, since nette/command-line 2.0.
+46: Constant `Nette\CommandLine\Parser::Default` is removed: pass `default:` to the `add*()` method of `Nette\CommandLine\Command`, since nette/command-line 2.0.
+54: Method `Nette\CommandLine\Console::useColors()` is replaced by `setColorDepth(\Nette\CommandLine\ColorDepth::Ansi16)`.
+55: Method `Nette\CommandLine\Console::useColors()` is replaced by `setColorDepth(\Nette\CommandLine\ColorDepth::Ansi16)`.
+56: Method `Nette\CommandLine\Console::useColors()` is replaced by `setColorDepth(\Nette\CommandLine\ColorDepth::None)`.
+57: Method `Nette\CommandLine\Console::useColors()` is replaced by `setColorDepth($state ? \Nette\CommandLine\ColorDepth::Ansi16 : \Nette\CommandLine\ColorDepth::None)`.
+59: Static method `Nette\CommandLine\Console::detectColors()` is removed: call `hasColors()` on the console of the stream, since nette/command-line 2.0.
+59: Static method `Nette\CommandLine\Console::detectTerminal()` is deprecated: call `isTerminal()` on the console of the stream, since nette/command-line 2.0.
+60: Method `Nette\CommandLine\Console::color()` is deprecated: pass the text as the second argument; the opening sequence alone is not written, since nette/command-line 2.0.
+61: Method `Nette\CommandLine\Console::color()` is deprecated: pass the text as the second argument; the opening sequence alone is not written, since nette/command-line 2.0.
+67: Class `Nette\CommandLine\Option` is removed: use `Nette\CommandLine\Parameters\Option` or `Nette\CommandLine\Parameters\Argument`, which the `add*()` methods of `Nette\CommandLine\Command` create, since nette/command-line 2.0.
+69: Class `Nette\CommandLine\ValueType` is removed: use the class of the parameter, `Nette\CommandLine\Parameters\Flag`, `Nette\CommandLine\Parameters\Option` or `Nette\CommandLine\Parameters\Argument`, since nette/command-line 2.0.
