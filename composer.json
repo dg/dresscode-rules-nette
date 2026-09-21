@@ -64,6 +64,7 @@
 		"dresscode": {
 			"plugin": "DressCodeRules\\Nette\\Plugin",
 			"upgrading": [
+				"upgrading/application.neon",
 				"upgrading/assets.neon",
 				"upgrading/bootstrap.neon",
 				"upgrading/caching.neon",
