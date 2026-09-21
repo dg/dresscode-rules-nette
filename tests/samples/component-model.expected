@@ -1,0 +1,62 @@
+<?php
+
+namespace App;
+
+use Nette\ComponentModel\Component;
+use Nette\ComponentModel\Container;
+use Nette\ComponentModel\IComponent;
+use Nette\ComponentModel\IContainer;
+
+
+class Widget extends Component
+{
+	public function __construct(IContainer $parent, string $name)
+	{
+		parent::__construct($parent, $name);
+		$this->monitor(Container::class);
+		$this->monitor(Container::class, fn() => null);
+	}
+
+
+	public function describe(): string
+	{
+		return $this->getName() . self::NameSeparator . $this->getParent()->getName();
+	}
+}
+
+
+class Panel extends Container
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	public function describe(): string
+	{
+		return $this->getParent() . $this->getName() . count($this->getComponents());
+	}
+}
+
+
+class Inspector
+{
+	public function inspect(Container $container, Component $component): void
+	{
+		$name = $component->getName();
+		$parent = $component->getParent();
+		$children = $container->getComponents();
+		$path = $component->lookupPath() . IComponent::NameSeparator;
+		$sleep = $component->__serialize();
+
+		$all = $container->getComponents();
+		$tree = $container->getComponents(true);
+		$buttons = $container->getComponents(true, Widget::class);
+		$widgets = $container->getComponents(false, Widget::class);
+		$list = $container->getComponentTree();
+
+		$box = new Container($container, 'box');
+		$empty = new Container;
+	}
+}
