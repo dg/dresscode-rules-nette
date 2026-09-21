@@ -1,0 +1,27 @@
+package: nette/component-model
+group: deprecations
+
+since 4.0:
+	forbidden-members:
+		'Nette\ComponentModel\Container::getComponents($deep, ...)': 'call getComponentTree() for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type'
+
+since 3.2:
+	replaced-calls:
+		Nette\ComponentModel\Component::$name: {get: 'getName()'}
+		Nette\ComponentModel\Component::$parent: {get: 'getParent()'}
+		Nette\ComponentModel\Container::$components: {get: 'getComponents()'}
+	forbidden-members:
+		'Nette\ComponentModel\Component::monitor($type)': 'pass the attached callback as the second argument or the detached one as the third; the attached() and detached() hooks are no longer called'
+
+since 3.1.2:
+	replaced-members:
+		Nette\ComponentModel\Component::__sleep: __serialize
+
+since 3.0.3:
+	replaced-members:
+		Nette\ComponentModel\IComponent::NAME_SEPARATOR: NameSeparator
+
+since 3.0:
+	forbidden-members:
+		'Nette\ComponentModel\Component::__construct(...$args)':'the class has no constructor; drop the call and attach the component with addComponent() of its container'
+		'Nette\ComponentModel\Container::__construct($parent, ...)': 'the class has no constructor and ignores the arguments; attach the container with addComponent() of its parent'

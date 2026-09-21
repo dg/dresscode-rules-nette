@@ -1,0 +1,19 @@
+15: Constructor Nette\ComponentModel\Component::__construct() is forbidden: the class has no constructor; drop the call and attach the component with addComponent() of its container
+16: Method Nette\ComponentModel\Component::monitor() is forbidden: pass the attached callback as the second argument or the detached one as the third; the attached() and detached() hooks are no longer called
+21: Method attached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+27: Method detached() is a hook nette/component-model no longer calls; its logic belongs to a callback of monitor()
+34: Property Nette\ComponentModel\Component::$name is replaced by getName()
+34: Constant Nette\ComponentModel\IComponent::NAME_SEPARATOR is replaced by IComponent::NameSeparator
+34: Property Nette\ComponentModel\Component::$parent is replaced by getParent()
+49: Property Nette\ComponentModel\Component::$parent is replaced by getParent()
+49: Property Nette\ComponentModel\Component::$name is replaced by getName()
+49: Property Nette\ComponentModel\Container::$components is replaced by getComponents()
+58: Property Nette\ComponentModel\Component::$name is replaced by getName()
+59: Property Nette\ComponentModel\Component::$parent is replaced by getParent()
+60: Property Nette\ComponentModel\Container::$components is replaced by getComponents()
+61: Constant Nette\ComponentModel\IComponent::NAME_SEPARATOR is replaced by IComponent::NameSeparator
+62: Method Nette\ComponentModel\Component::__sleep() is replaced by Component::__serialize()
+65: Method Nette\ComponentModel\Container::getComponents() is forbidden: call getComponentTree() for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type
+66: Method Nette\ComponentModel\Container::getComponents() is forbidden: call getComponentTree() for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type
+67: Method Nette\ComponentModel\Container::getComponents() is forbidden: call getComponentTree() for all the descendants, which returns a list instead of an iterator keyed by names; filter the array instead of passing a type
+70: Constructor Nette\ComponentModel\Container::__construct() is forbidden: the class has no constructor and ignores the arguments; attach the container with addComponent() of its parent
