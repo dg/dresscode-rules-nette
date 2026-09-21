@@ -7,12 +7,13 @@ use DressCode\Testing\UpgradingTester;
 const PackageRules = [NamedArgumentsForFlagsRule::class];
 
 
-/** The rules the upgrading files feed, which a sample is run with. */
+/** The rules a sample is run with: those the upgrading files feed, and those of this package that read the code alone. */
 const UpgradingRules = [
 	'replaced-classes',
 	'replaced-members',
 	'replaced-calls',
 	'nette/named-arguments-for-flags',
+	'nette/monitor-for-attached-hook',
 	'forbidden-classes',
 	'forbidden-members',
 	'attribute-for-annotation',

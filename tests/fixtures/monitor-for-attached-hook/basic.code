@@ -1,0 +1,131 @@
+<?php
+
+namespace App;
+
+use Nette;
+use Nette\Application\UI\Control;
+use Nette\Application\UI\Presenter;
+use Nette\ComponentModel\IComponent;
+use Nette\Forms\Controls\TextInput;
+use Nette\Forms\Form;
+
+
+// a guard and the call of the empty parent hook go, and a constructor is added, the parent declaring none
+class Menu extends Control
+{
+	private array $items = [];
+
+
+	public function render(): void
+	{
+	}
+
+
+	protected function attached(IComponent $presenter): void
+	{
+		parent::attached($presenter);
+		if (!$presenter instanceof Presenter) {
+			return;
+		}
+
+		// the items of the current module
+		$this->items = $presenter->getParameter('items');
+	}
+}
+
+
+// the type the constructor monitors, and detached() beside attached()
+class Cart extends Control
+{
+	public function __construct(
+		private Nette\Http\Session $session,
+	) {
+		$this->monitor(Presenter::class);
+	}
+
+
+	protected function attached($obj): void
+	{
+		$this->session->start();
+	}
+
+
+	protected function detached($obj): void
+	{
+		$this->session->close();
+	}
+}
+
+
+// a branch for each type, each a callback of its own
+class Widget extends Control
+{
+	public function __construct()
+	{
+	}
+
+
+	protected function attached($obj): void
+	{
+		if ($obj instanceof Presenter) {
+			$this->loadState([]);
+		} elseif ($obj instanceof Form) {
+			$obj->setAction('#');
+		}
+	}
+}
+
+
+// a control of a form monitors the form by itself
+class DateInput extends TextInput
+{
+	public function __construct(?string $label = null)
+	{
+		parent::__construct($label);
+	}
+
+
+	protected function attached($form): void
+	{
+		$this->setHtmlAttribute('data-format', 'Y-m-d');
+	}
+}
+
+
+// reported and left: a constructor added would stop passing the arguments to that of the parent
+class TimeInput extends TextInput
+{
+	protected function attached($form): void
+	{
+		$this->setHtmlAttribute('data-format', 'H:i');
+	}
+}
+
+
+// the hook of a parent of the project becomes a callback first, the child in the next pass
+class SpecialMenu extends Menu
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	protected function attached(IComponent $presenter): void
+	{
+		parent::attached($presenter);
+		$this->redrawControl();
+	}
+}
+
+
+// reported and left: the type is tested other than by instanceof
+class Panel extends Control
+{
+	protected function attached($obj): void
+	{
+		if (is_a($obj, Presenter::class)) {
+			$this->redrawControl();
+		}
+	}
+}
