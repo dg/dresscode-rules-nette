@@ -64,6 +64,7 @@
 		"dresscode": {
 			"extension": "DressCode\\Nette\\Extension",
 			"upgrading": [
+				"upgrading/application.neon",
 				"upgrading/assets.neon",
 				"upgrading/bootstrap.neon",
 				"upgrading/caching.neon",

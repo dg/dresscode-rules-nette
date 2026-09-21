@@ -1,0 +1,149 @@
+package: nette/application
+group: deprecations
+
+since 3.3:
+	replaced-classes:
+		Nette\Application\UI\PresenterComponent: Nette\Application\UI\Component
+		Nette\Application\UI\PresenterComponentReflection: Nette\Application\UI\ComponentReflection
+	replaced-calls:
+		Nette\Application\UI\Component::$presenter: {get: 'getPresenter()'}
+		Nette\Application\UI\Component::$linkCurrent: {get: 'isLinkCurrent()'}
+		Nette\Application\UI\Presenter::$action: {get: 'getAction()'}
+		Nette\Application\UI\Presenter::$view: {get: 'getView()', set: 'setView($value)'}
+		Nette\Application\UI\Presenter::$layout: {get: 'getLayout()', set: 'setLayout($value)'}
+		Nette\Application\UI\Presenter::$request: {get: 'getRequest()'}
+		Nette\Application\UI\Presenter::$session: {get: 'getSession()'}
+		Nette\Application\Request::$method: {get: 'getMethod()', set: 'setMethod($value)'}
+		Nette\Application\Request::$presenterName: {get: 'getPresenterName()', set: 'setPresenterName($value)'}
+		Nette\Application\Request::$parameters: {get: 'getParameters()', set: 'setParameters($value)'}
+		Nette\Application\Request::$post: {get: 'getPost()', set: 'setPost($value)'}
+		Nette\Application\Request::$files: {get: 'getFiles()', set: 'setFiles($value)'}
+		'Nette\Application\Routers\RouteList::offsetSet(null, $router)': 'add($router)'
+		'Nette\Application\Routers\RouteList::offsetGet($index)': 'getRouters()[$index]'
+		'Nette\Application\Routers\RouteList::offsetExists($index)': 'isset(getRouters()[$index])'
+	forbidden-members:
+		'Nette\Application\Routers\RouteList::offsetSet($index, $router)': 'there is no replacement, no public method replaces the router at an index; add the routers in the order they are to be matched'
+		'Nette\Application\Routers\RouteList::offsetUnset($index)': 'there is no replacement, no public method removes the router at an index; leave the router out when the list is built'
+	forbidden-classes:
+		Nette\Bridges\ApplicationLatte\UIMacros: 'support for Latte 2 is gone; use Latte 3 and register Nette\Bridges\ApplicationLatte\UIExtension'
+	attribute-for-annotation:
+		persistent: Nette\Application\Attributes\Persistent
+		crossOrigin: 'Nette\Application\Attributes\Requires(sameOrigin: false)'
+
+since 3.2.10:
+	replaced-calls:
+		'Nette\Application\UI\Component::getPresenterIfExists()': 'getPresenter(throw: false)'
+		'Nette\Application\UI\Form::getPresenterIfExists()': 'getPresenter(throw: false)'
+
+since 3.2.9:
+	forbidden-members:
+		Nette\Bridges\ApplicationLatte\Template::blueprint: 'write the tag {templatePrint} into the template, which prints the class of its variables'
+	attribute-for-annotation:
+		Nette\Application\Attributes\CrossOrigin: 'Nette\Application\Attributes\Requires(sameOrigin: false)'
+
+since 3.2.3:
+	replaced-members:
+		Nette\Application\UI\Presenter::parseDestination: Nette\Application\LinkGenerator::parseDestination
+	replaced-calls:
+		'Nette\Application\LinkGenerator::link(dest: $destination, params: $args)': 'link(destination: $destination, args: $args)'
+		'Nette\Application\LinkGenerator::link(dest: $destination, ...)': 'link(destination: $destination, ...)'
+		'Nette\Application\LinkGenerator::link(params: $args, ...)': 'link(args: $args, ...)'
+		'Nette\Application\UI\Component::saveState($params, $reflection)': 'saveState($params)'
+	forbidden-members:
+		Nette\Application\UI\Presenter::createRequest: 'links are built by Nette\Application\LinkGenerator, so an override no longer changes them; call link() or createRequest() of getLinkGenerator()'
+		Nette\Application\UI\Presenter::requestToUrl: 'call requestToUrl() of getLinkGenerator(), passing !$this->absoluteUrls as the second argument where the call left it out'
+
+since 3.2.1:
+	forbidden-members:
+		Nette\Application\Application::processException: 'call createErrorRequest(), which returns the request of the error presenter or null, and pass that request to processRequest()'
+
+since 3.2:
+	replaced-calls:
+		'Nette\Application\UI\Presenter::injectPrimary($context, $presenterFactory, $router, $httpRequest, $httpResponse, $session, $user, $templateFactory)': 'injectPrimary($httpRequest, $httpResponse, $presenterFactory, $router, $session, $user, $templateFactory)'
+	forbidden-members:
+		Nette\Application\Request::SECURED: 'the flag is no longer set; call isSecured() of Nette\Http\IRequest, which tells whether the request came over HTTPS'
+
+since 3.1.11:
+	replaced-members:
+		Nette\Application\UI\Presenter::INVALID_LINK_SILENT: InvalidLinkSilent
+		Nette\Application\UI\Presenter::INVALID_LINK_WARNING: InvalidLinkWarning
+		Nette\Application\UI\Presenter::INVALID_LINK_EXCEPTION: InvalidLinkException
+		Nette\Application\UI\Presenter::INVALID_LINK_TEXTUAL: InvalidLinkTextual
+		Nette\Application\UI\Presenter::PRESENTER_KEY: PresenterKey
+		Nette\Application\UI\Presenter::SIGNAL_KEY: SignalKey
+		Nette\Application\UI\Presenter::ACTION_KEY: ActionKey
+		Nette\Application\UI\Presenter::FLASH_KEY: FlashKey
+		Nette\Application\UI\Presenter::DEFAULT_ACTION: DefaultAction
+
+since 3.1.8:
+	replaced-calls:
+		'Nette\Application\UI\Component::getParameter($name, $default)': 'getParameter($name) ?? $default'
+
+since 3.1.7:
+	replaced-classes:
+		Nette\Bridges\ApplicationLatte\TranslatorExtension: Latte\Essential\TranslatorExtension
+
+since 3.1.2:
+	replaced-members:
+		Nette\Application\UI\Form::disableSameSiteProtection: allowCrossOrigin
+
+since 3.1:
+	replaced-classes:
+		Nette\Application\IResponse: Nette\Application\Response
+		Nette\Application\UI\IRenderable: Nette\Application\UI\Renderable
+		Nette\Application\UI\ISignalReceiver: Nette\Application\UI\SignalReceiver
+		Nette\Application\UI\IStatePersistent: Nette\Application\UI\StatePersistent
+		Nette\Application\UI\ITemplate: Nette\Application\UI\Template
+		Nette\Application\UI\ITemplateFactory: Nette\Application\UI\TemplateFactory
+		Nette\Bridges\ApplicationLatte\ILatteFactory: Nette\Bridges\ApplicationLatte\LatteFactory
+	replaced-members:
+		Nette\Application\UI\Form::disableSameSiteProtection: keep
+	replaced-calls:
+		'Nette\Application\Routers\RouteList::count()': '\count(getRouters())'
+	forbidden-members:
+		Nette\Application\UI\Presenter::getContext: 'inject the services the presenter needs; the DI container is no longer passed to it'
+		Nette\Application\Routers\Route::getFlags: 'the one-way flag is kept by the route list, whose getFlags() returns it for each router'
+		Nette\Application\Routers\SimpleRouter::getFlags: 'the one-way flag is kept by the route list, whose getFlags() returns it for each router'
+		Nette\Application\Routers\RouteList::getIterator: 'iterate over getRouters(), which returns an array of the routers'
+		'Nette\Application\Routers\Route::__construct($mask, $metadata, $flags)': 'pass oneWay: true to Nette\Application\Routers\RouteList::addRoute(), which creates the route'
+		'Nette\Application\Routers\SimpleRouter::__construct($defaults, $flags)': 'pass oneWay: 1 to Nette\Routing\RouteList::add() when adding the router'
+
+since 3.0.8:
+	replaced-members:
+		Nette\Application\UI\Form::disableSameSiteProtection: allowCrossOrigin
+
+since 3.0.2:
+	replaced-calls:
+		'Nette\Application\UI\Component::hasPresenter()': 'getPresenterIfExists() !== null'
+		'Nette\Application\UI\Form::hasPresenter()': 'getPresenterIfExists() !== null'
+	forbidden-classes:
+		Nette\Bridges\ApplicationLatte\Loader: 'use Latte\Loaders\FileLoader, which the class extended; its constructor takes the base directory, not the presenter'
+
+since 3.0:
+	replaced-classes:
+		Nette\Application\IRouter: Nette\Routing\Router
+	replaced-members:
+		Nette\Application\UI\Control::invalidateControl: redrawControl
+	replaced-calls:
+		'Nette\Application\UI\Control::validateControl()': 'redrawControl(null, false)'
+		'Nette\Application\UI\Control::validateControl($snippet)': 'redrawControl($snippet, false)'
+		'Nette\Application\UI\Control::getSnippetId()': "getSnippetId('')"
+		'Nette\Application\UI\Component::getParam()': 'getParameters()'
+		'Nette\Application\UI\Component::getParam($name)': 'getParameter($name)'
+		'Nette\Application\UI\Component::getParam($name, $default)': 'getParameter($name) ?? $default'
+		'Nette\Application\UI\Component::redirect(301, ...)': 'redirectPermanent(...)'
+		'Nette\Application\UI\Presenter::backlink()': 'getAction(true)'
+		'Nette\Bridges\ApplicationLatte\Template::registerHelper($name, $callback)': 'getLatte()->addFilter($name, $callback)'
+	forbidden-members:
+		Nette\Application\IRouter::SECURED: 'write the protocol, https://, into the mask of the route'
+		Nette\Application\Routers\Route::SECURED: 'write the protocol, https://, into the mask of the route'
+		Nette\Application\Routers\SimpleRouter::SECURED: 'there is no replacement, the router keeps the protocol of the request; drop the flag'
+		Nette\Application\Routers\Route::$defaultFlags: 'the router keeps the protocol of the request; write https:// into the mask of a route that has to be secured'
+		Nette\Application\Routers\Route::$styles: 'set the pattern and the filters of a parameter in the metadata of each route, under the name of the parameter'
+		Nette\Application\Routers\Route::MODULE_KEY: "write the key 'module' as a string"
+		Nette\Application\Routers\Route::PRESENTER_KEY: "write the key 'presenter' as a string"
+		Nette\Application\Routers\SimpleRouter::MODULE_KEY: "write the key 'module' as a string"
+		Nette\Application\Routers\SimpleRouter::PRESENTER_KEY: "write the key 'presenter' as a string"
+		Nette\Application\Routers\CliRouter::PRESENTER_KEY: "write the key 'presenter' as a string"
+		Nette\Application\Routers\Route::getTargetPresenters: 'there is no replacement, a route no longer says which presenters it leads to'
+		Nette\Application\UI\Component::getPersistentParams: 'mark public properties with #[Nette\Application\Attributes\Persistent]; the parameters are found by reflection and the method is no longer called'

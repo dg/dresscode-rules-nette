@@ -1,0 +1,94 @@
+6: Class Nette\Application\IResponse is replaced by Nette\Application\Response
+16: Class Nette\Application\UI\IRenderable is replaced by Nette\Application\UI\Renderable
+17: Class Nette\Application\UI\ITemplateFactory is replaced by Nette\Application\UI\TemplateFactory
+19: Class Nette\Application\UI\PresenterComponent is replaced by Nette\Application\UI\Component
+27: Class Nette\Application\IRouter is replaced by Nette\Routing\Router
+29: Static property Nette\Application\Routers\Route::$defaultFlags is forbidden: the router keeps the protocol of the request; write https:// into the mask of a route that has to be secured
+29: Constant Nette\Application\Routers\Route::SECURED is forbidden: write the protocol, https://, into the mask of the route
+30: Static property Nette\Application\Routers\Route::$styles is forbidden: set the pattern and the filters of a parameter in the metadata of each route, under the name of the parameter
+30: Constant Nette\Routing\Route::PATTERN is replaced by Route::Pattern
+33: Method Nette\Application\Routers\RouteList::offsetSet() is replaced by add($router)
+33: Constant Nette\Application\Routers\Route::MODULE_KEY is forbidden: write the key 'module' as a string
+33: Constant Nette\Application\Routers\Route::PRESENTER_KEY is forbidden: write the key 'presenter' as a string
+34: Method Nette\Application\Routers\RouteList::offsetSet() is replaced by add($router)
+34: Constructor Nette\Application\Routers\Route::__construct() is forbidden: pass oneWay: true to Nette\Application\Routers\RouteList::addRoute(), which creates the route
+35: Method Nette\Application\Routers\RouteList::offsetSet() is replaced by add($router)
+35: Constructor Nette\Application\Routers\SimpleRouter::__construct() is forbidden: pass oneWay: 1 to Nette\Routing\RouteList::add() when adding the router
+35: Constant Nette\Application\Routers\SimpleRouter::PRESENTER_KEY is forbidden: write the key 'presenter' as a string
+35: Constant Nette\Application\IRouter::SECURED is forbidden: write the protocol, https://, into the mask of the route
+36: Method Nette\Application\Routers\RouteList::offsetSet() is forbidden: there is no replacement, no public method replaces the router at an index; add the routers in the order they are to be matched
+36: Constant Nette\Application\Routers\CliRouter::PRESENTER_KEY is forbidden: write the key 'presenter' as a string
+37: Method Nette\Application\Routers\RouteList::offsetUnset() is forbidden: there is no replacement, no public method removes the router at an index; leave the router out when the list is built
+39: Method Nette\Application\Routers\RouteList::offsetExists() is replaced by isset(getRouters()[$index])
+39: Method Nette\Application\Routers\RouteList::count() is replaced by \count(getRouters())
+40: Method Nette\Application\Routers\RouteList::offsetGet() is replaced by getRouters()[$index]
+43: Method Nette\Application\Routers\RouteList::getIterator() is forbidden: iterate over getRouters(), which returns an array of the routers
+52: Method Nette\Application\Routers\Route::getFlags() is forbidden: the one-way flag is kept by the route list, whose getFlags() returns it for each router
+52: Method Nette\Application\Routers\SimpleRouter::getFlags() is forbidden: the one-way flag is kept by the route list, whose getFlags() returns it for each router
+52: Method Nette\Application\Routers\Route::getTargetPresenters() is forbidden: there is no replacement, a route no longer says which presenters it leads to
+59: Static method Nette\Application\UI\Component::getPersistentParams() is forbidden: mark public properties with #[Nette\Application\Attributes\Persistent]; the parameters are found by reflection and the method is no longer called
+65: Class Nette\Application\UI\PresenterComponent is replaced by Nette\Application\UI\Component
+71: Annotation @persistent is replaced by the attribute #[Nette\Application\Attributes\Persistent], but the text after it has no place there
+76: Annotation @persistent is replaced by the attribute #[Nette\Application\Attributes\Persistent]
+79: Annotation @persistent is replaced by the attribute #[Nette\Application\Attributes\Persistent], but the text after it has no place there
+86: Method Nette\Application\UI\Presenter::getContext() is forbidden: inject the services the presenter needs; the DI container is no longer passed to it
+87: Method Nette\Application\UI\Component::getParam() is replaced by getParameter($name)
+88: Method Nette\Application\UI\Component::getParam() is replaced by getParameters()
+89: Method Nette\Application\UI\Component::getParam() is replaced by getParameter($name) ?? $default
+90: Method Nette\Application\UI\Component::getParameter() is replaced by getParameter($name) ?? $default
+92: Property Nette\Application\UI\Presenter::$action is replaced by getAction()
+92: Property Nette\Application\UI\Presenter::$view is replaced by getView()
+93: Property Nette\Application\UI\Presenter::$layout is replaced by setLayout($value)
+94: Property Nette\Application\UI\Presenter::$view is replaced by setView($value)
+97: Property Nette\Application\UI\Presenter::$layout is replaced by getLayout()
+98: Property Nette\Application\UI\Presenter::$request is replaced by getRequest()
+98: Property Nette\Application\Request::$method is replaced by getMethod()
+99: Property Nette\Application\UI\Presenter::$session is replaced by getSession()
+100: Method Nette\Application\UI\Presenter::backlink() is replaced by getAction(true)
+102: Property Nette\Application\UI\Presenter::$request is replaced by getRequest()
+102: Property Nette\Application\UI\Presenter::$request is replaced by getRequest()
+102: Property Nette\Application\Request::$parameters is replaced by getParameters()
+103: Property Nette\Application\UI\Presenter::$request is replaced by getRequest()
+103: Property Nette\Application\Request::$parameters is replaced by setParameters($value)
+104: Method Nette\Application\UI\Component::redirect() is replaced by redirectPermanent(...)
+109: Annotation @crossOrigin is replaced by the attribute #[Nette\Application\Attributes\Requires(sameOrigin: false)]
+112: Method Nette\Application\UI\Control::invalidateControl() is replaced by Control::redrawControl()
+113: Method Nette\Application\UI\Control::validateControl() is replaced by redrawControl(null, false)
+114: Method Nette\Application\UI\Control::validateControl() is replaced by redrawControl($snippet, false)
+115: Method Nette\Application\UI\Component::redirect() is replaced by redirectPermanent(...)
+120: Attribute #[Nette\Application\Attributes\CrossOrigin] is replaced by #[Nette\Application\Attributes\Requires(sameOrigin: false)]
+123: The query string and the fragment of the link destination must be passed as arguments
+127: Method Nette\Application\UI\Presenter::createRequest() is forbidden: links are built by Nette\Application\LinkGenerator, so an override no longer changes them; call link() or createRequest() of getLinkGenerator()
+129: Method Nette\Application\UI\Presenter::createRequest() is forbidden: links are built by Nette\Application\LinkGenerator, so an override no longer changes them; call link() or createRequest() of getLinkGenerator()
+135: Method Nette\Application\UI\Presenter::requestToUrl() is forbidden: call requestToUrl() of getLinkGenerator(), passing !$this->absoluteUrls as the second argument where the call left it out
+136: Method Nette\Application\UI\Presenter::parseDestination() is replaced by Nette\Application\LinkGenerator::parseDestination()
+137: Static method Nette\Application\UI\Presenter::parseDestination() is replaced by Nette\Application\LinkGenerator::parseDestination()
+139: Method Nette\Application\UI\Component::saveState() is replaced by saveState($params), which no longer evaluates $this->getReflection()
+144: Class Nette\Application\UI\IRenderable is replaced by Nette\Application\UI\Renderable
+148: Property Nette\Application\UI\Component::$presenter is replaced by getPresenter()
+149: Property Nette\Application\UI\Component::$linkCurrent is replaced by isLinkCurrent()
+150: Method Nette\Application\UI\Component::getPresenterIfExists() is replaced by getPresenter(throw: false)
+150: Method Nette\Application\UI\Component::hasPresenter() is replaced by getPresenterIfExists() !== null
+151: Method Nette\Application\UI\Component::getPresenterIfExists() is replaced by getPresenter(throw: false)
+152: Method Nette\Application\UI\Control::getSnippetId() is replaced by getSnippetId('')
+162: Method Nette\Application\UI\Form::disableSameSiteProtection() is replaced by Form::allowCrossOrigin()
+163: Method Nette\Application\UI\Form::hasPresenter() is replaced by getPresenterIfExists() !== null
+163: Method Nette\Application\UI\Form::getPresenterIfExists() is replaced by getPresenter(throw: false)
+177: Class Nette\Application\UI\ITemplateFactory is replaced by Nette\Application\UI\TemplateFactory
+182: Class Nette\Application\IResponse is replaced by Nette\Application\Response
+184: Property Nette\Application\Request::$presenterName is replaced by setPresenterName($value)
+185: Property Nette\Application\Request::$post is replaced by setPost($value)
+186: Property Nette\Application\Request::$presenterName is replaced by getPresenterName()
+187: Property Nette\Application\Request::$files is replaced by getFiles()
+188: Property Nette\Application\Request::$post is replaced by getPost()
+189: Constant Nette\Application\Request::SECURED is forbidden: the flag is no longer set; call isSecured() of Nette\Http\IRequest, which tells whether the request came over HTTPS
+190: Constant Nette\Application\UI\Presenter::INVALID_LINK_EXCEPTION is replaced by Presenter::InvalidLinkException
+192: Method Nette\Application\UI\Presenter::injectPrimary() is replaced by injectPrimary($httpRequest, $httpResponse, $presenterFactory, $router, $session, $user, $templateFactory)
+193: Method Nette\Application\Application::processException() is forbidden: call createErrorRequest(), which returns the request of the error presenter or null, and pass that request to processRequest()
+194: Method Nette\Application\LinkGenerator::link() is replaced by link(destination: $destination, args: $args)
+195: Method Nette\Application\LinkGenerator::link() is replaced by link(args: $args, ...)
+201: Method Nette\Bridges\ApplicationLatte\Template::registerHelper() is replaced by getLatte()->addFilter($name, $callback)
+202: Method Nette\Bridges\ApplicationLatte\Template::blueprint() is forbidden: write the tag {templatePrint} into the template, which prints the class of its variables
+206: Class Nette\Bridges\ApplicationLatte\Loader is forbidden: use Latte\Loaders\FileLoader, which the class extended; its constructor takes the base directory, not the presenter
+208: Class Nette\Bridges\ApplicationLatte\Loader is forbidden: use Latte\Loaders\FileLoader, which the class extended; its constructor takes the base directory, not the presenter
+212: Class Nette\Bridges\ApplicationLatte\UIMacros is forbidden: support for Latte 2 is gone; use Latte 3 and register Nette\Bridges\ApplicationLatte\UIExtension

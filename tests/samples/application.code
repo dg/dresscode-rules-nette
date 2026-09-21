@@ -1,0 +1,215 @@
+<?php
+
+namespace App;
+
+use Nette\Application\Application;
+use Nette\Application\IResponse;
+use Nette\Application\IRouter;
+use Nette\Application\LinkGenerator;
+use Nette\Application\Request;
+use Nette\Application\Routers\CliRouter;
+use Nette\Application\Routers\Route;
+use Nette\Application\Routers\RouteList;
+use Nette\Application\Routers\SimpleRouter;
+use Nette\Application\UI\Control;
+use Nette\Application\UI\Form;
+use Nette\Application\UI\IRenderable;
+use Nette\Application\UI\ITemplateFactory;
+use Nette\Application\UI\Presenter;
+use Nette\Application\UI\PresenterComponent;
+use Nette\Bridges\ApplicationLatte\Loader;
+use Nette\Bridges\ApplicationLatte\Template;
+use Nette\Bridges\ApplicationLatte\UIMacros;
+
+
+class RouterFactory
+{
+	public static function createRouter(): IRouter
+	{
+		Route::$defaultFlags = Route::SECURED;
+		Route::$styles['id'] = [Route::PATTERN => '\d+'];
+
+		$router = new RouteList;
+		$router[] = new Route('admin/<presenter>/<action>', [Route::MODULE_KEY => 'Admin', Route::PRESENTER_KEY => 'Dashboard']);
+		$router[] = new Route('old/<id>', 'Old:default', Route::ONE_WAY);
+		$router[] = new SimpleRouter([SimpleRouter::PRESENTER_KEY => 'Homepage'], IRouter::SECURED);
+		$router[1] = new CliRouter([CliRouter::PRESENTER_KEY => 'Cli']);
+		unset($router[1]);
+
+		if (isset($router[0]) && $router->count() > 0) {
+			$first = $router[0];
+		}
+
+		foreach ($router->getIterator() as $route) {
+		}
+
+		return $router;
+	}
+
+
+	public static function describe(Route $route, SimpleRouter $simple): array
+	{
+		return [$route->getFlags(), $simple->getFlags(), $route->getTargetPresenters()];
+	}
+}
+
+
+class BaseComponent extends Control
+{
+	public static function getPersistentParams(): array
+	{
+		return ['page'];
+	}
+
+
+	public function attachTo(PresenterComponent $parent): void
+	{
+	}
+}
+
+
+/**
+ * @persistent(menu)
+ */
+abstract class BasePresenter extends Presenter
+{
+	/** @persistent */
+	public $lang;
+
+	/** @persistent  Default language */
+	public $locale;
+
+
+	protected function startup(): void
+	{
+		parent::startup();
+		$container = $this->getContext();
+		$id = $this->getParam('id');
+		$all = $this->getParam();
+		$page = $this->getParam('page', 1);
+		$sort = $this->getParameter('sort', 'name');
+
+		if ($this->action === 'edit' && $this->view !== 'default') {
+			$this->layout = 'wide';
+			$this->view = 'edit';
+		}
+
+		$layout = $this->layout;
+		$method = $this->request->method;
+		$section = $this->session->getSection('app');
+		$backlink = $this->backlink();
+
+		if (!$this->request->isMethod('POST') && $this->request->parameters) {
+			$this->request->parameters = ['id' => $id];
+			$this->redirect(301, 'Homepage:');
+		}
+	}
+
+
+	/** @crossOrigin */
+	public function handleVote(): void
+	{
+		$this->invalidateControl('votes');
+		$this->validateControl();
+		$this->validateControl('header');
+		$this->redirect(301, 'this', ['voted' => true]);
+		$this->redirect('this');
+	}
+
+
+	#[\Nette\Application\Attributes\CrossOrigin]
+	public function handleShare(): void
+	{
+		$this->redirect('Product:show?id=1#share');
+	}
+
+
+	protected function createRequest($component, $destination, array $args, $mode): ?string
+	{
+		return parent::createRequest($component, $destination, $args, $mode);
+	}
+
+
+	public function beforeRender(): void
+	{
+		$url = $this->requestToUrl($this->getRequest());
+		$parts = self::parseDestination('Homepage:default');
+		$parsed = Presenter::parseDestination('Product:show');
+		$state = [];
+		$this->saveState($state, $this->getReflection());
+	}
+}
+
+
+class MenuControl extends Control implements IRenderable
+{
+	public function render(): void
+	{
+		$presenter = $this->presenter;
+		$current = $this->linkCurrent;
+		$attached = $this->hasPresenter();
+		$maybe = $this->getPresenterIfExists();
+		$id = $this->getSnippetId();
+		$this->template->render(__DIR__ . '/menu.latte');
+	}
+}
+
+
+class SignFormFactory
+{
+	public function create(Form $form): Form
+	{
+		$form->disableSameSiteProtection();
+		if ($form->hasPresenter() && $form->getPresenterIfExists()) {
+			$form->getPresenter()->flashMessage('ok');
+		}
+
+		return $form;
+	}
+}
+
+
+class Mailer
+{
+	public function __construct(
+		private LinkGenerator $linkGenerator,
+		private Application $application,
+		private ITemplateFactory $templateFactory,
+	) {
+	}
+
+
+	public function send(Request $request, Presenter $presenter, IResponse $response, \Throwable $e): string
+	{
+		$request->presenterName = 'Front:Homepage';
+		$request->post = [];
+		$name = $request->presenterName;
+		$files = $request->files;
+		$post = $request->post;
+		$secured = $request->hasFlag(Request::SECURED);
+		$invalid = $presenter->invalidLinkMode === Presenter::INVALID_LINK_EXCEPTION;
+
+		$presenter->injectPrimary(null, null, null, $presenter->getHttpRequest(), $presenter->getHttpResponse(), null, null, null);
+		$this->application->processException($e);
+		return $this->linkGenerator->link(dest: 'Homepage:', params: ['id' => 1])
+			. $this->linkGenerator->link('Product:show', params: ['id' => 2]);
+	}
+
+
+	public function prepare(Template $template): void
+	{
+		$template->registerHelper('money', fn($value) => "$value CZK");
+		$template->blueprint();
+	}
+
+
+	public function createLoader(Presenter $presenter): Loader
+	{
+		return new Loader($presenter);
+	}
+
+
+	public function install(UIMacros $macros): void
+	{
+	}
+}
