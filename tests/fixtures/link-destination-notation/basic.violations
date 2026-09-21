@@ -1,0 +1,15 @@
+15: The query string of the link destination must be passed as arguments
+16: The fragment of the link destination must be passed as the '#' argument
+17: The query string and the fragment of the link destination must be passed as arguments
+18: The query string of the link destination must be passed as arguments, which may pass arguments the query string used to override
+19: The query string of the link destination must be passed as arguments, which may pass arguments the query string used to override
+20: The query string of the link destination must be passed as arguments, which may pass arguments the query string used to override
+21: The fragment of the link destination must be passed as the '#' argument
+24: The fragment of the link destination must be passed as the '#' argument, which encodes the fragment the destination wrote as it is
+25: The fragment of the link destination must be passed as the '#' argument, which encodes the fragment the destination wrote as it is
+28: The query string of the link destination must be passed as arguments
+29: The query string of the link destination must be passed as arguments, which may pass arguments the query string used to override
+32: The query string of the link destination must be passed as arguments, but its query string holds an array
+33: The query string of the link destination must be passed as arguments, but the query string is not written out whole
+43: The query string of the link destination must be passed as arguments
+49: The query string of the link destination must be passed as arguments

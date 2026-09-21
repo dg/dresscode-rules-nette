@@ -14,6 +14,7 @@ const UpgradingRules = [
 	'replaced-calls',
 	'nette/named-arguments-for-flags',
 	'nette/monitor-for-attached-hook',
+	'nette/link-destination-notation',
 	'forbidden-classes',
 	'forbidden-members',
 	'attribute-for-annotation',

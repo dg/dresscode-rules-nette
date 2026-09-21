@@ -13,7 +13,7 @@ required as `dresscode/dresscode`.
 Besides the data the package ships the rules the data of an ecosystem need and DressCode itself does not carry,
 in `src/` under `DressCode\Nette`, named `nette/<name>`. `DressCode\Nette\Extension` makes them known, `composer.json` names it
 under `extra.dresscode.extension`, and `tests/rules.phpt` runs their fixtures from `tests/fixtures/<name>/`. A rule
-that reads the code alone, `nette/monitor-for-attached-hook`, supersedes the
+that reads the code alone, `nette/monitor-for-attached-hook` and `nette/link-destination-notation`, supersedes the
 entries it would share a use with, so the data hold no sentence for what it converts, and `tests/samples.php` runs it
 with the samples.
 

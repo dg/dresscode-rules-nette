@@ -1,0 +1,51 @@
+<?php
+// risky
+
+namespace App;
+
+use Nette\Application\LinkGenerator;
+use Nette\Application\UI\Presenter;
+
+
+class ProductPresenter extends Presenter
+{
+	public function renderDefault(int $id, array $params, string $section, LinkGenerator $generator): void
+	{
+		// the query becomes the arguments, the fragment the argument '#'
+		$this->link('Product:show', ['id' => '1', 'tab' => 'reviews']);
+		$this->link('Product:show', ['#' => 'reviews']);
+		$this->link('Product:show', ['id' => '1', '#' => 'reviews']);
+		$this->link('Product:show', ['page' => 2, 'id' => '1']);
+		$this->link('Product:show', [$id, 'id' => '1']);
+		$this->link('Product:show', ['id' => '1'] + $params);
+		$this->link('Product:show', ['id' => $id, '#' => 'reviews']);
+
+		// a fragment written by an expression is encoded as the argument '#'
+		$this->link('Product:show', ['#' => $section]);
+		$this->link('Product:show', ['#' => 'part-' . $section]);
+
+		// the other methods that take a destination
+		$this->canonicalize('Product:show', ['id' => '1']);
+		$generator->link('Product:show', ['page' => 2, 'id' => '1']);
+
+		// reported and left
+		$this->link('Product:show?filter[color]=red');
+		$this->link('Product:show?id=' . $id);
+
+		// left alone: no ? or # in a literal part
+		$this->link('Product:show', ['id' => $id]);
+		$this->link($section);
+	}
+
+
+	public function actionOrder(): void
+	{
+		$this->redirect('this', ['order' => 'name']);
+	}
+
+
+	public function actionShow(): void
+	{
+		$this->forward('Product:show', ['id' => '1']);
+	}
+}
