@@ -19,12 +19,12 @@
 		"nette/application": "^3.2",
 		"nette/forms": "^3.2",
 		"nette/http": "^3.3",
+		"nette/phpstan-rules": "^1.0",
 		"nette/schema": "^1.3",
-		"nette/utils": "^4.0",
 		"nette/tester": "^2.6",
-		"phpstan/phpstan": "^2.2",
+		"nette/utils": "^4.0",
 		"phpstan/extension-installer": "^1.4",
-		"nette/phpstan-rules": "^1.0"
+		"phpstan/phpstan": "^2.2"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
@@ -40,6 +40,11 @@
 	"extra": {
 		"branch-alias": {
 			"dev-master": "1.0-dev"
+		},
+		"dresscode": {
+			"upgrading": [
+				"upgrading/forms.neon"
+			]
 		}
 	}
 }
