@@ -1,0 +1,106 @@
+<?php
+
+namespace App;
+
+use Nette\Forms\ControlGroup;
+use Nette\Forms\Controls\BaseControl;
+use Nette\Forms\Controls\Checkbox;
+use Nette\Forms\Controls\ChoiceControl;
+use Nette\Forms\Controls\CsrfProtection;
+use Nette\Forms\Controls\MultiSelectBox;
+use Nette\Forms\Controls\SelectBox;
+use Nette\Forms\Controls\SubmitButton;
+use Nette\Forms\Controls\TextInput;
+use Nette\Forms\Form;
+use Nette\Forms\FormFactory;
+use Nette\Forms\Control;
+use Nette\Forms\Rendering\LatteRenderer;
+
+function build(Form $form, Control $control): void
+{
+	$form->addText('name')
+		->setHtmlAttribute('placeholder', 'Name')
+		->addRule(Form::Filled)
+		->addRule($form::MaxLength, null, 100);
+	$form->addImageButton('send');
+	$values = $form->getUntrustedValues(null);
+}
+
+
+class SignUpFormFactory
+{
+	public function create(array $defaults): Form
+	{
+		$form = new Form;
+		$form->addProtection('Your session has expired, please submit the form again.');
+		$form->setMethod('POST');
+		$form->setAction('/sign-up');
+
+		$form->addMultiUpload('avatar', 'Avatar');
+		$form->addUpload('scan', 'Scan');
+		$form->addUpload('photo', 'Photo', $this->isMultiple());
+
+		$form->setDefaults(values: $defaults);
+		$form->setValues(values: $defaults, erase: true);
+		return $form;
+	}
+
+
+	public function describe(BaseControl $input, ControlGroup $group, SubmitButton $button): string
+	{
+		$label = $input->getCaption();
+		$input->setCaption('Full name');
+		$class = $input->getOption('class') ?? 'form-control';
+		$legend = $group->getOption('label') ?? 'Details';
+
+		if ($input->isFilled() && !$button->isSubmittedBy()) {
+			$input->setOmitted(state: false);
+		}
+
+		$input->setOmitted(true);
+		return $input->getHtmlName() . ': ' . $label . $class . $legend . count($input->getOptions());
+	}
+
+
+	public function choices(SelectBox $country, MultiSelectBox $tags, ChoiceControl $choice, TextInput $email, Checkbox $terms): array
+	{
+		$choice->checkDefaultValue(false);
+		$country->addOptionAttributes(['data-flag' => true]);
+		$tags->addOptionAttributes(['data-color' => 'red']);
+		$email->setHtmlType('email');
+		$terms->getContainerPrototype()->class = 'checkbox';
+		return [$country->getSelectedItem(), $tags->getSelectedItems()];
+	}
+
+
+	public function render(Form $form, CsrfProtection $protector): void
+	{
+		$renderer = $form->getRenderer();
+		$form->setRenderer($renderer);
+		$values = $form->getValues('array');
+		$blueprint = new LatteRenderer;
+		echo $blueprint->render($form);
+	}
+
+
+	public function legacy(FormFactory $factory): Form
+	{
+		$rule = CsrfProtection::Protection;
+		return $factory->create();
+	}
+
+
+	private function isMultiple(): bool
+	{
+		return true;
+	}
+}
+
+
+class DateInput extends BaseControl
+{
+	public function setUp(): void
+	{
+		BaseControl::enableAutoOptionalMode();
+	}
+}
