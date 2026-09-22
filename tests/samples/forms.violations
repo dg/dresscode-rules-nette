@@ -1,0 +1,45 @@
+16: Class `Nette\Forms\IControl` is replaced by `Nette\Forms\Control`.
+20: Class `Nette\Forms\IControl` is replaced by `Nette\Forms\Control`.
+23: Method `Nette\Forms\Controls\BaseControl::setAttribute()` is replaced by `BaseControl::setHtmlAttribute()`.
+24: Constant `Nette\Forms\Form::FILLED` is replaced by `Form::Filled`.
+25: Constant `Nette\Forms\Form::MAX_LENGTH` is replaced by `Form::MaxLength`.
+26: Method `Nette\Forms\Container::addImage()` is replaced by `Container::addImageButton()`.
+27: Method `Nette\Forms\Container::getUnsafeValues()` is replaced by `Container::getUntrustedValues()`.
+36: Method `Nette\Forms\Form::addProtection()` is deprecated: the built-in same-origin protection of the form is sufficient; drop the call, since nette/forms 3.3.
+37: Property `Nette\Forms\Form::$method` is replaced by `setMethod($value)`.
+38: Property `Nette\Forms\Form::$action` is replaced by `setAction($value)`.
+40: Method `Nette\Forms\Container::addUpload()` is replaced by `addMultiUpload($name, $label)`.
+41: Method `Nette\Forms\Container::addUpload()` is replaced by `addUpload($name, $label)`.
+44: Method `Nette\Forms\Container::setDefaults()` is replaced by `setDefaults(values: $values, ...)`.
+45: Method `Nette\Forms\Container::setValues()` is replaced by `setValues(values: $values, ...)`.
+52: Property `Nette\Forms\Controls\BaseControl::$caption` is replaced by `getCaption()`.
+53: Property `Nette\Forms\Controls\BaseControl::$caption` is replaced by `setCaption($value)`.
+54: Method `Nette\Forms\Controls\BaseControl::getOption()` is replaced by `getOption($key) ?? $default`.
+55: Method `Nette\Forms\ControlGroup::getOption()` is replaced by `getOption($key) ?? $default`.
+57: Property `Nette\Forms\Controls\BaseControl::$filled` is replaced by `isFilled()`.
+57: Property `Nette\Forms\Controls\SubmitButton::$submittedBy` is replaced by `isSubmittedBy()`.
+58: Method `Nette\Forms\Controls\BaseControl::setOmitted()` is replaced by `setOmitted(state: $state, ...)`.
+61: Property `Nette\Forms\Controls\BaseControl::$omitted` is replaced by `setOmitted($value)`.
+62: Property `Nette\Forms\Controls\BaseControl::$htmlName` is replaced by `getHtmlName()`.
+62: Property `Nette\Forms\Controls\BaseControl::$options` is replaced by `getOptions()`.
+68: Property `Nette\Forms\Controls\ChoiceControl::$checkAllowedValues` is replaced by `checkDefaultValue($value)`.
+69: Method `Nette\Forms\Controls\SelectBox::addOptionAttributes()` is deprecated: use `setOptionAttribute()`, which sets one attribute per call, so call it once for each item of the array, since nette/forms 3.2.
+70: Method `Nette\Forms\Controls\MultiSelectBox::addOptionAttributes()` is deprecated: use `setOptionAttribute()`, which sets one attribute per call, so call it once for each item of the array, since nette/forms 3.2.
+71: Method `Nette\Forms\Controls\TextInput::setType()` is replaced by `TextInput::setHtmlType()`.
+72: Method `Nette\Forms\Controls\Checkbox::getSeparatorPrototype()` is replaced by `Checkbox::getContainerPrototype()`.
+73: Property `Nette\Forms\Controls\ChoiceControl::$selectedItem` is replaced by `getSelectedItem()`.
+73: Property `Nette\Forms\Controls\MultiChoiceControl::$selectedItems` is replaced by `getSelectedItems()`.
+77: Class `Nette\Forms\Controls\CsrfProtection` is deprecated: there is no replacement; the built-in same-origin protection of the form is sufficient, since nette/forms 3.3.
+77: Class `Nette\Forms\Rendering\DataClassGenerator` is removed: use `Nette\Forms\Blueprint`, whose `dataClass()` prints the generated class and exits and whose `generateDataClass()` returns it without the `$useSmartObject` option, since nette/forms 3.1.15.
+79: Property `Nette\Forms\Form::$renderer` is replaced by `getRenderer()`.
+80: Property `Nette\Forms\Form::$renderer` is replaced by `setRenderer($value)`.
+81: Method `Nette\Forms\Container::getValues()` is replaced by `getValues('array')`.
+82: Class `Nette\Forms\Rendering\LatteRenderer` is removed: use `Nette\Forms\Blueprint`, whose `latte()` prints the generated template and exits and whose `generateLatte()` returns it, since nette/forms 3.1.15.
+83: Method `Nette\Forms\Rendering\LatteRenderer::render()` is replaced by `(new \Nette\Forms\Blueprint)->generateLatte($form)`.
+84: Method `Nette\Forms\Rendering\DataClassGenerator::generateCode()` is replaced by `(new \Nette\Forms\Blueprint)->generateDataClass($form, $this->propertyPromotion, ...)`.
+88: Class `Nette\Forms\FormFactory` is removed: create the form with `new Nette\Forms\Form`; the class and its DI service are gone, since nette/forms 3.1.5.
+90: Class `Nette\Forms\Controls\CsrfProtection` is deprecated: there is no replacement; the built-in same-origin protection of the form is sufficient, since nette/forms 3.3.
+90: Constant `Nette\Forms\Form::PROTECTION` is replaced by `Nette\Forms\Controls\CsrfProtection::PROTECTION`.
+90: Constant `Nette\Forms\Controls\CsrfProtection::PROTECTION` is replaced by `CsrfProtection::Protection`.
+106: Static method `Nette\Forms\Controls\BaseControl::enableAutoOptionalMode()` is removed: controls are optional automatically; drop the call, since nette/forms 3.0.
+116: Method `Nette\Forms\Form::addProtection()` is deprecated: the built-in same-origin protection of the form is sufficient; drop the call, since nette/forms 3.3.

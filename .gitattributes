@@ -8,3 +8,4 @@ tests/          export-ignore
 
 *               text=auto
 *.php*          diff=php
+/tests/samples/** text eol=lf
