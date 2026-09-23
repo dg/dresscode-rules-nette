@@ -1,0 +1,124 @@
+package: nette/forms
+group: deprecations
+
+since 3.3:
+	replaced-members:
+		Nette\Bridges\FormsLatte\FormMacros::renderFormBegin: keep
+		Nette\Bridges\FormsLatte\FormMacros::renderFormEnd: keep
+	replaced-calls:
+		Nette\Forms\Controls\BaseControl::$filled: {get: 'isFilled()'}
+		Nette\Forms\Controls\BaseControl::$htmlName: {get: 'getHtmlName()'}
+		Nette\Forms\Controls\BaseControl::$omitted: {get: 'isOmitted()', set: 'setOmitted($value)'}
+		Nette\Forms\Controls\BaseControl::$options: {get: 'getOptions()'}
+		Nette\Forms\Controls\ChoiceControl::$selectedItem: {get: 'getSelectedItem()'}
+		Nette\Forms\Controls\MultiChoiceControl::$selectedItems: {get: 'getSelectedItems()'}
+		Nette\Forms\Controls\SubmitButton::$submittedBy: {get: 'isSubmittedBy()'}
+		Nette\Forms\Form::$action: {get: 'getAction()', set: 'setAction($value)'}
+		Nette\Forms\Form::$method: {get: 'getMethod()', set: 'setMethod($value)'}
+		Nette\Forms\Form::$renderer: {get: 'getRenderer()', set: 'setRenderer($value)'}
+	forbidden-classes:
+		Nette\Bridges\FormsLatte\FormMacros: 'support for Latte 2 is gone; use Latte 3 and register Nette\Bridges\FormsLatte\FormsExtension'
+
+since 3.2.9:
+	replaced-calls:
+		'Nette\Forms\Container::setDefaults(values: $values, ...)': keep
+		'Nette\Forms\Container::setDefaults(data: $values, ...)': 'setDefaults(values: $values, ...)'
+
+since 3.2.3:
+	replaced-calls:
+		'Nette\Forms\Container::setValues(values: $values, ...)': keep
+		'Nette\Forms\Container::setValues(data: $values, ...)': 'setValues(values: $values, ...)'
+		'Nette\Forms\Controls\BaseControl::setOmitted(value: $state, ...)': 'setOmitted(state: $state, ...)'
+
+since 3.2:
+	replaced-calls:
+		'Nette\Forms\Container::getValues(true)': "getValues('array')"
+	forbidden-members:
+		Nette\Forms\Controls\SelectBox::addOptionAttributes: 'use setOptionAttribute(), which sets one attribute per call, so call it once for each item of the array'
+		Nette\Forms\Controls\MultiSelectBox::addOptionAttributes: 'use setOptionAttribute(), which sets one attribute per call, so call it once for each item of the array'
+
+since 3.1.15:
+	forbidden-classes:
+		Nette\Forms\Rendering\DataClassGenerator: 'use Nette\Forms\Blueprint, whose dataClass() prints the generated class and exits and whose generateDataClass() returns it without the $useSmartObject option'
+		Nette\Forms\Rendering\LatteRenderer: 'use Nette\Forms\Blueprint, whose latte() prints the generated template and exits and whose generateLatte() returns it'
+
+since 3.1.11:
+	replaced-members:
+		Nette\Forms\Form::BLANK: Blank
+		Nette\Forms\Form::COUNT: Count
+		Nette\Forms\Form::DATA_FILE: DataFile
+		Nette\Forms\Form::DATA_KEYS: DataKeys
+		Nette\Forms\Form::DATA_LINE: DataLine
+		Nette\Forms\Form::DATA_TEXT: DataText
+		Nette\Forms\Form::EMAIL: Email
+		Nette\Forms\Form::EQUAL: Equal
+		Nette\Forms\Form::FILLED: Filled
+		Nette\Forms\Form::FLOAT: Float
+		Nette\Forms\Form::GET: Get
+		Nette\Forms\Form::IMAGE: Image
+		Nette\Forms\Form::INTEGER: Integer
+		Nette\Forms\Form::IS_IN: IsIn
+		Nette\Forms\Form::IS_NOT_IN: IsNotIn
+		Nette\Forms\Form::LENGTH: Length
+		Nette\Forms\Form::MAX: Max
+		Nette\Forms\Form::MAX_FILE_SIZE: MaxFileSize
+		Nette\Forms\Form::MAX_LENGTH: MaxLength
+		Nette\Forms\Form::MAX_POST_SIZE: MaxPostSize
+		Nette\Forms\Form::MIME_TYPE: MimeType
+		Nette\Forms\Form::MIN: Min
+		Nette\Forms\Form::MIN_LENGTH: MinLength
+		Nette\Forms\Form::NOT_EQUAL: NotEqual
+		Nette\Forms\Form::NUMERIC: Numeric
+		Nette\Forms\Form::PATTERN: Pattern
+		Nette\Forms\Form::PATTERN_ICASE: PatternInsensitive
+		Nette\Forms\Form::POST: Post
+		Nette\Forms\Form::PROTECTOR_ID: ProtectorId
+		Nette\Forms\Form::RANGE: Range
+		Nette\Forms\Form::REQUIRED: Required
+		Nette\Forms\Form::SUBMITTED: Submitted
+		Nette\Forms\Form::TRACKER_ID: TrackerId
+		Nette\Forms\Form::VALID: Valid
+		Nette\Forms\Controls\CsrfProtection::PROTECTION: Protection
+		Nette\Forms\Controls\SelectBox::VALID: Valid
+		Nette\Forms\Controls\UploadControl::VALID: Valid
+
+since 3.1.10:
+	replaced-members:
+		Nette\Forms\Container::getUnsafeValues: getUntrustedValues
+
+since 3.1.8:
+	replaced-calls:
+		'Nette\Forms\Controls\BaseControl::getOption($key, $default)': 'getOption($key) ?? $default'
+		'Nette\Forms\ControlGroup::getOption($key, $default)': 'getOption($key) ?? $default'
+
+since 3.1.5:
+	forbidden-classes:
+		Nette\Forms\FormFactory: 'there is no replacement, the class and its DI service are gone; create the form with new Nette\Forms\Form'
+
+since 3.1:
+	replaced-classes:
+		Nette\Forms\IControl: Nette\Forms\Control
+		Nette\Forms\IFormRenderer: Nette\Forms\FormRenderer
+		Nette\Forms\ISubmitterControl: Nette\Forms\SubmitterControl
+	replaced-members:
+		Nette\Forms\Container::addImage: addImageButton
+		Nette\Forms\Controls\Checkbox::getSeparatorPrototype: getContainerPrototype
+
+since 3.0:
+	replaced-members:
+		Nette\Forms\Form::PROTECTION: Nette\Forms\Controls\CsrfProtection::PROTECTION
+		Nette\Forms\Rules::$defaultMessages: Nette\Forms\Validator::$messages
+		Nette\Bridges\FormsLatte\FormMacros::renderFormBegin: Nette\Bridges\FormsLatte\Runtime::renderFormBegin
+		Nette\Bridges\FormsLatte\FormMacros::renderFormEnd: Nette\Bridges\FormsLatte\Runtime::renderFormEnd
+		Nette\Forms\Controls\BaseControl::setAttribute: setHtmlAttribute
+		Nette\Forms\Controls\TextInput::setType: setHtmlType
+	replaced-calls:
+		Nette\Forms\Controls\BaseControl::$caption: {get: 'getCaption()', set: 'setCaption($value)'}
+		Nette\Forms\Controls\ChoiceControl::$checkAllowedValues: {set: 'checkDefaultValue($value)'}
+		Nette\Forms\Controls\MultiChoiceControl::$checkAllowedValues: {set: 'checkDefaultValue($value)'}
+		'Nette\Forms\Container::addUpload($name, $label, true)': 'addMultiUpload($name, $label)'
+		'Nette\Forms\Container::addUpload($name, $label, false)': 'addUpload($name, $label)'
+		'Nette\Forms\Container::setDefaults(values: $values, ...)': 'setDefaults(data: $values, ...)'
+		'Nette\Forms\Container::setValues(values: $values, ...)': 'setValues(data: $values, ...)'
+	forbidden-members:
+		Nette\Forms\Controls\BaseControl::enableAutoOptionalMode: 'controls are optional automatically; drop the call'

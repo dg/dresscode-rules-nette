@@ -1,0 +1,38 @@
+16: Class Nette\Forms\IControl is replaced by Nette\Forms\Control
+19: Class Nette\Forms\IControl is replaced by Nette\Forms\Control
+22: Method Nette\Forms\Controls\BaseControl::setAttribute() is replaced by BaseControl::setHtmlAttribute()
+23: Constant Nette\Forms\Form::FILLED is replaced by Form::Filled
+24: Constant Nette\Forms\Form::MAX_LENGTH is replaced by Form::MaxLength
+25: Method Nette\Forms\Container::addImage() is replaced by Container::addImageButton()
+26: Method Nette\Forms\Container::getUnsafeValues() is replaced by Container::getUntrustedValues()
+36: Property Nette\Forms\Form::$method is replaced by setMethod($value)
+37: Property Nette\Forms\Form::$action is replaced by setAction($value)
+39: Method Nette\Forms\Container::addUpload() is replaced by addMultiUpload($name, $label)
+40: Method Nette\Forms\Container::addUpload() is replaced by addUpload($name, $label)
+43: Method Nette\Forms\Container::setDefaults() is replaced by setDefaults(values: $values, ...)
+44: Method Nette\Forms\Container::setValues() is replaced by setValues(values: $values, ...)
+51: Property Nette\Forms\Controls\BaseControl::$caption is replaced by getCaption()
+52: Property Nette\Forms\Controls\BaseControl::$caption is replaced by setCaption($value)
+53: Method Nette\Forms\Controls\BaseControl::getOption() is replaced by getOption($key) ?? $default
+54: Method Nette\Forms\ControlGroup::getOption() is replaced by getOption($key) ?? $default
+56: Property Nette\Forms\Controls\BaseControl::$filled is replaced by isFilled()
+56: Property Nette\Forms\Controls\SubmitButton::$submittedBy is replaced by isSubmittedBy()
+57: Method Nette\Forms\Controls\BaseControl::setOmitted() is replaced by setOmitted(state: $state, ...)
+60: Property Nette\Forms\Controls\BaseControl::$omitted is replaced by setOmitted($value)
+61: Property Nette\Forms\Controls\BaseControl::$htmlName is replaced by getHtmlName()
+61: Property Nette\Forms\Controls\BaseControl::$options is replaced by getOptions()
+67: Property Nette\Forms\Controls\ChoiceControl::$checkAllowedValues is replaced by checkDefaultValue($value)
+68: Method Nette\Forms\Controls\SelectBox::addOptionAttributes() is forbidden: use setOptionAttribute(), which sets one attribute per call, so call it once for each item of the array
+69: Method Nette\Forms\Controls\MultiSelectBox::addOptionAttributes() is forbidden: use setOptionAttribute(), which sets one attribute per call, so call it once for each item of the array
+70: Method Nette\Forms\Controls\TextInput::setType() is replaced by TextInput::setHtmlType()
+71: Method Nette\Forms\Controls\Checkbox::getSeparatorPrototype() is replaced by Checkbox::getContainerPrototype()
+72: Property Nette\Forms\Controls\ChoiceControl::$selectedItem is replaced by getSelectedItem()
+72: Property Nette\Forms\Controls\MultiChoiceControl::$selectedItems is replaced by getSelectedItems()
+78: Property Nette\Forms\Form::$renderer is replaced by getRenderer()
+79: Property Nette\Forms\Form::$renderer is replaced by setRenderer($value)
+80: Method Nette\Forms\Container::getValues() is replaced by getValues('array')
+81: Class Nette\Forms\Rendering\LatteRenderer is forbidden: use Nette\Forms\Blueprint, whose latte() prints the generated template and exits and whose generateLatte() returns it
+86: Class Nette\Forms\FormFactory is forbidden: there is no replacement, the class and its DI service are gone; create the form with new Nette\Forms\Form
+88: Constant Nette\Forms\Form::PROTECTION is replaced by Nette\Forms\Controls\CsrfProtection::PROTECTION
+88: Constant Nette\Forms\Controls\CsrfProtection::PROTECTION is replaced by CsrfProtection::Protection
+104: Static method Nette\Forms\Controls\BaseControl::enableAutoOptionalMode() is forbidden: controls are optional automatically; drop the call

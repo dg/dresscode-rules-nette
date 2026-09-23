@@ -1,0 +1,106 @@
+<?php
+
+namespace App;
+
+use Nette\Forms\ControlGroup;
+use Nette\Forms\Controls\BaseControl;
+use Nette\Forms\Controls\Checkbox;
+use Nette\Forms\Controls\ChoiceControl;
+use Nette\Forms\Controls\CsrfProtection;
+use Nette\Forms\Controls\MultiSelectBox;
+use Nette\Forms\Controls\SelectBox;
+use Nette\Forms\Controls\SubmitButton;
+use Nette\Forms\Controls\TextInput;
+use Nette\Forms\Form;
+use Nette\Forms\FormFactory;
+use Nette\Forms\IControl;
+use Nette\Forms\Rendering\LatteRenderer;
+
+function build(Form $form, IControl $control): void
+{
+	$form->addText('name')
+		->setAttribute('placeholder', 'Name')
+		->addRule(Form::FILLED)
+		->addRule($form::MAX_LENGTH, null, 100);
+	$form->addImage('send');
+	$values = $form->getUnsafeValues(null);
+}
+
+
+class SignUpFormFactory
+{
+	public function create(array $defaults): Form
+	{
+		$form = new Form;
+		$form->addProtection('Your session has expired, please submit the form again.');
+		$form->method = 'POST';
+		$form->action = '/sign-up';
+
+		$form->addUpload('avatar', 'Avatar', true);
+		$form->addUpload('scan', 'Scan', false);
+		$form->addUpload('photo', 'Photo', $this->isMultiple());
+
+		$form->setDefaults(data: $defaults);
+		$form->setValues(data: $defaults, erase: true);
+		return $form;
+	}
+
+
+	public function describe(BaseControl $input, ControlGroup $group, SubmitButton $button): string
+	{
+		$label = $input->caption;
+		$input->caption = 'Full name';
+		$class = $input->getOption('class', 'form-control');
+		$legend = $group->getOption('label', 'Details');
+
+		if ($input->filled && !$button->submittedBy) {
+			$input->setOmitted(value: false);
+		}
+
+		$input->omitted = true;
+		return $input->htmlName . ': ' . $label . $class . $legend . count($input->options);
+	}
+
+
+	public function choices(SelectBox $country, MultiSelectBox $tags, ChoiceControl $choice, TextInput $email, Checkbox $terms): array
+	{
+		$choice->checkAllowedValues = false;
+		$country->addOptionAttributes(['data-flag' => true]);
+		$tags->addOptionAttributes(['data-color' => 'red']);
+		$email->setType('email');
+		$terms->getSeparatorPrototype()->class = 'checkbox';
+		return [$country->selectedItem, $tags->selectedItems];
+	}
+
+
+	public function render(Form $form, CsrfProtection $protector): void
+	{
+		$renderer = $form->renderer;
+		$form->renderer = $renderer;
+		$values = $form->getValues(true);
+		$blueprint = new LatteRenderer;
+		echo $blueprint->render($form);
+	}
+
+
+	public function legacy(FormFactory $factory): Form
+	{
+		$rule = Form::PROTECTION;
+		return $factory->create();
+	}
+
+
+	private function isMultiple(): bool
+	{
+		return true;
+	}
+}
+
+
+class DateInput extends BaseControl
+{
+	public function setUp(): void
+	{
+		BaseControl::enableAutoOptionalMode();
+	}
+}
