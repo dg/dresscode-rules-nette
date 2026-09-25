@@ -86,5 +86,14 @@
 				"upgrading/utils.neon"
 			]
 		}
-	}
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../../Dress-Code",
+			"options": {
+				"symlink": false
+			}
+		}
+	]
 }
