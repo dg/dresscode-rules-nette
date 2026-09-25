@@ -18,6 +18,7 @@ const UpgradingRules = [
 	'forbidden-classes',
 	'forbidden-members',
 	'attribute-for-annotation',
+	'attribute-for-member',
 ];
 
 
