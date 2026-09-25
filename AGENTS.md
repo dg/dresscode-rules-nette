@@ -59,3 +59,10 @@ against the code of the library at its tags: the tag decides, not the guide.
   joined by a semicolon; `test`, never `check`; `such as`, never `e.g.`; no `you`, no trailing `instead`, no `should`.
 - A sample holds code of the old API the way an application writes it, a child overriding a method among it, and
   every shape the data fix or report; it may declare classes of its own.
+
+## Names and messages
+
+A name (of a rule, a class, an option, a data file) and every message are this project's own, never taken from
+Rector or another tool: the name says the state the rule enforces, in the vocabulary of the `AGENTS.md` of DressCode,
+and a message follows the norm of DressCode. Every name goes through a proposal with its reasons, a critical review
+against the vocabulary and the neighbouring names of the catalogue, and the adjustment; only then into the code.
