@@ -28,7 +28,7 @@ class ArticleModel
 		$ids = $this->connection->fetchList('SELECT id FROM article WHERE category_id = ?', $categoryId);
 		$names = $this->database->fetchList('SELECT name FROM category');
 		$result = $this->database->query('SELECT * FROM article WHERE id IN (?)', $ids);
-		$this->connection->query('DELETE FROM log WHERE id = ?', ...$params);
+		$this->connection->queryArgs('DELETE FROM log WHERE id = ?', $params);
 		$tags = $result->fetchList();
 		$first = $result->fetch()['title'] ?? null;
 		$count = $result->fetchField();

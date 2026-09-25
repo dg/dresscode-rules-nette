@@ -5,7 +5,7 @@
 29: Method Nette\Database\Connection::fetchFields() is replaced by Connection::fetchList()
 30: Method Nette\Database\Explorer::fetchFields() is replaced by Explorer::fetchList()
 31: Method Nette\Database\Explorer::queryArgs() is replaced by query($sql, ...$params)
-32: Method Nette\Database\Connection::queryArgs() is replaced by query($sql, ...$params)
+32: Method Nette\Database\Connection::queryArgs() is replaced by query($sql, ...$params), which unpacks $params, whose keys may not be the names of parameters
 33: Method Nette\Database\ResultSet::fetchFields() is replaced by ResultSet::fetchList()
 34: Method Nette\Database\ResultSet::fetchField() is replaced by fetch()[$column] ?? null
 36: Method Nette\Database\ResultSet::fetchPairs() is replaced by fetchPairs(keyOrCallback: $key, ...)

@@ -50,8 +50,8 @@ class MailSender
 			new SmtpMailer('smtp.example.com', 'joe', 'secret'),
 			new SmtpMailer(...$options),
 			new DkimSigner(domain: 'example.com', selector: 'mail', privateKey: 'key'),
-			new DkimSigner(...$options),
-			new DkimSigner(...$options, signHeaders: $headers),
+			new DkimSigner($options),
+			new DkimSigner($options, $headers),
 			new DkimSigner('example.com', 'mail', 'key'),
 			new DkimSigner(...$options),
 		];

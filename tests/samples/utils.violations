@@ -13,7 +13,7 @@
 52: Static method Nette\Utils\Callback::closure() is replaced by \Closure::fromCallable($callable)
 53: Static method Nette\Utils\Callback::closure() is replaced by \Closure::fromCallable([$callable, $method])
 54: Static method Nette\Utils\Callback::invoke() is replaced by $callable(...$args)
-55: Static method Nette\Utils\Callback::invokeArgs() is replaced by $callable(...$args)
+55: Static method Nette\Utils\Callback::invokeArgs() is replaced by $callable(...$args), which unpacks $args, whose keys may not be the names of parameters
 64: Class Nette\Iterators\Filter is replaced by CallbackFilterIterator
 65: Constructor Nette\Iterators\CachingIterator::__construct() is replaced by new \Nette\Iterators\CachingIterator(iterable: $i, ...)
 67: Method Nette\Iterators\CachingIterator::isFirst() is replaced by isFirst(gridWidth: $w, ...)

@@ -55,7 +55,7 @@ class Catalog
 		$closure = \Closure::fromCallable($fn);
 		$bound = \Closure::fromCallable([$this, 'describe']);
 		$result = $fn(...$items);
-		$spread = $fn(...$args);
+		$spread = Callback::invokeArgs($fn, $args);
 
 		return [$mapped, $ok, $odd, $closure, $bound, $result, $spread];
 	}

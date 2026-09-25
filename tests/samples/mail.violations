@@ -19,8 +19,8 @@
 47: Constructor Nette\Mail\SmtpMailer::__construct() is forbidden: pass the options as named arguments, new SmtpMailer(host: ..., username: ..., password: ...), encryption for secure and streamOptions for context
 48: Constructor Nette\Mail\SmtpMailer::__construct() is forbidden: pass the options as named arguments, new SmtpMailer(host: ..., username: ..., password: ...), encryption for secure and streamOptions for context
 51: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options)
-52: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options)
-53: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options, signHeaders: $signHeaders)
+52: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options), which unpacks $options, whose keys may not be the names of parameters
+53: Constructor Nette\Mail\DkimSigner::__construct() is replaced by new \Nette\Mail\DkimSigner(...$options, signHeaders: $signHeaders), which unpacks $options, whose keys may not be the names of parameters
 62: Method Nette\Mail\FallbackMailer::onFailure() is replaced by \Nette\Utils\Arrays::invoke($this->onFailure, ...$args)
 70: Constant Nette\Mail\Message::LOW is replaced by Message::Low
 73: Method Nette\Mail\Message::buildText() is forbidden: there is no replacement, the class no longer calls it; the plain text comes from the static Nette\Mail\HtmlComposer::htmlToText(), which no override changes
