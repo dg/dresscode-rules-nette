@@ -62,13 +62,20 @@ since 4.0.1:
 
 since 4.0:
 	replaced-calls:
-		'Nette\PhpGenerator\ClassType::$methods': {get: 'getMethods()', set: 'setMethods($value)'}
-		'Nette\PhpGenerator\ClassType::$properties': {get: 'getProperties()', set: 'setProperties($value)'}
-		'Nette\PhpGenerator\Method::$body': {get: 'getBody()', set: 'setBody($value)'}
-		'Nette\PhpGenerator\GlobalFunction::$body': {get: 'getBody()', set: 'setBody($value)'}
-		'Nette\PhpGenerator\Closure::$body': {get: 'getBody()', set: 'setBody($value)'}
-		'Nette\PhpGenerator\Parameter::$defaultValue': {get: 'getDefaultValue()', set: 'setDefaultValue($value)'}
-		'Nette\PhpGenerator\Property::$value': {get: 'getValue()', set: 'setValue($value)'}
+		'Nette\PhpGenerator\ClassType::$methods::get': 'getMethods()'
+		'Nette\PhpGenerator\ClassType::$methods::set': 'setMethods($value)'
+		'Nette\PhpGenerator\ClassType::$properties::get': 'getProperties()'
+		'Nette\PhpGenerator\ClassType::$properties::set': 'setProperties($value)'
+		'Nette\PhpGenerator\Method::$body::get': 'getBody()'
+		'Nette\PhpGenerator\Method::$body::set': 'setBody($value)'
+		'Nette\PhpGenerator\GlobalFunction::$body::get': 'getBody()'
+		'Nette\PhpGenerator\GlobalFunction::$body::set': 'setBody($value)'
+		'Nette\PhpGenerator\Closure::$body::get': 'getBody()'
+		'Nette\PhpGenerator\Closure::$body::set': 'setBody($value)'
+		'Nette\PhpGenerator\Parameter::$defaultValue::get': 'getDefaultValue()'
+		'Nette\PhpGenerator\Parameter::$defaultValue::set': 'setDefaultValue($value)'
+		'Nette\PhpGenerator\Property::$value::get': 'getValue()'
+		'Nette\PhpGenerator\Property::$value::set': 'setValue($value)'
 		'Nette\PhpGenerator\ClassLike::withBodiesFrom($class)': 'from($class, withBodies: true)'
 		'Nette\PhpGenerator\GlobalFunction::withBodyFrom($function)': 'from($function, withBody: true)'
 		'Nette\PhpGenerator\Type::getType($value)': '\get_debug_type($value)'

@@ -6,18 +6,25 @@ since 3.3:
 		Nette\Application\UI\PresenterComponent: Nette\Application\UI\Component
 		Nette\Application\UI\PresenterComponentReflection: Nette\Application\UI\ComponentReflection
 	replaced-calls:
-		Nette\Application\UI\Component::$presenter: {get: 'getPresenter()'}
-		Nette\Application\UI\Component::$linkCurrent: {get: 'isLinkCurrent()'}
-		Nette\Application\UI\Presenter::$action: {get: 'getAction()'}
-		Nette\Application\UI\Presenter::$view: {get: 'getView()', set: 'setView($value)'}
-		Nette\Application\UI\Presenter::$layout: {get: 'getLayout()', set: 'setLayout($value)'}
-		Nette\Application\UI\Presenter::$request: {get: 'getRequest()'}
-		Nette\Application\UI\Presenter::$session: {get: 'getSession()'}
-		Nette\Application\Request::$method: {get: 'getMethod()', set: 'setMethod($value)'}
-		Nette\Application\Request::$presenterName: {get: 'getPresenterName()', set: 'setPresenterName($value)'}
-		Nette\Application\Request::$parameters: {get: 'getParameters()', set: 'setParameters($value)'}
-		Nette\Application\Request::$post: {get: 'getPost()', set: 'setPost($value)'}
-		Nette\Application\Request::$files: {get: 'getFiles()', set: 'setFiles($value)'}
+		Nette\Application\UI\Component::$presenter::get: 'getPresenter()'
+		Nette\Application\UI\Component::$linkCurrent::get: 'isLinkCurrent()'
+		Nette\Application\UI\Presenter::$action::get: 'getAction()'
+		Nette\Application\UI\Presenter::$view::get: 'getView()'
+		Nette\Application\UI\Presenter::$view::set: 'setView($value)'
+		Nette\Application\UI\Presenter::$layout::get: 'getLayout()'
+		Nette\Application\UI\Presenter::$layout::set: 'setLayout($value)'
+		Nette\Application\UI\Presenter::$request::get: 'getRequest()'
+		Nette\Application\UI\Presenter::$session::get: 'getSession()'
+		Nette\Application\Request::$method::get: 'getMethod()'
+		Nette\Application\Request::$method::set: 'setMethod($value)'
+		Nette\Application\Request::$presenterName::get: 'getPresenterName()'
+		Nette\Application\Request::$presenterName::set: 'setPresenterName($value)'
+		Nette\Application\Request::$parameters::get: 'getParameters()'
+		Nette\Application\Request::$parameters::set: 'setParameters($value)'
+		Nette\Application\Request::$post::get: 'getPost()'
+		Nette\Application\Request::$post::set: 'setPost($value)'
+		Nette\Application\Request::$files::get: 'getFiles()'
+		Nette\Application\Request::$files::set: 'setFiles($value)'
 		'Nette\Application\Routers\RouteList::offsetSet(null, $router)': 'add($router)'
 		'Nette\Application\Routers\RouteList::offsetGet($index)': 'getRouters()[$index]'
 		'Nette\Application\Routers\RouteList::offsetExists($index)': 'isset(getRouters()[$index])'

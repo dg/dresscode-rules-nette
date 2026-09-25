@@ -7,9 +7,9 @@ since 4.0:
 
 since 3.2:
 	replaced-calls:
-		Nette\ComponentModel\Component::$name: {get: 'getName()'}
-		Nette\ComponentModel\Component::$parent: {get: 'getParent()'}
-		Nette\ComponentModel\Container::$components: {get: 'getComponents()'}
+		Nette\ComponentModel\Component::$name::get: 'getName()'
+		Nette\ComponentModel\Component::$parent::get: 'getParent()'
+		Nette\ComponentModel\Container::$components::get: 'getComponents()'
 	forbidden-members:
 		'Nette\ComponentModel\Component::monitor($type)': 'pass the attached callback as the second argument or the detached one as the third; the attached() and detached() hooks are no longer called'
 

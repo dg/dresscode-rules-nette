@@ -19,9 +19,12 @@ since 4.0:
 		Nette\Mail\Message::NORMAL: Normal
 		Nette\Mail\Message::LOW: Low
 	replaced-calls:
-		Nette\Mail\Message::$subject: {get: 'getSubject()', set: 'setSubject($value)'}
-		Nette\Mail\Message::$htmlBody: {get: 'getHtmlBody()', set: 'setHtmlBody($value)'}
-		Nette\Mail\MimePart::$body: {get: 'getBody()', set: 'setBody($value)'}
+		Nette\Mail\Message::$subject::get: 'getSubject()'
+		Nette\Mail\Message::$subject::set: 'setSubject($value)'
+		Nette\Mail\Message::$htmlBody::get: 'getHtmlBody()'
+		Nette\Mail\Message::$htmlBody::set: 'setHtmlBody($value)'
+		Nette\Mail\MimePart::$body::get: 'getBody()'
+		Nette\Mail\MimePart::$body::set: 'setBody($value)'
 		'Nette\Mail\DkimSigner::__construct($options)': 'new \Nette\Mail\DkimSigner(...$options)'
 		'Nette\Mail\DkimSigner::__construct($options, $signHeaders)': 'new \Nette\Mail\DkimSigner(...$options, signHeaders: $signHeaders)'
 	forbidden-members:
