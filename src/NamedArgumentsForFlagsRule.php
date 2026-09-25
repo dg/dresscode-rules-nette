@@ -3,7 +3,7 @@
 namespace DressCode\Nette;
 
 use DressCode\Analyses\{Access, MemberKind, Parameter, Types};
-use DressCode\{ConfigurableRule, Group, NodeRule, RuleContext, RuleInfo, Stage};
+use DressCode\{ConfigurableRule, NodeRule, RuleContext, RuleInfo, Stage};
 use DressCode\Rules\Upgrading\{MemberMaps, MemberPattern};
 use Nette\Schema\{Expect, Schema};
 use PhpSyntax\Analyses\NameResolver;
@@ -33,7 +33,6 @@ use function count, is_bool;
 	'nette/named-arguments-for-flags',
 	Stage::Structure,
 	description: 'Passes the named arguments a method takes instead of the flags of an integer',
-	group: Group::Deprecations,
 	requiresTypes: true,
 )]
 final class NamedArgumentsForFlagsRule extends NodeRule implements ConfigurableRule
