@@ -3,7 +3,7 @@
 namespace DressCode\Nette;
 
 use DressCode\Analyses\{Access, MemberKind, Types};
-use DressCode\{Group, NodeRule, RuleContext, RuleInfo, Stage, Tristate};
+use DressCode\{NodeRule, RuleContext, RuleGroup, RuleInfo, Stage, Tristate};
 use DressCode\Rules\CodeWriter;
 use Nette;
 use PhpSyntax\Analyses\NameResolver;
@@ -34,7 +34,7 @@ use function count, in_array, is_array, is_string, strlen;
 	'nette/monitor-for-attached-hook',
 	Stage::Structure,
 	description: 'Registers the logic of an `attached()` or `detached()` hook as a callback of `monitor()`',
-	group: Group::Deprecations,
+	group: RuleGroup::Deprecations,
 	modifiesComments: true,
 	requires: ['nette/component-model' => '>=3.0'],
 	requiresTypes: true,

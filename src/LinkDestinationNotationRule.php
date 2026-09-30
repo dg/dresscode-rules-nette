@@ -3,7 +3,7 @@
 namespace DressCode\Nette;
 
 use DressCode\Analyses\Types;
-use DressCode\{Group, NodeRule, Risk, RuleContext, RuleInfo, Stage, Tristate};
+use DressCode\{NodeRule, Risk, RuleContext, RuleGroup, RuleInfo, Stage, Tristate};
 use Nette;
 use PhpSyntax\{Node, Parser, Token};
 use PhpSyntax\Nodes\{ArgumentNode, ExpressionNode, IdentifierNode};
@@ -30,7 +30,7 @@ use function count, is_array, is_string, strlen;
 	'nette/link-destination-notation',
 	Stage::Structure,
 	description: 'Passes the query string and the fragment of a link destination as arguments',
-	group: Group::Deprecations,
+	group: RuleGroup::Deprecations,
 	requires: ['nette/application' => '>=3.3'],
 	requiresTypes: true,
 )]
