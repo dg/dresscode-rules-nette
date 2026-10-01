@@ -407,7 +407,7 @@ final class MonitorForAttachedHookRule extends NodeRule
 		}
 
 		foreach ($plans as $name => $plan) {
-			CodeWriter::removeBetweenGaps($hooks[$name], $style->eol, CommentPolicy::Drop); // the statements are written anew with their comments
+			CodeWriter::removeBetweenGaps($hooks[$name], $style->lineEnding, CommentPolicy::Drop); // the statements are written anew with their comments
 		}
 	}
 
@@ -464,7 +464,7 @@ final class MonitorForAttachedHookRule extends NodeRule
 			fn(string $line) => rtrim($line) === '' ? '' : $indentation . $style->indent . (str_starts_with($line, $from) ? substr($line, strlen($from)) : ltrim($line)),
 			$lines,
 		);
-		return $head . $style->eol . implode($style->eol, $lines) . $style->eol . $indentation . '}';
+		return $head . $style->lineEnding . implode($style->lineEnding, $lines) . $style->lineEnding . $indentation . '}';
 	}
 
 
@@ -509,13 +509,13 @@ final class MonitorForAttachedHookRule extends NodeRule
 		assert($body !== null);
 		$trailing = $body->openBrace->trailingTrivia;
 		if ($trailing === [] || !$trailing[count($trailing) - 1]->isLineEnding()) {
-			$body->openBrace->setTrailingTrivia([new Trivia(Trivia::LineEnding, $style->eol)]);
+			$body->openBrace->setTrailingTrivia([new Trivia(Trivia::LineEnding, $style->lineEnding)]);
 			$body->closeBrace->setLeadingTrivia([new Trivia(Trivia::Whitespace, substr($indentation, 0, -strlen($style->indent)))]);
 		}
 
 		foreach ($texts as $text) {
 			$statement = (new Parser)->parseStatement($text);
-			$statement->setEdgeTrivia([new Trivia(Trivia::Whitespace, $indentation)], [new Trivia(Trivia::LineEnding, $style->eol)]);
+			$statement->setEdgeTrivia([new Trivia(Trivia::Whitespace, $indentation)], [new Trivia(Trivia::LineEnding, $style->lineEnding)]);
 			$body->statements->append($statement);
 		}
 	}
@@ -529,11 +529,11 @@ final class MonitorForAttachedHookRule extends NodeRule
 	{
 		$style = $context->getStyle();
 		$inner = $indentation . $style->indent;
-		$text = 'class Template' . $style->eol . '{' . $style->eol
-			. $indentation . 'public function __construct()' . $style->eol
-			. $indentation . '{' . $style->eol
-			. implode('', array_map(fn(string $statement) => $inner . $statement . $style->eol, $texts))
-			. $indentation . '}' . $style->eol
+		$text = 'class Template' . $style->lineEnding . '{' . $style->lineEnding
+			. $indentation . 'public function __construct()' . $style->lineEnding
+			. $indentation . '{' . $style->lineEnding
+			. implode('', array_map(fn(string $statement) => $inner . $statement . $style->lineEnding, $texts))
+			. $indentation . '}' . $style->lineEnding
 			. '}';
 		$template = (new Parser)->parseStatement($text);
 		assert($template instanceof ClassNode);
@@ -551,7 +551,7 @@ final class MonitorForAttachedHookRule extends NodeRule
 			$gap[] = $trivia;
 		}
 
-		$constructor->setEdgeTrivia($gap, [new Trivia(Trivia::LineEnding, $style->eol)]);
+		$constructor->setEdgeTrivia($gap, [new Trivia(Trivia::LineEnding, $style->lineEnding)]);
 		$class->members->insert($class->members->indexOf($first), $constructor);
 	}
 }
