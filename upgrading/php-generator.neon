@@ -1,5 +1,4 @@
 package: nette/php-generator
-intent: deprecations
 
 since 4.2.1:
 	replacedCalls:

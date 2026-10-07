@@ -1,5 +1,4 @@
 package: latte/latte
-intent: deprecations
 
 since 3.1.5:
 	replacedCalls:

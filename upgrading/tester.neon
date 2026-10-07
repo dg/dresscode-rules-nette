@@ -1,5 +1,4 @@
 package: nette/tester
-intent: deprecations
 
 since 2.6:
 	replacedMembers:

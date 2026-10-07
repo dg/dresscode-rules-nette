@@ -1,5 +1,4 @@
 package: nette/assets
-intent: deprecations
 
 since 1.0.3:
 	replacedMembers:

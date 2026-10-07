@@ -33,7 +33,7 @@ against the code of the library at its tags: the tag decides, not the guide.
 
 ## Writing the data
 
-- A file starts with `package: vendor/name` and `intent: deprecations`, the intent of its data, and goes on with
+- A file starts with `package: vendor/name` and goes on with
   sections `since <version>`, newest first, the version without trailing zeros (`since 3.1`). The order decides
   nothing, the sections are merged by version.
 - Decide by what happens to the code, not by the label of the guide: a member called differently and used the same

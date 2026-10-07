@@ -1,5 +1,4 @@
 package: nette/routing
-intent: deprecations
 
 since 3.1.4:
 	nette.flagsAsNamedArguments:

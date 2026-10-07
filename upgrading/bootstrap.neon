@@ -1,5 +1,4 @@
 package: nette/bootstrap
-intent: deprecations
 
 since 3.2.1:
 	replacedCalls:

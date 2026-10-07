@@ -1,5 +1,4 @@
 package: nette/forms
-intent: deprecations
 
 since 3.3:
 	replacedMembers:

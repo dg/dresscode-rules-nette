@@ -1,5 +1,4 @@
 package: nette/caching
-intent: deprecations
 
 since 3.4:
 	forbiddenClasses:

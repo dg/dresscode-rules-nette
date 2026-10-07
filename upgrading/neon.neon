@@ -1,5 +1,4 @@
 package: nette/neon
-intent: deprecations
 
 since 3.4:
 	replacedCalls:

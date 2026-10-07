@@ -1,5 +1,4 @@
 package: nette/di
-intent: deprecations
 
 since 3.2.2:
 	forbiddenMembers:

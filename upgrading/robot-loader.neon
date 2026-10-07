@@ -1,5 +1,4 @@
 package: nette/robot-loader
-intent: deprecations
 
 since 4.1.3:
 	replacedMembers:

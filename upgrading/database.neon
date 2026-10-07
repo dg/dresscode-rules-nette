@@ -1,5 +1,4 @@
 package: nette/database
-intent: deprecations
 
 since 3.2.7:
 	forbiddenMembers:

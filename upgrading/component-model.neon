@@ -1,5 +1,4 @@
 package: nette/component-model
-intent: deprecations
 
 since 4.0:
 	forbiddenMembers:

@@ -1,5 +1,4 @@
 package: nette/application
-intent: deprecations
 
 since 3.3:
 	replacedClasses:
