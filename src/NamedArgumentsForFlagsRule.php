@@ -44,7 +44,8 @@ final class NamedArgumentsForFlagsRule extends NodeRule
 
 	public static function getDecisions(): array
 	{
-		return [new Decision(self::Map, new Map(new Data, grammar: self::createGrammar()), 'A call passing the named arguments its method takes for the flags of an integer')];
+		return [
+			new Decision(self::Map, new Map(new Data, grammar: self::createGrammar()), 'A call passing the named arguments its method takes for the flags of an integer')];
 	}
 
 

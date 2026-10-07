@@ -45,7 +45,8 @@ final class LinkDestinationNotationRule extends NodeRule
 
 	public static function getDecisions(): array
 	{
-		return [new Decision('nette.linkArguments', Domain::adopted(), 'The query string and the fragment of a link destination passed as arguments of the link')];
+		return [
+			new Decision('nette.linkArguments', Domain::adopted(), 'The query string and the fragment of a link destination passed as arguments of the link')];
 	}
 
 

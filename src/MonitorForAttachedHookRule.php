@@ -49,7 +49,8 @@ final class MonitorForAttachedHookRule extends NodeRule
 
 	public static function getDecisions(): array
 	{
-		return [new Decision('nette.monitorCallbacks', Domain::adopted(), 'The logic of an `attached()` or `detached()` hook registered as a callback of `monitor()`')];
+		return [
+			new Decision('nette.monitorCallbacks', Domain::adopted(), 'The logic of an `attached()` or `detached()` hook registered as a callback of `monitor()`')];
 	}
 
 
